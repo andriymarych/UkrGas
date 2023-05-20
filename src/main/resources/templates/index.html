@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UKR GAS</title>
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
+    <link rel="stylesheet" type="text/css" href="/css/header.css">
+    <link rel="stylesheet" type="text/css" href="/css/login-form.css">
+    <link rel="stylesheet" type="text/css" href="/css/slider.css">
+    <link rel="stylesheet" type="text/css" href="/css/index.css">
+    <link rel="icon" type="image/x-icon" href="/img/common/icon.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css"/>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet"></head>
+<body>
+<div id="background-popup"></div>
+<header th:replace="fragments/header :: header" id="header">
+</header>
+<div th:replace="fragments/login-form :: login-form">
+
+</div>
+<main>
+<section class="slider-container">
+    <div class="swiper">
+        <div id="swiper-wrapper" class="swiper-wrapper">
+          <div class="swiper-slide">
+              <a href="/payments">
+                  <img src="/img/index/slider-1.png"  alt="показники">
+              </a>
+          </div>
+            <div class="swiper-slide">
+                <a href="/application">
+                    <img src="/img/index/slider-2.png"  alt="показники">
+                </a>
+            </div>
+        </div>
+
+        <div class="prev-button">
+            <div class="swiper-button-prev"></div>
+        </div>
+        <div class="swiper-button-next"></div>
+
+    </div>
+</section>
+<div class="action-container">
+
+    <a th:href="@{/meterage}">
+    <div class="action-box">
+        <img id="meterage-img" src="/img/index/meterage.png"  alt="показники">
+        <p class="action-description">Передати показання</p>
+    </div>
+    </a>
+    <a th:href="@{/payments}">
+        <div class="action-box">
+            <img id="payments-img" src="/img/index/payments.png"  alt="Сплатити">
+            <p class="action-description">Сплатити газ</p>
+        </div>
+    </a>
+    <a th:href="@{/calculations}">
+        <div class="action-box">
+            <img id="calculations-img" src="/img/index/calculations.png"  alt="Розрахунки">
+            <p class="action-description">Розрахунки</p>
+        </div>
+    </a>
+
+</div>
+</main>
+<footer th:replace="fragments/footer :: footer">
+</footer>
+
+<script src="/js/common/login-form.js"></script>
+<script type="module" src="/js/index/index.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
+<script src="/js/index/slider-animation.js"></script>
+
+</body>
+</html>

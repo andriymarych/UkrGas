@@ -1,0 +1,49 @@
+
+.action-container {
+    display: flex;
+    margin-top: 130px;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    gap: 1em;
+}
+
+.action-box {
+    border-radius: 20px;
+    align-items: center;
+    margin: auto;
+    width: 400px;
+    height: 400px;
+    background-color: white;
+    transition: transform 0.3s ease-out;
+}
+.action-box:hover {
+    transform: scale(1.1);
+
+}
+
+.action-box img {
+    display: inline-block;
+    margin-top: 50px;
+    width: 200px;
+    height: 200px;
+}
+#meterage-img{
+    margin-left: 95px;
+}
+#payments-img{
+    margin-left: 109px;
+}
+#calculations-img{
+    margin-left: 115px;
+}
+.action-description{
+    text-align: center;
+    font-size: 28px;
+    font-weight: 300;
+    text-decoration:none ;
+    color: #626161;
+}
+.action-description:hover, .action-description:visited, .action-description:link {
+    color: #626161;
+    text-decoration:none ;
+}

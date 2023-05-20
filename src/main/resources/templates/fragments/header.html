@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>ThymeLeaf Fragment:header</title>
+</head>
+<body>
+<header th:fragment="header">
+<a th:href="@{/}" class="logo">
+    <img id="logo" src="/img/common/logo.png" alt="logo">
+</a>
+<nav>
+    <ul class="main-nav">
+
+        <a th:href="@{/news}">
+            <li>Новини</li>
+        </a>
+        <a th:href="@{/tarrifs}">
+            <li>Тарифні плани</li>
+        </a>
+        <a th:href="@{/contacts}">
+            <li>Контакти</li>
+        </a>
+    </ul>
+</nav>
+<button id="main-login-button">Особистий кабінет</button>
+<div class="dropdown">
+    <button hidden id="user-button"></button>
+    <div class="dropdown-content">
+        <a th:href="@{/account}">Управління акаутом</a>
+        <a th:href="@{/account/booking}">Ваші замовлення</a>
+    </div>
+</div>
+</header>
+</body>
+</html>
