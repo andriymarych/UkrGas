@@ -8,10 +8,10 @@
 .page-header {
     margin-left: 115px;
     font-size: 26px;
-    font-weight: 300;
+    font-weight: 200;
 
 }
-.meterage-container {
+.payment-container{
     display: flex;
     margin-top: 70px;
     margin-left: 70px;
@@ -20,7 +20,11 @@
     flex-wrap: wrap;
     gap: 0.2em;
 }
-.meterage-box{
+.payment-box-header{
+    text-align: center;
+    margin-top: 60px;
+}
+.payment-box{
     width: 640px;
     height: 440px;
     align-items: center;
@@ -30,9 +34,11 @@
     background-color: white;
     transition: transform 0.3s ease-out;
 }
-.meterage-box-header{
-    text-align: center;
-    margin-top: 60px;
+.payment-input-header{
+    font-size: 24px;
+    font-weight: 400;
+    text-align: left;
+    margin: 70px 0 30px 100px;
 }
 .meterage-input-box-description{
     color: #6b6b6b;
@@ -40,20 +46,38 @@
     font-weight: 400;
     margin-top: 60px;
 }
-.meterage-reading-input{
+.payment-input{
     display: block;
-    width: 300px;
-    margin: 20px auto 0 auto;
+    position: absolute;
+    margin-top: -75px;
+    margin-left: 390px;
+    width: 100px;
     border: 2px solid #989898;
     border-radius: 10px;
     padding: 12px;
+    text-align: center;
     font-size: 20px;
 }
-.save-button{
+.currency{
+    display: inline-block;
+    margin-left: 400px;
+}
+.total-payment-value{
+    font-size: 24px;
+    font-weight: 400;
+    display: block;
+    text-align: center;
+    margin: 160px auto 0 auto;
+}
+#total-price{
+    margin-left: 20px;
+    font-weight: 200;
+}
+.pay-button{
     display: block;
     width: 230px;
     height: 60px;
-    margin:55px auto 0 auto;
+    margin: 30px auto 0 auto;
     background-color: #235ab3;
     color: #fff;
     border-style: none;
@@ -61,27 +85,27 @@
     font-size: larger;
     cursor: pointer;
 }
-#meterage-readings-container{
+#payment-container{
     margin-top: 30px;
     height: 240px;
     overflow-y: scroll;
 }
-.reading-record{
+.payment-record{
     color: #484848;
     display: block;
     text-align: center;
     margin: 0 auto 15px auto;
 }
-.gas-meter-number{
+.payment-number{
     display: inline-block;
     text-align: left;
     width: 165px;
 }
-.reading-date{
+.payment-date{
     display: inline-block;
     width: 140px;
 }
-.meter-reading-value{
+.payment-value{
     display: inline-block;
     width: 180px;
 }

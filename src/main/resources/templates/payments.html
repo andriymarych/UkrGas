@@ -1,22 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Оплати</title>
-  <link rel="stylesheet" type="text/css" href="/css/common/style.css">
-  <link rel="stylesheet" type="text/css" href="/css/common/header.css">
-  <link rel="stylesheet" type="text/css" href="/css/common/login-form.css">
-  <link rel="stylesheet" type="text/css" href="/css/index/slider.css">
-  <link rel="stylesheet" type="text/css" href="/css/index/index.css">
-  <link rel="icon" type="image/x-icon" href="/img/common/icon.png">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css"/>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet"></head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Оплати</title>
+    <link rel="stylesheet" type="text/css" href="/css/common/style.css">
+    <link rel="stylesheet" type="text/css" href="/css/common/header.css">
+    <link rel="stylesheet" type="text/css" href="/css/common/login-form.css">
+    <link rel="stylesheet" type="text/css" href="/css/payments/payments.css">
+    <link rel="icon" type="image/x-icon" href="/img/common/icon.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css"/>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+</head>
 <body>
 <div id="background-popup"></div>
 <header th:replace="fragments/header :: header" id="header">
@@ -25,9 +25,52 @@
 
 </div>
 <main>
-
-
-
+    <div class="main-section">
+        <h3 class="page-header">Оплати</h3>
+        <div class="payment-container">
+            <div class="payment-box">
+                <h4 class="payment-input-header">Газ <span class="currency"> грн</span></h4>
+                <input type="text" class="payment-input">
+                <p class="total-payment-value">До оплати: <span id="total-price">270 грн</span></p>
+                <button class="pay-button">Оплатити</button>
+            </div>
+            <div class="payment-box">
+                <h4 class="payment-box-header">Історія платежів</h4>
+                <div id="payment-container">
+                    <p class="payment-record">
+                        <span class="payment-number">№32950</span>
+                        <span class="payment-date">21.05.2023</span>
+                        <span class="payment-value">455.00 грн</span>
+                    </p>
+                    <p class="payment-record">
+                        <span class="payment-number">№30215</span>
+                        <span class="payment-date">21.05.2023</span>
+                        <span class="payment-value">920.00 грн</span>
+                    </p>
+                    <p class="payment-record">
+                        <span class="payment-number">№27460</span>
+                        <span class="payment-date">21.04.2023</span>
+                        <span class="payment-value">795.00 грн</span>
+                    </p>
+                    <p class="payment-record">
+                        <span class="payment-number">№26122</span>
+                        <span class="payment-date">11.04.2023</span>
+                        <span class="payment-value">1095.00 грн</span>
+                    </p>
+                    <p class="payment-record">
+                        <span class="payment-number">№22567</span>
+                        <span class="payment-date">11.04.2023</span>
+                        <span class="payment-value">1295.00 грн</span>
+                    </p>
+                    <p class="payment-record">
+                        <span class="payment-number">№22567</span>
+                        <span class="payment-date">11.04.2023</span>
+                        <span class="payment-value">245095.00 грн</span>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
 </main>
 <footer th:replace="fragments/footer :: footer">
 </footer>
