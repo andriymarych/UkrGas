@@ -19,14 +19,17 @@
 </head>
 <body>
 <div id="background-popup"></div>
-<header th:replace="fragments/header :: header" id="header">
+<header th:replace="~{fragments/header :: header}" id="header">
 </header>
-<div th:replace="fragments/login-form :: login-form">
+<div th:replace="~{fragments/login-form :: login-form}">
 
 </div>
 <main>
     <div class="main-section">
-        <h3 class="page-header">Оплати</h3>
+        <div class="page-status">
+        <h3 class="page-header">Оплати </h3>
+        <h3 class="balance">Баланс: <span id="balance-value">240 грн</span></h3>
+        </div>
         <div class="payment-container">
             <div class="payment-box">
                 <h4 class="payment-input-header">Газ <span class="currency"> грн</span></h4>
@@ -72,7 +75,7 @@
         </div>
     </div>
 </main>
-<footer th:replace="fragments/footer :: footer">
+<footer th:replace="~{fragments/footer :: footer}">
 </footer>
 
 <script src="/js/common/login-form.js"></script>

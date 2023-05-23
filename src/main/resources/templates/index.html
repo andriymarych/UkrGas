@@ -19,9 +19,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet"></head>
 <body>
 <div id="background-popup"></div>
-<header th:replace="fragments/header :: header" id="header">
+<header th:replace="~{fragments/header :: header}" id="header">
 </header>
-<div th:replace="fragments/login-form :: login-form">
+<div th:replace="~{fragments/login-form :: login-form}">
 
 </div>
 <main>
@@ -70,7 +70,7 @@
 
 </div>
 </main>
-<footer th:replace="fragments/footer :: footer">
+<footer th:replace="~{fragments/footer :: footer}">
 </footer>
 
 <script src="/js/common/login-form.js"></script>

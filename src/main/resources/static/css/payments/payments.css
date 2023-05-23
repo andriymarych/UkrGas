@@ -6,16 +6,28 @@
 }
 
 .page-header {
-    margin-left: 115px;
+    margin: 0 0 0 135px;
     font-size: 26px;
     font-weight: 200;
+}
+.page-status{
+    display: flex;
+    justify-content: space-between;
+    margin-right: 140px;
+}
+.balance{
+    margin-top: 0;
+    font-weight: 400;
 
+}
+#balance-value{
+    margin-left: 20px;
+    font-weight: 400;
+    color: #207700;
 }
 .payment-container{
     display: flex;
-    margin-top: 70px;
-    margin-left: 70px;
-    margin-right: 70px;
+    margin: 50px 70px 0 70px;
     justify-content: space-evenly;
     flex-wrap: wrap;
     gap: 0.2em;

@@ -1,0 +1,68 @@
+.main-section {
+    margin-top: 180px;
+    height: 610px;
+    width: 100%;
+}
+
+.page-header {
+    margin-left: 135px;
+    font-size: 26px;
+    font-weight: 300;
+}
+.calculation-box{
+    width: 1380px;
+    height: 560px;
+    margin: 35px auto 0 auto;
+    border-radius: 20px;
+    border: solid 2px #004aad;
+    background-color: white;
+    transition: transform 0.3s ease-out;
+}
+.box-description{
+    font-weight: 600;
+    margin: 70px 0 20px 60px;
+}
+.month{
+    display: inline-block;
+    text-align: center;
+    width: 170px;
+}
+.tariff{
+    display: inline-block;
+    text-align: center;
+    width: 230px;
+}
+.price{
+    display: inline-block;
+    text-align: center;
+    width: 165px;
+}
+.amount-consumed{
+    display: inline-block;
+    text-align: center;
+    width: 150px;
+}
+.accrued-amount{
+    display: inline-block;
+    text-align: center;
+    width: 170px;
+}
+.amount-paid{
+    display: inline-block;
+    text-align: center;
+    width: 170px;
+}
+.balance{
+    display: inline-block;
+    text-align: center;
+    width: 170px;
+}
+#calculation-records-container{
+    font-weight: 500;
+    height: 385px;
+    overflow-y: scroll;
+    margin: 20px 0 20px 60px;
+}
+.calculation-record{
+    margin-bottom: 20px;
+}
