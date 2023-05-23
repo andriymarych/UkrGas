@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Показання</title>
+    <link rel="stylesheet" type="text/css" href="/css/common/style.css">
+    <link rel="stylesheet" type="text/css" href="/css/common/header.css">
+    <link rel="stylesheet" type="text/css" href="/css/common/login-form.css">
+    <link rel="stylesheet" type="text/css" href="/css/meterage/meterage.css">
+    <link rel="icon" type="image/x-icon" href="/img/common/icon.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css"/>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+</head>
+<body>
+<div id="background-popup"></div>
+<header th:replace="fragments/header :: header" id="header">
+</header>
+<div th:replace="fragments/login-form :: login-form">
+
+</div>
+<main>
+    <div class="main-section">
+        <h3 class="page-header">Показання</h3>
+        <div class="meterage-container">
+            <div class="meterage-box">
+                <h4 class="meterage-input-box-header">Лічильник №32950</h4>
+                <p class="meterage-input-box-description">Уведіть показання станом на 21.05.2023</p>
+                <input type="text" class="meterage-reading-input">
+                <button class="save-button">Зберегти</button>
+            </div>
+            <div class="meterage-box">
+                <h4 class="meterage-input-box-header">Історія показань</h4>
+                <div class="meterage-readings-container">
+                    <p class="reading-record">
+                        <span class="gas-meter-number">№32950</span>
+                        <span class="reading-date">21.05.2023</span>
+                        <span class="meter-reading-value">30123.00 м³</span>
+                    </p>
+                    <p class="reading-record">
+                        <span class="gas-meter-number">№32950</span>
+                        <span class="reading-date">21.05.2023</span>
+                        <span class="meter-reading-value">30123.00 м³</span>
+                    </p>
+                    <p class="reading-record">
+                        <span class="gas-meter-number">№32950</span>
+                        <span class="reading-date">21.04.2023</span>
+                        <span class="meter-reading-value">30003.00 м³</span>
+                    </p>
+                    <p class="reading-record">
+                        <span class="gas-meter-number">№32950</span>
+                        <span class="reading-date">11.04.2023</span>
+                        <span class="meter-reading-value">30003.00 м³</span>
+                    </p>
+                    <p class="reading-record">
+                        <span class="gas-meter-number">№3250</span>
+                        <span class="reading-date">11.04.2023</span>
+                        <span class="meter-reading-value">30003.00 м³</span>
+                    </p>
+                    <p class="reading-record">
+                        <span class="gas-meter-number">№32950</span>
+                        <span class="reading-date">11.04.2023</span>
+                        <span class="meter-reading-value">3003.00 м³</span>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</main>
+<footer th:replace="fragments/footer :: footer">
+</footer>
+
+<script src="/js/common/login-form.js"></script>
+<script type="module" src="/js/index/index.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
+<script src="/js/index/slider-animation.js"></script>
+
+</body>
+</html>

@@ -12,6 +12,7 @@ const userButton = document.getElementById("user-button");
 
 const shadowBG = document.getElementById("background-popup");
 const controlDisapearingBG = (flag) => {
+    shadowBG.style.backgroundColor = "rgba(0, 0, 0, 0.6)";
     (flag)
         ? shadowBG.style.visibility = "visible"
         : shadowBG.style.visibility = "hidden";
