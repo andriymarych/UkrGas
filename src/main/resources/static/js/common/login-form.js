@@ -1,8 +1,6 @@
 const loginBtn = document.getElementById("main-login-button");
-const regBtn = document.getElementById("registration-popup-button");
 
 const closeLoginFormBtn = document.getElementById("close-login-button");
-const closeRegistrationFormBtn = document.getElementById("close-registration-button");
 
 const loginFormPopUpButton = document.getElementById("login-form-button");
 
@@ -21,33 +19,21 @@ const controlDisapearingBG = (flag) => {
 
 loginBtn.addEventListener('click', () => {
     document.querySelector(".login-popup").classList.add("active");
-    document.querySelector(".registration-popup").classList.remove("active");
     controlDisapearingBG(1);
 });
 
-regBtn.addEventListener('click', () => {
-    document.querySelector(".login-popup").classList.remove("active");
-    document.querySelector(".registration-popup").classList.add("active");
-});
 closeLoginFormBtn.addEventListener('click', () => {
     document.querySelector(".login-popup").classList.remove("active");
-    document.querySelector(".registration-popup").classList.remove("active");
-    controlDisapearingBG(0);
-});
-closeRegistrationFormBtn.addEventListener('click', () => {
-    document.querySelector(".login-popup").classList.remove("active");
-    document.querySelector(".registration-popup").classList.remove("active");
     controlDisapearingBG(0);
 });
 shadowBG.addEventListener('click', () => {
     document.querySelector(".login-popup").classList.remove("active");
-    document.querySelector(".registration-popup").classList.remove("active");
     controlDisapearingBG(0);
 })
 
 loginFormPopUpButton.addEventListener('click', () => {
     document.querySelector(".login-popup").classList.add("active");
-    document.querySelector(".registration-popup").classList.remove("active");
+
     controlDisapearingBG(1);
 });
 
@@ -181,6 +167,6 @@ const setUserData = (response, password) => {
 
 const removePopUps = () => {
     document.querySelector(".login-popup").classList.remove("active");
-    document.querySelector(".registration-popup").classList.remove("active");
+
     controlDisapearingBG(0);
 }

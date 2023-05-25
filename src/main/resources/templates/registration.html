@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Реєстрація</title>
+  <link rel="stylesheet" type="text/css" href="/css/common/style.css">
+  <link rel="stylesheet" type="text/css" href="/css/common/header.css">
+  <link rel="stylesheet" type="text/css" href="/css/common/login-form.css">
+  <link rel="stylesheet" type="text/css" href="/css/registration/registration.css">
+  <link rel="icon" type="image/x-icon" href="/img/common/icon.png">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet"></head>
+<body>
+<div id="background-popup"></div>
+<header th:replace="~{fragments/header :: header}" id="header">
+</header>
+<div th:replace="~{fragments/login-form :: login-form}">
+
+</div>
+<main>
+  <div class="main-section">
+    <form class="form-container">
+
+      <h1 class="form-header">Реєстрація</h1>
+
+      <p class="first-header">
+        <span class="email-header">Електронна пошта</span>
+        <span class="password-header">Пароль</span>
+      </p>
+
+      <input type="text" id="email-input" class="registration-form" required>
+      <input type="text" id="password-input" class="registration-form" required>
+
+      <p class="second-header">
+        <span class="account-number-header">Номер особового рахунку</span>
+        <span class="password-confirmation-header">Підтвердження пароля</span>
+      </p>
+      
+      <input type="text" id="account-number-input" class="registration-form" required>
+      <input type="text" id="password-confirmation-input" class="registration-form" required>
+
+      <div class="checkbox-agreement">
+        <input type="checkbox" name="agreement" required="required" class="checkbox">
+        <span class="checkbox-text">  Я приймаю умови обробки даних</span>
+      </div>
+      <button type="submit" id="create-account-button">Створити акаунт</button>
+
+    </form>
+  </div>
+
+</main>
+<footer th:replace="~{fragments/footer :: footer}">
+</footer>
+
+<script src="/js/common/login-form.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
+<script src="/js/index/slider-animation.js"></script>
+
+</body>
+</html>
