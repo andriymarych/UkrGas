@@ -18,6 +18,20 @@
     background-color: white;
     transition: transform 0.3s ease-out;
 }
+#left-line,#right-line{
+    display: block;
+    position: absolute;
+    background-color: #b3b3b3;
+    width: 0.5px;
+    height: 390px;
+}
+#left-line{
+    margin: 125px 0 0 638px;
+}
+
+#right-line{
+    margin: 125px 0 0 800px;
+}
 .box-description{
     font-weight: 600;
     margin: 70px 0 20px 60px;

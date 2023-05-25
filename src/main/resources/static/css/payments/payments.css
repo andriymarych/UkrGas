@@ -85,7 +85,7 @@
     margin-left: 20px;
     font-weight: 200;
 }
-.pay-button{
+#pay-button{
     display: block;
     width: 230px;
     height: 60px;

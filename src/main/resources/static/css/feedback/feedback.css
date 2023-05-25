@@ -1,0 +1,87 @@
+
+.main-section {
+    margin-top: 180px;
+    height: 650px;
+    width: 100%;
+}
+
+.form-container{
+    width: 1200px;
+    height: 650px;
+    align-items: center;
+    margin: auto;
+    border-radius: 20px;
+    border: solid 2px #004aad;
+    background-color: white;
+    transition: transform 0.3s ease-out;
+}
+.form-header{
+    display: block;
+    margin-top: 50px;
+    text-align: center;
+    font-size: 26px;
+    font-weight: 500;
+}
+.first-header{
+    font-weight: 300;
+    margin-left: 145px;
+    margin-top: 20px;
+}
+.second-header{
+    font-weight: 300;
+    margin-left: 145px;
+    margin-top: 30px;
+}
+.feedback-form{
+    width: 300px;
+    margin-left: 130px;
+    border: 2px solid #989898;
+    border-radius: 10px;
+    padding: 12px;
+    font-size: 20px;
+}
+#send-feedback-button{
+    display: block;
+    width: 230px;
+    height: 60px;
+    margin:30px auto 0 auto;
+    background-color: #235ab3;
+    color: #fff;
+    border-style: none;
+    border-radius: 10px;
+    font-size: larger;
+    cursor: pointer;
+}
+.category-header{
+    margin-left: 470px;
+}
+.email-header{
+    margin-left: 565px;
+}
+#full-name-input{
+    display: inline-block;
+}
+#email-input{
+    margin-left: 270px;
+    display: inline-block;
+}
+#type-select,#category-select{
+    display: inline-block;
+    width: 328px;
+}
+#category-select{
+    margin-left: 270px;
+}
+.textarea-form{
+    width: 930px;
+    height: 150px;
+    margin: 30px 0 0 130px;
+    padding: 12px 20px;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 10px;
+    background-color: #f8f8f8;
+    font-size: 19px;
+    resize: none;
+    outline: none;
+}
