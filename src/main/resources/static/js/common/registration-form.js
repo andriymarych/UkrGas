@@ -1,7 +1,4 @@
 
-const registrationButton = document.getElementById('create-account-button');
-
-
 
 
 const registerNewUser = () => {
@@ -65,7 +62,7 @@ const sendUserData = (data) => {
         .catch(error => {
             let errorBody = JSON.parse(error.message);
             document.getElementById('registration-label').innerHTML = errorParser(errorBody.message);
-            console.error('Error:', error);
+
         });
 }
 

@@ -13,8 +13,12 @@ const createFeedback = () => {
     const feedbackCategory = document.getElementById('feedback-category').value;
     const content = document.getElementById("feedback-content").value;
 
-    if (fullName === '' || email === '' || feedbackType === '' || feedbackCategory === '' ) {
-        label.innerHTML = '*Заповніть всі поля!';
+    if (fullName === '' || email === '' || feedbackType === ''
+        || feedbackCategory === '' || content ==='') {
+        label.innerHTML = '* Заповніть усі  поля';
+        return;
+    }if(content.length < 10){
+        label.innerHTML = '* Текстове поле звернення повинне містити більше 30 символів';
         return;
     }
     else {
@@ -34,7 +38,7 @@ const createFeedback = () => {
 const sendFeedbackData = (data) => {
     console.log(data);
     console.log(data.password);
-    fetch('/auth/registration', {
+    fetch('/feedback/create', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -48,10 +52,30 @@ const sendFeedbackData = (data) => {
             return response.json();
         })
         .then(data => {
-            setUserData(data);
+            displayCreatedFeedback(data)
+            console.log(data);
         })
         .catch(error => {
             console.error('Error:', error);
         });
 }
 
+const displayCreatedFeedback = (feedbackResponseObject) => {
+    let feedbackResponseDiv  = document.createElement("div");
+    feedbackResponseDiv.setAttribute("id","feedback-response");
+
+    let firstLineResponse = document.createElement("p");
+    firstLineResponse.setAttribute("class","first-line-response");
+    firstLineResponse.innerHTML = "Дякуємо за відгук !";
+
+    let secondLineResponse = document.createElement("p");
+    secondLineResponse.setAttribute("class","second-line-response");
+    secondLineResponse.innerHTML = "Номер зареєстрованого звернення  - " + feedbackResponseObject.data.id;
+
+    document.getElementById("form-container").style.display = "none";
+
+    feedbackResponseDiv.appendChild(firstLineResponse);
+    feedbackResponseDiv.appendChild(secondLineResponse);
+
+    document.getElementById("main-section").appendChild(feedbackResponseDiv);
+}
