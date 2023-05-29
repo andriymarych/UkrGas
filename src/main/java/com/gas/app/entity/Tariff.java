@@ -2,14 +2,14 @@ package com.gas.app.entity;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.Collection;
 
 @Entity
 @Table(name="tariff")
-@Data
+@Getter @Setter
+@ToString
 @NoArgsConstructor
 public class Tariff {
 

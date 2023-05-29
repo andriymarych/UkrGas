@@ -9,7 +9,8 @@ import java.sql.Date;
 
 @Entity
 @Table(name = "account_tariff")
-@Data
+@Getter @Setter
+@ToString
 @NoArgsConstructor
 public class AccountTariff {
 
@@ -27,15 +28,15 @@ public class AccountTariff {
     @Column(name = "end_date")
     private Date endDate;
 
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "accountTariff")
+    @JsonBackReference
+    private PersonalGasAccount personalGasAccount;
+
     @ManyToOne
     @JoinColumn(name = "tariff_id", referencedColumnName = "id")
     @JsonBackReference
     private Tariff tariff;
 
-    @ManyToOne
-    @JoinColumn(name = "gas_account_id", referencedColumnName = "id")
-    @JsonBackReference
-    private GasAccount gasAccount;
 
 
 }

@@ -5,30 +5,28 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 
-
+import java.util.Collection;
+import java.util.Objects;
+import java.util.Set;
 
 @Entity
-@Table(name = "auth")
-@Getter @Setter
-@ToString
+@Table(name = "person")
+@Getter
+@Setter
+@ToString()
 @NoArgsConstructor
-public class Auth {
+public class Person {
 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "id")
     private long id;
 
-    @Column(name = "email")
-    private String email;
+    @Column(name = "first_name")
+    private String firstName;
 
-    @Column(name = "password")
-    private String password;
+    @Column(name = "last_name")
+    private String lastName;
 
 
-
-    public Auth(String email, String password) {
-        this.email = email;
-        this.password = password;
-    }
 }

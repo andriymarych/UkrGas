@@ -2,15 +2,16 @@ package com.gas.app.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.sql.Date;
 import java.util.Objects;
 
 @Entity
 @Table(name = "feedback")
-@Data
+@Getter
+@Setter
+@ToString
 @NoArgsConstructor
 public class Feedback {
 
@@ -31,18 +32,15 @@ public class Feedback {
     @Column(name = "content")
     private String content;
 
-    @Column(name = "date")
-    private Date date;
+    @Column(name = "category_id")
+    private Integer categoryId;
 
-    @ManyToOne
-    @JoinColumn(name = "category_id", referencedColumnName = "id")
-    @JsonBackReference
-    private FeedbackCategory categoryId;
+    @Column(name = "type_id")
+    private Integer typeId;
 
-    @ManyToOne
-    @JoinColumn(name = "type_id", referencedColumnName = "id")
-    @JsonBackReference
-    private FeedbackType typeId;
-
-
+    public Feedback(String fullName, String email, String content) {
+        this.fullName = fullName;
+        this.email = email;
+        this.content = content;
+    }
 }

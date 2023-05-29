@@ -2,14 +2,14 @@ package com.gas.app.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
+import lombok.*;
 
 
 @Entity
 @Table(name = "address")
-@Data
+@Getter
+@Setter
+@ToString
 @NoArgsConstructor
 public class Address {
 
@@ -33,9 +33,9 @@ public class Address {
     @Column(name = "apartment_number")
     private Integer apartmentNumber;
 
-    @OneToOne(mappedBy = "addressId")
+    @OneToOne(mappedBy = "address",fetch = FetchType.LAZY)
     @JsonBackReference
-    private GasAccount gasAccount;
+    private PersonalGasAccount personalGasAccount;
 
 
 }

@@ -1,16 +1,17 @@
 package com.gas.app.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.Collection;
 
 @Entity
 @Table(name = "user")
-@Data
+@Getter @Setter
+@ToString
 @NoArgsConstructor
 public class User {
 
@@ -19,22 +20,13 @@ public class User {
     @Column(name = "id")
     private long id;
 
-    @Column(name = "name")
-    private String  name;
-
-    @Column(name = "surname")
-    private String  surname;
-
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "user")
-    @JsonManagedReference
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "auth_id", referencedColumnName = "id", foreignKey = @ForeignKey(name = "FK_User_AuthId"))
+    @JsonBackReference
     private Auth auth;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
     @JsonManagedReference
-    private Collection<GasAccount> gasAccounts;
+    private Collection<PersonalGasAccount> personalGasAccounts;
 
-    public User(String name, String surname) {
-        this.name = name;
-        this.surname = surname;
-    }
 }

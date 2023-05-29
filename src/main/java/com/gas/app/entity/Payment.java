@@ -2,14 +2,15 @@ package com.gas.app.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.sql.Date;
 
 @Entity
 @Table(name="payment")
-@Data
+@Getter
+@Setter
+@ToString
 @NoArgsConstructor
 public class Payment {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,9 +25,9 @@ public class Payment {
     @Column(name = "date")
     private Date date;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "gas_account_id", referencedColumnName = "id")
     @JsonBackReference
-    private GasAccount gasAccount;
+    private PersonalGasAccount personalGasAccount;
 
 }
