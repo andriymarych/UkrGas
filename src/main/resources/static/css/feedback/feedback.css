@@ -66,12 +66,12 @@
     margin-left: 270px;
     display: inline-block;
 }
-#type-select,#category-select{
+#feedback-type,#feedback-category{
     color: #2d2d2d;
     display: inline-block;
     width: 328px;
 }
-#category-select{
+#feedback-category{
     margin-left: 270px;
 }
 .textarea-form{
