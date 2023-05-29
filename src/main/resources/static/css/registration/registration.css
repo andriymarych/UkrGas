@@ -7,7 +7,7 @@
 
 .form-container {
     width: 1100px;
-    height: 610px;
+    height: 620px;
     align-items: center;
     margin: auto;
     border-radius: 20px;
@@ -50,10 +50,16 @@
     width: 20px;
 }
 .checkbox-agreement{
-    margin: 55px 0 0 365px;
+    margin: 25px 0 0 365px;
 }
 .checkbox-text{
     margin-left: 20px;
+}
+#registration-label{
+    height: 20px;
+    display: block;
+    margin: 25px auto 0 auto;
+    text-align: center;
 }
 #create-account-button {
     display: block;

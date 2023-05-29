@@ -3,7 +3,7 @@
     padding: 30px 40px;
     position: fixed;
     width: 400px;
-    height: 345px;
+    height: 370px;
     top: -150%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -14,35 +14,21 @@
     z-index: 10;
 }
 
-.registration-popup{
-    background-color: #fff;
-    padding: 42px 20px 0 20px;
-    position: fixed;
-    width: 515px;
-    height: 620px;
-    top: -150%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    opacity: 0;
-    transition: all 0.7s ease;
-    border-radius: 22px;
-    text-align: center;
-    z-index: 10;
-}
+
 .active{
     transform: translate(-50%, -50%);
     opacity: 1;
     top: 50%;
 }
 
-#login-form, #registration-form{
+#login-form{
     display: flex;
     flex-direction: column;
     justify-content: center;
     opacity: 1;
 }
 
-#login-form h2, #registration-form h2{
+#login-form h2{
     margin: 12px;
 }
 
@@ -55,7 +41,7 @@
     font-size: 20px;
 
 }
-#login-form input::placeholder, #registration-form input::placeholder{
+#login-form input::placeholder{
     padding: 15px;
     font-size: 19px;
     opacity: 0.8;
@@ -97,7 +83,7 @@
 }
 
 #registration-popup-button{
-    font-size: 1.1em;
+    font-size: 19px;
     background: 0;
     border: 0;
     margin: 10px 20px;
@@ -127,7 +113,7 @@
     font-size: 30px;
     cursor: pointer;
 }
-#close-login-button, #close-registration-button{
+#close-login-button{
     color: black;
     position: absolute;
     top: 30px;
@@ -135,11 +121,18 @@
     font-size: 30px;
     cursor: pointer;
 }
-#login-label,#registration-label{
+#login-label, #registration-label{
+    display: block;
+    height: 30px;
     color: red;
-    font-size: 20px;
-}
 
+}
+#login-label{
+    font-size: 17px;
+}
+#registration-label{
+     font-size: 20px;
+ }
 .registration-popup h2{
     margin-bottom: 16px;
 }
