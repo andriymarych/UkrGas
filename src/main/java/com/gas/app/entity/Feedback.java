@@ -20,9 +20,6 @@ public class Feedback {
     @Column(name = "id")
     private long id;
 
-    @Column(name = "status")
-    private String status;
-
     @Column(name = "full_name")
     private String fullName;
 

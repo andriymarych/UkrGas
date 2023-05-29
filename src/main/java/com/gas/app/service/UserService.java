@@ -3,7 +3,7 @@ package com.gas.app.service;
 
 
 import com.gas.app.controller.exception.ServiceException;
-import com.gas.app.dto.UserRegistrationForm;
+import com.gas.app.dto.UserRegistrationDto;
 import com.gas.app.entity.Auth;
 import com.gas.app.entity.PersonalGasAccount;
 import com.gas.app.entity.User;
@@ -25,7 +25,7 @@ public class UserService {
     private final PersonalGasAccountService personalGasAccountService;
 
     @Transactional
-    public User registerUser(UserRegistrationForm userForm) {
+    public User registerUser(UserRegistrationDto userForm) {
         if (authService.isEmailAlreadyInUse(userForm.email())) {
             throw new ServiceException("Email [" + userForm.email() + "] is already in use",
                     HttpStatus.CONFLICT);

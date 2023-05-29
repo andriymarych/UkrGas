@@ -1,7 +1,7 @@
 package com.gas.app.controller;
 
 
-import com.gas.app.dto.UserRegistrationForm;
+import com.gas.app.dto.UserRegistrationDto;
 import com.gas.app.entity.User;
 import com.gas.app.service.UserService;
 import com.gas.app.util.ResponseHandler;
@@ -26,7 +26,7 @@ public class RegistrationController {
     }
     @PostMapping("/")
     @Transactional
-    public ResponseEntity<Object> registration(@RequestBody UserRegistrationForm userForm) {
+    public ResponseEntity<Object> registration(@RequestBody UserRegistrationDto userForm) {
         User user = userService.registerUser(userForm);
         return ResponseHandler.generateResponse("Account has been created", HttpStatus.CREATED, user);
     }

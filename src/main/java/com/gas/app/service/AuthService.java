@@ -1,7 +1,7 @@
 package com.gas.app.service;
 
 
-import com.gas.app.dto.UserRegistrationForm;
+import com.gas.app.dto.UserRegistrationDto;
 import com.gas.app.entity.Auth;
 import com.gas.app.repository.AuthRepository;
 import lombok.RequiredArgsConstructor;
@@ -23,7 +23,7 @@ public class AuthService {
                 .isPresent();
     }
     @Transactional
-    public Auth generateAuth(UserRegistrationForm userForm) {
+    public Auth generateAuth(UserRegistrationDto userForm) {
         String encodedPassword = passwordEncoder.encode(userForm.password());
         return new Auth(userForm.email(), encodedPassword);
     }

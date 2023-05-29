@@ -1,7 +1,11 @@
 package com.gas.app.controller.exception;
 
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 
+@Getter
+@RequiredArgsConstructor
 public class ServiceException extends RuntimeException{
     private final HttpStatus httpStatus;
     public ServiceException(String message, HttpStatus httpStatus) {
@@ -9,7 +13,5 @@ public class ServiceException extends RuntimeException{
         this.httpStatus = httpStatus;
     }
 
-    public HttpStatus getHttpStatus() {
-        return httpStatus;
-    }
+
 }

@@ -25,11 +25,9 @@ public class FeedbackController {
         return "feedback";
     }
 
-    @PostMapping
+    @PostMapping("/create")
     public ResponseEntity<Object> saveBooking(@RequestBody FeedbackDto feedbackDto) {
-        Feedback feedback = service.saveFeedback(feedbackDto).orElseThrow(
-                () -> new ServiceException("Feedback creation error", HttpStatus.CONFLICT)
-        );
-        return ResponseHandler.generateResponse("Booking was successfully made", HttpStatus.OK, feedback);
+        Feedback feedback = service.saveFeedback(feedbackDto);
+        return ResponseHandler.generateResponse("Feedback was successfully created", HttpStatus.CREATED, feedback);
     }
 }
