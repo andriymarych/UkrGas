@@ -1,4 +1,4 @@
-package com.gas.app.controller.exception.apiException;
+package com.gas.app.controller.exception;
 
 import org.springframework.http.HttpStatus;
 
