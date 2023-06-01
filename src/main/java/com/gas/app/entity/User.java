@@ -18,15 +18,15 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "id")
-    private long id;
+    private Long id;
 
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "auth_id", referencedColumnName = "id", foreignKey = @ForeignKey(name = "FK_User_AuthId"))
-    @JsonBackReference
+    @JsonManagedReference
     private Auth auth;
 
-    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+ /*   @OneToMany(mappedBy = "user",cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JsonManagedReference
-    private Collection<PersonalGasAccount> personalGasAccounts;
+    private Collection<PersonalGasAccount> personalGasAccounts;*/
 
 }

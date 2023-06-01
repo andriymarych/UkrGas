@@ -12,7 +12,8 @@ import java.sql.Date;
 @Getter @Setter
 @ToString
 @NoArgsConstructor
-public class AccountTariff {
+public class
+AccountTariff {
 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
@@ -32,7 +33,7 @@ public class AccountTariff {
     @JsonBackReference
     private PersonalGasAccount personalGasAccount;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "tariff_id", referencedColumnName = "id")
     @JsonBackReference
     private Tariff tariff;
