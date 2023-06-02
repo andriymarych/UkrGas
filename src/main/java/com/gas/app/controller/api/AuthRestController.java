@@ -1,4 +1,4 @@
-package com.gas.app.controller;
+package com.gas.app.controller.api;
 
 
 import com.gas.app.dto.UserLoginDto;
@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/auth")
 @RequiredArgsConstructor
-public class AuthController {
+public class AuthRestController {
 
     private final UserService userService;
 

@@ -14,16 +14,17 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/v1/personalAccount")
+@RequestMapping("/api/v1/personalAccounts/")
 
-public class PersonalGasAccountController {
+public class PersonalGasAccountRestController {
 
     private final PersonalGasAccountService personalGasAccountService;
 
-
-    @PostMapping("/")
+    @GetMapping("/")
     @Transactional
-    public ResponseEntity<Object> getPersonalAccountsByUserId(@RequestBody UserSessionDto user) {
+    public ResponseEntity<Object> getPersonalAccounts(@RequestParam Long userId,
+                                                      @RequestParam Long authId) {
+        UserSessionDto user = new UserSessionDto(userId, authId);
         List<PersonalGasAccount> gasAccounts = personalGasAccountService.getAccountsByUser(user);
         return ResponseHandler.generateResponse("Login is successful", HttpStatus.OK, gasAccounts);
     }
@@ -31,19 +32,4 @@ public class PersonalGasAccountController {
 
 }
 
-/*
-@RestController
-@RequestMapping("/api")
-@RequiredArgsConstructor
-public class PersonalGasAccountController {
 
-    private final UserService userService;
-
-    @PostMapping("/login")
-    @Transactional
-    public ResponseEntity<Object> login(@RequestBody UserLoginDto userForm) {
-
-        User user = userService.authenticateUser(userForm.email(), userForm.password());
-        return ResponseHandler.generateResponse("Login is successful", HttpStatus.OK, user);
-    }
-}*/

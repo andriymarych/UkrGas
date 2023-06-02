@@ -1,4 +1,4 @@
-package com.gas.app.controller.exception;
+package com.gas.app.exception;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;

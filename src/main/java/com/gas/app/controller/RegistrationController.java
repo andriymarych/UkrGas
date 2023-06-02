@@ -19,15 +19,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/registration")
 @RequiredArgsConstructor
 public class RegistrationController {
-    private final UserService userService;
+
     @GetMapping
     public String getPage() {
         return "registration";
     }
-    @PostMapping("/")
-    @Transactional
-    public ResponseEntity<Object> registration(@RequestBody UserRegistrationDto userForm) {
-        User user = userService.registerUser(userForm);
-        return ResponseHandler.generateResponse("Account has been created", HttpStatus.CREATED, user);
-    }
+
 }

@@ -2,7 +2,7 @@ package com.gas.app.service;
 
 
 
-import com.gas.app.controller.exception.ServiceException;
+import com.gas.app.exception.ServiceException;
 import com.gas.app.dto.UserRegistrationDto;
 import com.gas.app.entity.Auth;
 import com.gas.app.entity.PersonalGasAccount;

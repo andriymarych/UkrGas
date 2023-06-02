@@ -1,4 +1,4 @@
-package com.gas.app.controller.exception;
+package com.gas.app.exception;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;

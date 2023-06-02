@@ -1,8 +1,9 @@
 package com.gas.app.service;
 
 
-import com.gas.app.controller.exception.ServiceException;
+import com.gas.app.exception.ServiceException;
 import com.gas.app.dto.UserRegistrationDto;
+import com.gas.app.dto.UserSessionDto;
 import com.gas.app.entity.Auth;
 import com.gas.app.entity.User;
 import com.gas.app.repository.AuthRepository;
@@ -27,15 +28,25 @@ public class AuthService {
         return authRepository.findAuthByEmail(email)
                 .isPresent();
     }
+
     @Transactional
     public Auth generateAuth(UserRegistrationDto userForm) {
         String encodedPassword = passwordEncoder.encode(userForm.password());
         return new Auth(userForm.email(), encodedPassword);
     }
+
     @Transactional
-    public boolean verifyAuth(Long userId, Long authId){
+    public void verifyAuth(UserSessionDto userSessionDto) {
+
+        Long userId = userSessionDto.userId();
+        Long authId = userSessionDto.authId();
+
         User user = userRepository.findUserById(userId)
-                .orElseThrow( () -> new ServiceException("User with id[" + userId + "] is not found", HttpStatus.NOT_FOUND));
-        return user.getAuth().getId().equals(authId);
+                .orElseThrow(() -> new ServiceException("User [" + userId + "] is not found", HttpStatus.NOT_FOUND));
+
+        if (!user.getAuth().getId().equals(authId)) {
+            throw new ServiceException("User [" + userId + "] entered an incorrect auth id", HttpStatus.FORBIDDEN);
+        }
+
     }
 }
