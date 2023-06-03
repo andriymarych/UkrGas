@@ -10,22 +10,18 @@
     <img id="logo" src="/img/common/logo.png" alt="logo">
 </a>
 <nav>
-    <ul class="main-nav">
-
-        <a th:href="@{/feedback}">
-            <li>Напишіть нам</li>
-        </a>
-        <a th:href="@{/contacts}">
-            <li>Контакти</li>
-        </a>
+    <ul class="main-nav" id="nav-bar-list">
     </ul>
 </nav>
-<button id="main-login-button">Особистий кабінет</button>
+<button hidden id="main-login-button">Особистий кабінет</button>
 <div class="dropdown">
-    <button hidden id="user-button"></button>
-    <div class="dropdown-content">
-        <a th:href="@{/account}">Управління акаутом</a>
-        <a th:href="@{/account/booking}">Ваші замовлення</a>
+    <button hidden id="user-button">
+        <span class="material-symbols-outlined user-icon">
+            account_circle</span>
+    </button>
+    <div id="personal-account-list" >
+
+
     </div>
 </div>
 </header>

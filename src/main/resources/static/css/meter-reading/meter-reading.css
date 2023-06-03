@@ -11,7 +11,8 @@
     font-weight: 300;
 
 }
-.meterage-container {
+
+.meter-container {
     display: flex;
     margin-top: 70px;
     margin-left: 70px;
@@ -20,7 +21,8 @@
     flex-wrap: wrap;
     gap: 0.2em;
 }
-.meterage-box{
+
+.meter-box {
     width: 640px;
     height: 440px;
     align-items: center;
@@ -30,17 +32,32 @@
     background-color: white;
     transition: transform 0.3s ease-out;
 }
-.meterage-box-header{
+
+.meter-box-header {
     text-align: center;
     margin-top: 60px;
 }
-.meterage-input-box-description{
+
+.meter-input-box-description {
     color: #6b6b6b;
     text-align: center;
     font-weight: 400;
     margin-top: 60px;
 }
-.meterage-reading-input{
+#feedback-response {
+    text-align: center;
+    font-weight: 350;
+    font-size: 23px;
+    margin-top: 80px;
+}
+#first-line-response{
+    color: green;
+}
+
+#second-line-response{
+    color: #454545;
+}
+#meter-reading-input {
     display: block;
     width: 300px;
     margin: 20px auto 0 auto;
@@ -49,11 +66,20 @@
     padding: 12px;
     font-size: 20px;
 }
-#save-button{
+
+#meter-reading-label {
+    height: 20px;
+    color: red;
+    display: block;
+    margin: 15px auto 0 auto;
+    text-align: center;
+}
+
+#save-button {
     display: block;
     width: 230px;
     height: 60px;
-    margin:55px auto 0 auto;
+    margin: 25px auto 0 auto;
     background-color: #235ab3;
     color: #fff;
     border-style: none;
@@ -61,27 +87,33 @@
     font-size: larger;
     cursor: pointer;
 }
-#meterage-readings-container{
+
+#meter-readings-container {
     margin-top: 30px;
     height: 240px;
     overflow-y: scroll;
 }
-.reading-record{
+
+.reading-record {
     color: #484848;
     display: block;
     text-align: center;
     margin: 0 auto 15px auto;
 }
-.gas-meter-number{
+
+.gas-meter-number {
     display: inline-block;
     text-align: left;
-    width: 165px;
+    width: 130px;
 }
-.reading-date{
+
+.reading-date {
     display: inline-block;
-    width: 140px;
+    width: 175px;
 }
-.meter-reading-value{
+
+.meter-reading-value {
     display: inline-block;
-    width: 180px;
+    text-align: end;
+    width: 130px;
 }

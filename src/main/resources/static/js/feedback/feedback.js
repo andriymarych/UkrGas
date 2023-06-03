@@ -1,9 +1,4 @@
 
-const registrationButton = document.getElementById('create-account-button');
-
-
-
-
 const createFeedback = () => {
     const label = document.getElementById('feedback-label');
 
@@ -38,7 +33,7 @@ const createFeedback = () => {
 const sendFeedbackData = (data) => {
     console.log(data);
     console.log(data.password);
-    fetch('/feedback/create', {
+    fetch('api/v1/feedback/create', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'

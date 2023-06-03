@@ -4,9 +4,6 @@ const closeLoginFormBtn = document.getElementById("close-login-button");
 const loginLabel = document.getElementById("login-label");
 
 
-const userButton = document.getElementById("user-button");
-
-
 const shadowBG = document.getElementById("background-popup");
 const controlDisapearingBG = (flag) => {
     shadowBG.style.backgroundColor = "rgba(0, 0, 0, 0.6)";
@@ -14,7 +11,7 @@ const controlDisapearingBG = (flag) => {
         ? shadowBG.style.visibility = "visible"
         :
         shadowBG.style.visibility = "hidden"
-        clearPopUp();
+    clearPopUp();
 }
 
 
@@ -68,13 +65,15 @@ const verifyUser = (input) => {
     })
         .then(response => {
             if (!response.ok) {
-                return response.text().then(text => { throw new Error(text) })
+                return response.text().then(text => {
+                    throw new Error(text)
+                })
             }
             return response.json();
         })
         .then(data => {
             document.getElementById('login-label').innerHTML = '';
-            setUserData(data, input.password);
+            setUserData(data);
             removePopUp();
         })
         .catch(error => {
@@ -84,11 +83,18 @@ const verifyUser = (input) => {
 
 }
 
-const setUserData = (response, password) => {
-    sessionStorage.setItem('id', response.data.id);
-    sessionStorage.setItem('personal-gas-account', response.data.personalGasAccount);
-    sessionStorage.setItem('email', response.data.email);
+const setUserData = (response) => {
+    sessionStorage.setItem('isUserAuthorized', 'true');
+    sessionStorage.setItem('userId', response.data.userId);
+    sessionStorage.setItem('authId', response.data.authId);
     window.location.href = '../';
+}
+const sessionLogout = () => {
+    sessionStorage.setItem('isUserAuthorized', 'false');
+    sessionStorage.removeItem('current-personal-account');
+    sessionStorage.removeItem('userId');
+    sessionStorage.removeItem('authId');
+    location.reload();
 }
 
 const removePopUp = () => {
@@ -100,10 +106,10 @@ const clearPopUp = () => {
     document.getElementById('password').value = "";
     loginLabel.innerHTML = "";
 }
-const  errorParser = (errorMessage) => {
-    if(errorMessage.includes("password")){
+const errorParser = (errorMessage) => {
+    if (errorMessage.includes("password")) {
         return "* Ви ввели невірний пароль"
-    }else{
+    } else {
         return "* Користувача із введеним логіном не існує"
     }
 }
