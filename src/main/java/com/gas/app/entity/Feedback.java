@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.Objects;
 
 @Entity
@@ -28,6 +29,9 @@ public class Feedback {
 
     @Column(name = "content")
     private String content;
+
+    @Column(name = "timestamp", insertable = false)
+    private Timestamp timestamp;
 
     @Column(name = "category_id")
     private Integer categoryId;

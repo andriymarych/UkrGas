@@ -58,7 +58,7 @@ public class PersonalGasAccount {
 
     @OneToMany(mappedBy = "personalGasAccount", fetch = FetchType.LAZY)
     @JsonManagedReference
-    private Collection<Meterage> meterages;
+    private Collection<MeterReading> meterages;
 
     @OneToMany(mappedBy = "personalGasAccount", fetch = FetchType.LAZY )
     @JsonManagedReference

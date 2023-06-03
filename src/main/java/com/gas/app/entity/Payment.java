@@ -22,11 +22,11 @@ public class Payment {
     @Column(name = "amount_paid")
     private Double amountPaid;
 
-    @Column(name = "date")
+    @Column(name = "date", insertable = false)
     private Date date;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "gas_account_id", referencedColumnName = "id")
+    @JoinColumn(name = "personal_gas_account_id", referencedColumnName = "id")
     @JsonBackReference
     private PersonalGasAccount personalGasAccount;
 

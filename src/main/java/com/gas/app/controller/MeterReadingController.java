@@ -5,13 +5,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
-@RequestMapping("/meterage")
+@RequestMapping("/meter-reading")
 @RequiredArgsConstructor
-public class MeterageController {
+public class MeterReadingController {
 
 
     @GetMapping
     public String getPage() {
-        return "meterage";
+        return "meter-reading";
     }
 }

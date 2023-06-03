@@ -7,27 +7,30 @@ import lombok.*;
 import java.sql.Date;
 
 @Entity
-@Table(name="meterage")
+@Table(name="meter_reading")
 @Getter
 @Setter
 @ToString
 @NoArgsConstructor
-public class Meterage {
+public class MeterReading {
 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "id")
     private long id;
 
-    @Column(name = "meter_readings")
-    private Long meterReadings;
+    @Column(name = "meter_reading")
+    private Double meterReading;
 
-    @Column(name = "date")
+    @Column(name = "date", insertable = false)
     private Date date;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "gas_account_id", referencedColumnName = "id")
+    @JoinColumn(name = "personal_gas_account_id", referencedColumnName = "id")
     @JsonBackReference
     private PersonalGasAccount personalGasAccount;
 
+    public MeterReading(Double meterReading) {
+        this.meterReading = meterReading;
+    }
 }

@@ -28,11 +28,11 @@ public class Calculation {
     @Column(name = "balance")
     private Double balance;
 
-    @Column(name = "date")
+    @Column(name = "date", insertable = false)
     private Date date;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "gas_account_id", referencedColumnName = "id")
+    @JoinColumn(name = "personal_gas_account_id", referencedColumnName = "id")
     @JsonBackReference
     private PersonalGasAccount personalGasAccount;
 
