@@ -9,5 +9,22 @@ const formatDate = (date) => {
 
     return dd + '.' + mm + '.' + yyyy;
 }
+const formatMonth = (date) =>{
+    const monthString = ["Січень",
+        "Лютий",
+        "Березень",
+        "Квітень",
+        "Травень",
+        "Червень",
+        "Липень",
+        "Серпень",
+        "Вересень",
+        "Жовтень",
+        "Листопад",
+        "Грудень"];
 
-export {formatDate}
+    const dateObject = new Date(date);
+    return monthString[dateObject.getMonth()] + " " + dateObject.getFullYear() ;
+}
+
+export {formatDate,formatMonth}

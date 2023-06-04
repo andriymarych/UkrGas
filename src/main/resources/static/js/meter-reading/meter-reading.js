@@ -149,7 +149,7 @@ const saveMeterReading = () => {
         meterReading : meterReadingInput
     }
     sendMeterReadingData(data);
-    setTimeout(() => window.location.reload(), 250);
+    setTimeout(() => window.location.reload(), 350);
 }
 const sendMeterReadingData = (data) => {
     fetch('/api/v1/personal-account/meter-reading/', {

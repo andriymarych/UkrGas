@@ -5,7 +5,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 
 public interface MeterReadingRepository extends JpaRepository<MeterReading, Long> {
@@ -30,6 +29,6 @@ public interface MeterReadingRepository extends JpaRepository<MeterReading, Long
             " where personal_gas_account_id = :personalAccountId " +
             "and date_trunc('month', date)  >= date_trunc('month', current_date - interval '1' month) " +
             "order by id ", nativeQuery = true)
-   List<Object[]> getMeterReadingForTheLastAndCurrentMonth(Long personalAccountId);
+   List<Object[]> getMeterReadingsForTheLastAndCurrentMonth(Long personalAccountId);
 
 }

@@ -43,6 +43,7 @@ public class SettlementService {
                     calculation.setAccruedPayment(accruedPayment);
                     calculation.setPaidPayment(paidPayment);
                     calculation.setBalance(totalBalance);
+                    calculation.setTariff(account.getAccountTariff().getTariff());
                     account.setBalance(totalBalance);
                     calculationRepository.save(calculation);
 
@@ -55,7 +56,7 @@ public class SettlementService {
     public Double calculateAmountConsumed(PersonalGasAccount account) {
 
         List<Object[]> meterReadings = meterReadingRepository
-                .getMeterReadingForTheLastAndCurrentMonth(account.getId());
+                .getMeterReadingsForTheLastAndCurrentMonth(account.getId());
 
         Double meterReadingLastMonth = (Double) meterReadings.get(0)[1];
         Double meterReadingCurrentMonth;

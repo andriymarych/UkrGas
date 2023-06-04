@@ -131,7 +131,7 @@ const savePayment = () => {
         amountPaid : paymentAmountInput.value
     }
     sendPaymentData(data);
-    setTimeout(() => window.location.reload(), 250);
+    setTimeout(() => window.location.reload(), 350);
 }
 const sendPaymentData = (data) => {
     fetch('/api/v1/personal-account/payment/', {

@@ -49,22 +49,37 @@
 .price{
     display: inline-block;
     text-align: center;
-    width: 165px;
+    width: 170px;
+}
+.price-span{
+    display: inline-block;
+    text-align: center;
+    width: 180px;
 }
 .amount-consumed{
     display: inline-block;
     text-align: center;
     width: 150px;
 }
-.accrued-amount{
+.accrued-payment{
     display: inline-block;
     text-align: center;
     width: 170px;
 }
-.amount-paid{
+.accrued-payment-span{
+    display: inline-block;
+    text-align: center;
+    width: 165px;
+}
+.paid-payment{
     display: inline-block;
     text-align: center;
     width: 170px;
+}
+.paid-payment-span{
+    display: inline-block;
+    text-align: center;
+    width: 175px;
 }
 .balance{
     display: inline-block;
