@@ -21,7 +21,7 @@ public class PersonalGasAccount {
     private long id;
 
     @Column(name = "balance")
-    private Long balance;
+    private Double balance;
 
     @Column(name = "IEC_number")
     private String iecNumber;

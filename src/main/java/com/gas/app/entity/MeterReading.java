@@ -3,6 +3,7 @@ package com.gas.app.entity;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.GenerationTime;
 
 import java.sql.Date;
 
@@ -23,6 +24,7 @@ public class MeterReading {
     private Double meterReading;
 
     @Column(name = "date", insertable = false)
+    @org.hibernate.annotations.Generated(GenerationTime.INSERT)
     private Date date;
 
     @ManyToOne(fetch = FetchType.LAZY)
