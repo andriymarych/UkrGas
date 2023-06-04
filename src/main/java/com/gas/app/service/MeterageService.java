@@ -22,7 +22,7 @@ public class MeterageService {
     private final PersonalGasAccountService accountService;
 
     @Transactional
-    public MeterReadingResponseDto getMeterageByPersonalAccountId(UserSessionDto userSessionDto,
+    public MeterReadingResponseDto getMeterReadingsByPersonalAccountId(UserSessionDto userSessionDto,
                                                                   Long personalAccountId) {
 
         PersonalGasAccount personalGasAccount = accountService.

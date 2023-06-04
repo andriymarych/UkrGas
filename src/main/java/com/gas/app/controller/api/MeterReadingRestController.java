@@ -14,19 +14,19 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/v1/personalAccount/")
+@RequestMapping("/api/v1/personal-account/")
 public class MeterReadingRestController {
 
     private final MeterageService meterageService;
     @GetMapping("/{personalAccountId}/meter-readings/")
     @Transactional
-    public ResponseEntity<Object> getMeterages(@PathVariable Long personalAccountId,
+    public ResponseEntity<Object> getMeterReadings(@PathVariable Long personalAccountId,
                                                @RequestParam Long userId,
                                                @RequestParam Long authId) {
 
         UserSessionDto userSessionDto = new UserSessionDto(userId, authId);
         MeterReadingResponseDto meterReadingResponseDto = meterageService
-                .getMeterageByPersonalAccountId(userSessionDto, personalAccountId);
+                .getMeterReadingsByPersonalAccountId(userSessionDto, personalAccountId);
 
         return ResponseHandler.generateResponse("OK",
                 HttpStatus.OK, meterReadingResponseDto);
@@ -35,13 +35,13 @@ public class MeterReadingRestController {
     @Transactional
     public ResponseEntity<Object> saveMeterReading(@RequestBody MeterReadingRequestDto requestDto) {
 
-        MeterReading meterReadingResponseDto = meterageService
+        MeterReading meterReading = meterageService
                 .saveMeterReading(requestDto);
 
         return ResponseHandler
                 .generateResponse("Meter reading ["
-                                + meterReadingResponseDto.getMeterReading() +
+                                + meterReading.getMeterReading() +
                                 "] has been successfully saved",
-                HttpStatus.OK, meterReadingResponseDto);
+                HttpStatus.OK, meterReading);
     }
 }
