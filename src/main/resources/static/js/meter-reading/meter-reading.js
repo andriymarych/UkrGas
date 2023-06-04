@@ -29,7 +29,7 @@ async function loadUserMeterReadings () {
             }
         };
         let accountId  = sessionStorage.getItem('current-personal-account');
-        let request =  `/api/v1/personalAccount/${accountId}/meter-readings/?` + params.toString();
+        let request =  `/api/v1/personal-account/${accountId}/meter-readings/?` + params.toString();
         const response =
             await fetch(request, settings);
         const responseBody = await response.json();
@@ -54,7 +54,7 @@ const setMeterNumber = (data) => {
 const setMeterReadings = (data) => {
 
     let  meterNumber =  data.personalGasAccount.gasMeterNumber;
-    const meterReadingsData = data.meterages;
+    const meterReadingsData = data.meterReadings;
 
     meterReadingsData.sort((a,b) => b.id - a.id);
     let lastMeterReading = meterReadingsData[0];
@@ -66,7 +66,7 @@ const setMeterReadings = (data) => {
     lastMeterReadingValue = meterReadingsData[0].meterReading;
     console.log(lastMeterReadingValue);
 
-    meterReadingsData.forEach((meterReading, index) => {
+    meterReadingsData.forEach((meterReading) => {
 
         let readingRecordP = document.createElement('p');
         readingRecordP.setAttribute('class', "reading-record");
@@ -151,13 +151,13 @@ const saveMeterReading = () => {
     sendMeterReadingData(data);
     setTimeout(() => window.location.reload(), 250);
 }
-const sendMeterReadingData = (input) => {
-    fetch('/api/v1/personalAccount/meter-reading/', {
+const sendMeterReadingData = (data) => {
+    fetch('/api/v1/personal-account/meter-reading/', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify(input)
+        body: JSON.stringify(data)
     })
         .then(response => {
             if (!response.ok) {
@@ -167,12 +167,4 @@ const sendMeterReadingData = (input) => {
             }
             return response.json();
         })
-        .then(data => {
-            document.getElementById('login-label').innerHTML = '';
-            removePopUp();
-        })
-        .catch(error => {
-            let errorBody = JSON.parse(error.message);
-            document.getElementById('login-label').innerHTML = errorParser(errorBody.message);
-        });
 }

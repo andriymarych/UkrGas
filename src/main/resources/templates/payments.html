@@ -29,48 +29,23 @@
     <div class="main-section">
         <div class="page-status">
         <h3 class="page-header">Оплати </h3>
-        <h3 class="balance">Баланс: <span id="balance-value">240 грн</span></h3>
+            <div class="balance">
+        <h3 class="balance-value">Баланс: <span id="balance-value-span"></span></h3>
+        <p id="balance-status"></p>
+            </div>
         </div>
         <div class="payment-container">
             <div class="payment-box">
                 <h4 class="payment-input-header">Газ <span class="currency"> грн</span></h4>
-                <input type="text" class="payment-input">
-                <p class="total-payment-value">До оплати: <span id="total-price">270 грн</span></p>
+                <input type="text" id="payment-amount-input">
+                <p class="total-payment-value">До оплати: <span id="total-price">0 грн</span></p>
+                <label id="payment-label"></label>
                 <button id="pay-button">Оплатити</button>
             </div>
             <div class="payment-box">
                 <h4 class="payment-box-header">Історія платежів</h4>
                 <div id="payment-container">
-                    <p class="payment-record">
-                        <span class="payment-number">№32950</span>
-                        <span class="payment-date">21.05.2023</span>
-                        <span class="payment-value">455.00 грн</span>
-                    </p>
-                    <p class="payment-record">
-                        <span class="payment-number">№30215</span>
-                        <span class="payment-date">21.05.2023</span>
-                        <span class="payment-value">920.00 грн</span>
-                    </p>
-                    <p class="payment-record">
-                        <span class="payment-number">№27460</span>
-                        <span class="payment-date">21.04.2023</span>
-                        <span class="payment-value">795.00 грн</span>
-                    </p>
-                    <p class="payment-record">
-                        <span class="payment-number">№26122</span>
-                        <span class="payment-date">11.04.2023</span>
-                        <span class="payment-value">1095.00 грн</span>
-                    </p>
-                    <p class="payment-record">
-                        <span class="payment-number">№22567</span>
-                        <span class="payment-date">11.04.2023</span>
-                        <span class="payment-value">1295.00 грн</span>
-                    </p>
-                    <p class="payment-record">
-                        <span class="payment-number">№22567</span>
-                        <span class="payment-date">11.04.2023</span>
-                        <span class="payment-value">245095.00 грн</span>
-                    </p>
+
                 </div>
             </div>
         </div>
@@ -80,6 +55,7 @@
 </footer>
 
 <script src="/js/common/login-form.js"></script>
+<script type="module" src="/js/payment/payments.js"></script>
 <script src="/js/common/header-initializer.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
 
