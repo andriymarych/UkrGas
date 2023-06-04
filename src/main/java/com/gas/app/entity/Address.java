@@ -33,9 +33,6 @@ public class Address {
     @Column(name = "apartment_number")
     private Integer apartmentNumber;
 
-    @OneToOne(mappedBy = "address",fetch = FetchType.LAZY)
-    @JsonBackReference
-    private PersonalGasAccount personalGasAccount;
 
 
 }

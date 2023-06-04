@@ -25,8 +25,6 @@ public class User {
     @JsonManagedReference
     private Auth auth;
 
- /*   @OneToMany(mappedBy = "user",cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JsonManagedReference
-    private Collection<PersonalGasAccount> personalGasAccounts;*/
+
 
 }

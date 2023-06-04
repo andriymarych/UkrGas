@@ -7,7 +7,7 @@ import com.gas.app.exception.ServiceException;
 import com.gas.app.dto.MeterReadingResponseDto;
 import com.gas.app.dto.UserSessionDto;
 import com.gas.app.entity.PersonalGasAccount;
-import com.gas.app.repository.MeterageRepository;
+import com.gas.app.repository.MeterReadingRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -18,7 +18,7 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class MeterageService {
-    private final MeterageRepository meterageRepository;
+    private final MeterReadingRepository meterReadingRepository;
     private final PersonalGasAccountService accountService;
 
     @Transactional
@@ -28,7 +28,7 @@ public class MeterageService {
         PersonalGasAccount personalGasAccount = accountService.
                 getAccountByAccountId(userSessionDto, personalAccountId);
 
-        List<MeterReading> meterReadings = meterageRepository.
+        List<MeterReading> meterReadings = meterReadingRepository.
                 findMeterReadingsByPersonalAccountId(personalGasAccount.getId())
                 .orElseThrow(
                         () -> new ServiceException("Could not find meterReadings with personal gas account["
@@ -44,17 +44,16 @@ public class MeterageService {
                 getAccountByAccountId(requestDto.userSession(), requestDto.gasAccountId());
 
         MeterReading meterReading = new MeterReading(requestDto.meterReading());
-        meterReading.setPersonalGasAccount(personalGasAccount);
         validateMeterReading(meterReading);
 
         meterReading.setPersonalGasAccount(personalGasAccount);
-        return meterageRepository.save(meterReading);
+        return meterReadingRepository.save(meterReading);
     }
 
     @Transactional
     public void validateMeterReading(MeterReading meterReading) {
 
-        MeterReading lastMeterReading = meterageRepository
+        MeterReading lastMeterReading = meterReadingRepository
                 .getLastMeterReading(meterReading.getPersonalGasAccount().getId())
                 .orElseThrow(
                         () -> new ServiceException("Could not find last meter reading " +

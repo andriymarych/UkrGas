@@ -18,9 +18,8 @@ public interface PaymentRepository extends JpaRepository<Payment,Long> {
     Optional<List<Payment>> findPaymentsByPersonalAccountId(Long personalAccountId);
 
 
-    @Query("select meterReading from MeterReading meterReading " +
-            "left join fetch meterReading.personalGasAccount account " +
-            "where account.id = :personalAccountId " +
-            "order by meterReading.id desc limit 1")
-    Optional<MeterReading> getLastMeterReading(Long personalAccountId);
+    @Query(value = "select sum(amount_paid) from ukr_gas.payment where personal_gas_account_id = :personalAccountId " +
+            "and date_trunc('month', date) = date_trunc('month', current_date - interval '1' month) ", nativeQuery = true)
+    Double getSumOfPaymentsForTheLastMonth(Long personalAccountId);
+
 }
