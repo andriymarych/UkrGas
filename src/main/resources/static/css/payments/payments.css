@@ -15,19 +15,34 @@
     justify-content: space-between;
     margin-right: 140px;
 }
+
 .balance{
     margin-top: 0;
     font-weight: 400;
+}
+.balance-value{
+    margin-bottom: 5px;
+}
+#balance-value-span{
+    font-weight: 400;
+    margin-left: 20px;
 
 }
-#balance-value{
-    margin-left: 20px;
+#balance-status{
+    margin-top: 0;
     font-weight: 400;
+    text-align: end;
+
+}
+.overpaid-status{
     color: #207700;
+}
+.debt-status{
+    color: #e10000;
 }
 .payment-container{
     display: flex;
-    margin: 50px 70px 0 70px;
+    margin: 15px 70px 0 70px;
     justify-content: space-evenly;
     flex-wrap: wrap;
     gap: 0.2em;
@@ -58,7 +73,7 @@
     font-weight: 400;
     margin-top: 60px;
 }
-.payment-input{
+#payment-amount-input{
     display: block;
     position: absolute;
     margin-top: -75px;
@@ -79,12 +94,20 @@
     font-weight: 400;
     display: block;
     text-align: center;
-    margin: 160px auto 0 auto;
+    margin: 125px auto 0 auto;
 }
 #total-price{
     margin-left: 20px;
     font-weight: 200;
 }
+#payment-label {
+    height: 20px;
+    color: red;
+    display: block;
+    margin: 15px auto 0 auto;
+    text-align: center;
+}
+
 #pay-button{
     display: block;
     width: 230px;
@@ -111,13 +134,15 @@
 .payment-number{
     display: inline-block;
     text-align: left;
-    width: 165px;
+    width: 130px;
 }
 .payment-date{
     display: inline-block;
-    width: 140px;
+    width: 175px;
 }
-.payment-value{
+.payment-amount-paid{
     display: inline-block;
-    width: 180px;
+    text-align: end;
+    width: 130px;
 }
+
