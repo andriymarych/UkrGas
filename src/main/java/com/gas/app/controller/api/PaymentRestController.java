@@ -34,7 +34,7 @@ public class PaymentRestController {
     }
     @PostMapping("/payment/")
     @Transactional
-    public ResponseEntity<Object> saveMeterReading(@RequestBody PaymentRequestDto requestDto) {
+    public ResponseEntity<Object> savePayment(@RequestBody PaymentRequestDto requestDto) {
 
         Payment payment = paymentService
                 .savePayment(requestDto);

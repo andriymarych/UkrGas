@@ -29,7 +29,6 @@ public class MeterReading {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "personal_gas_account_id", referencedColumnName = "id")
-    @JsonBackReference
     private PersonalGasAccount personalGasAccount;
 
     public MeterReading(Double meterReading) {

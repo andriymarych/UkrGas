@@ -24,8 +24,6 @@ public class Tariff {
     @Column(name = "price")
     private Double price;
 
-    @OneToMany(mappedBy = "tariff", fetch = FetchType.LAZY)
-    @JsonManagedReference
-    private Collection<AccountTariff> accountTariffs;
+
 
 }

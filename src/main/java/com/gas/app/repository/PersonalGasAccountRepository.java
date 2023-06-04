@@ -6,12 +6,23 @@ import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 
 public interface PersonalGasAccountRepository extends JpaRepository<PersonalGasAccount, Long> {
     @Query("select distinct account from PersonalGasAccount account " +
             "left join fetch account.person  where account.accountNumber = :accountNumber")
     Optional<PersonalGasAccount> findAccountByAccountNumber(String accountNumber);
+
+    @Query("select distinct account from PersonalGasAccount account " +
+            "left join fetch account.accountTariff account_tariff " +
+            "left join fetch account_tariff.tariff " +
+            "left join fetch account.person " +
+            "left join fetch account.address " +
+            "left join fetch account.user user " +
+            "left join fetch user.auth " +
+            "left join fetch account.person ")
+    List<PersonalGasAccount> findAllAccounts();
 
     @Query("select distinct account from PersonalGasAccount account " +
             "left join fetch account.accountTariff account_tariff " +

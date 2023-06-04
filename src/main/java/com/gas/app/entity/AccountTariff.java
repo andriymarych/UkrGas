@@ -1,6 +1,7 @@
 package com.gas.app.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -29,13 +30,10 @@ AccountTariff {
     @Column(name = "end_date")
     private Date endDate;
 
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "accountTariff")
-    @JsonBackReference
-    private PersonalGasAccount personalGasAccount;
+
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "tariff_id", referencedColumnName = "id")
-    @JsonBackReference
     private Tariff tariff;
 
 

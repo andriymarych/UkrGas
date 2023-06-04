@@ -5,7 +5,6 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.util.Collection;
 
 @Entity
 @Table(name = "personal_gas_account")
@@ -18,7 +17,7 @@ public class PersonalGasAccount {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "id")
-    private long id;
+    private Long id;
 
     @Column(name = "balance")
     private Double balance;
@@ -44,7 +43,6 @@ public class PersonalGasAccount {
 
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn( name = "tariff_id", referencedColumnName = "id")
-    @JsonManagedReference
     private AccountTariff accountTariff;
 
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
@@ -52,16 +50,5 @@ public class PersonalGasAccount {
     @JsonManagedReference
     private Address address;
 
-   /* @OneToMany(mappedBy = "personalGasAccount", fetch = FetchType.LAZY)
-    @JsonManagedReference
-    private Collection<Calculation> calculations;
-
-    @OneToMany(mappedBy = "personalGasAccount", fetch = FetchType.LAZY)
-    @JsonManagedReference
-    private Collection<MeterReading> meterages;
-
-    @OneToMany(mappedBy = "personalGasAccount", fetch = FetchType.LAZY )
-    @JsonManagedReference
-    private Collection<Payment> payments;*/
 
 }
