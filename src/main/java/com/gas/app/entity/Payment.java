@@ -2,9 +2,12 @@ package com.gas.app.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
-import lombok.*;
 
-import java.sql.Date;
+import lombok.*;
+import org.hibernate.annotations.Generated;
+import org.hibernate.annotations.GenerationTime;
+
+import java.sql.Timestamp;
 
 @Entity
 @Table(name="payment")
@@ -23,11 +26,15 @@ public class Payment {
     private Double amountPaid;
 
     @Column(name = "date", insertable = false)
-    private Date date;
+    @Generated(GenerationTime.INSERT)
+    private Timestamp timestamp;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "personal_gas_account_id", referencedColumnName = "id")
     @JsonBackReference
     private PersonalGasAccount personalGasAccount;
 
+    public Payment(Double amountPaid) {
+        this.amountPaid = amountPaid;
+    }
 }

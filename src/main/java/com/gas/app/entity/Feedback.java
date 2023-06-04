@@ -1,12 +1,11 @@
 package com.gas.app.entity;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.GenerationTime;
+import org.hibernate.annotations.Generated;
 
-import java.sql.Date;
 import java.sql.Timestamp;
-import java.util.Objects;
 
 @Entity
 @Table(name = "feedback")
@@ -31,6 +30,7 @@ public class Feedback {
     private String content;
 
     @Column(name = "timestamp", insertable = false)
+    @Generated(GenerationTime.INSERT)
     private Timestamp timestamp;
 
     @Column(name = "category_id")
