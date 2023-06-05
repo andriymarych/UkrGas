@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Розрахунки</title>
+    <link rel="stylesheet" type="text/css" href="/css/common/style.css">
+    <link rel="stylesheet" type="text/css" href="/css/common/header.css">
+    <link rel="stylesheet" type="text/css" href="/css/common/login-form.css">
+    <link rel="stylesheet" type="text/css" href="/css/profile/profile.css">
+    <link rel="icon" type="image/x-icon" href="/img/common/icon.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"/>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css"/>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+</head>
+<body>
+<div id="background-popup"></div>
+<header th:replace="~{fragments/header :: header}" id="header">
+</header>
+<div th:replace="~{fragments/login-form :: login-form}">
+
+</div>
+<main>
+    <div class="main-section">
+        <div class="info-box">
+            <div class="balance-container">
+
+                <p class="balance-value">Баланс</p>
+                <p id="balance-value-span">353 грн</p>
+            </div>
+            <div class="personal-info-container">
+                <h3 class="personal-info-header" >Персональні дані</h3>
+                <div class="info-span-header">
+                    <p class="info-header">Власник о/c </p>
+                    <p class="info-header">Особовий рахунок </p>
+                    <p class="info-header">ІЕС-код </p>
+                    <p class="info-header">Адреса </p>
+                </div>
+                <div class="info-div">
+                    <p id="owner" class="info-span">Марич Андрій Петрович</p>
+                    <p id="personal-account-number" class="info-span">05345341</p>
+                    <p id="iec-number" class="info-span">0534MXN5341</p>
+                    <p id="address" class="info-span">Івано-Франківськ</p>
+                </div>
+            </div>
+            <div class="tariff-info-container">
+                <h3 class="tariff-container-header"> Мій Тариф</h3>
+                <div class="info-span-header">
+                    <p class="tariff-header">Тарифний план</p>
+                    <p class="tariff-header">Ціна за 1 куб. м, грн</p>
+                    <p class="tariff-header">Знижка </p>
+                    <p class="tariff-header">Період плану</p>
+                </div>
+                <div class="tariff-div">
+                    <p id="tariff-name" class="tariff-info-span">Річний</p>
+                    <p id="tariff-price" class="tariff-info-span">7.45235</p>
+                    <p id="tariff-discount" class="tariff-info-span">Відсутня</p>
+                    <p id="tariff-period" class="tariff-info-span">01.02.2022-01.02.2024</p>
+                </div>
+                <p></p>
+            </div>
+        </div>
+    </div>
+
+
+</main>
+<footer th:replace="~{fragments/footer :: footer}">
+</footer>
+
+<script src="/js/common/login-form.js"></script>
+<script type="module" src="/js/calculations/calculations.js"></script>
+<script src="/js/common/header-initializer.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
+<script src="/js/index/slider-animation.js"></script>
+
+</body>
+</html>
