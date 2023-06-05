@@ -31,7 +31,7 @@
     <div class="swiper">
         <div id="swiper-wrapper" class="swiper-wrapper">
           <div class="swiper-slide">
-              <a href="/payments">
+              <a href="/payments" class="pageAnchor">
                   <img src="/img/index/slider-1.png"  alt="показники">
               </a>
           </div>
@@ -51,19 +51,19 @@
 </section>
 <div class="action-container">
 
-    <a th:href="@{/meter-reading}">
+    <a th:href="@{/meter-reading}" class="pageAnchor">
     <div class="action-box">
         <img id="meterage-img" src="/img/index/meterage.png"  alt="показники">
         <p class="action-description">Передати показання</p>
     </div>
     </a>
-    <a th:href="@{/payments}">
+    <a th:href="@{/payments}" class="pageAnchor">
         <div class="action-box">
             <img id="payments-img" src="/img/index/payments.png"  alt="Сплатити">
             <p class="action-description">Сплатити газ</p>
         </div>
     </a>
-    <a th:href="@{/calculations}">
+    <a th:href="@{/calculations}" class="pageAnchor">
         <div class="action-box">
             <img id="calculations-img" src="/img/index/calculations.png"  alt="Розрахунки">
             <p class="action-description">Розрахунки</p>
@@ -76,6 +76,7 @@
 </footer>
 
 <script src="/js/common/login-form.js"></script>
+<script src="/js/index/index.js"></script>
 <script src="/js/common/header-initializer.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
 <script src="/js/index/slider-animation.js"></script>
