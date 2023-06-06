@@ -22,8 +22,6 @@ public interface MeterReadingRepository extends JpaRepository<MeterReading, Long
     Optional<MeterReading> getLastMeterReading(Long personalAccountId);
 
 
-
-
     @Query(value = "select id, meter_reading, date " +
             "from ukr_gas.meter_reading" +
             " where personal_gas_account_id = :personalAccountId " +

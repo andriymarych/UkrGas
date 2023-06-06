@@ -25,8 +25,6 @@ public class Auth {
     @Column(name = "password")
     private String password;
 
-
-
     public Auth(String email, String password) {
         this.email = email;
         this.password = password;

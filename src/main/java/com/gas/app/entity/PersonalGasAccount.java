@@ -36,9 +36,8 @@ public class PersonalGasAccount {
     @JsonBackReference
     private User user;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "person_id", referencedColumnName = "id")
-    @JsonBackReference
     private Person person;
 
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
@@ -49,6 +48,5 @@ public class PersonalGasAccount {
     @JoinColumn( name = "address_id", referencedColumnName = "id")
     @JsonManagedReference
     private Address address;
-
 
 }

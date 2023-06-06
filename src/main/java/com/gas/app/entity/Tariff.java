@@ -24,6 +24,4 @@ public class Tariff {
     @Column(name = "price")
     private Double price;
 
-
-
 }

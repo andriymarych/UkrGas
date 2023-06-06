@@ -14,19 +14,30 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/v1/personalAccounts/")
+@RequestMapping("/api/v1/personal-account/")
 
 public class PersonalGasAccountRestController {
 
     private final PersonalGasAccountService personalGasAccountService;
 
-    @GetMapping("/")
+
+    @GetMapping("/{personalAccountId}")
+    @Transactional
+    public ResponseEntity<Object> getPersonalAccountById(@PathVariable Long personalAccountId,
+                                                             @RequestParam Long userId,
+                                                      @RequestParam Long authId) {
+        UserSessionDto user = new UserSessionDto(userId, authId);
+        PersonalGasAccount gasAccount = personalGasAccountService.getAccountByAccountId(user,personalAccountId);
+        return ResponseHandler.generateResponse("OK", HttpStatus.OK, gasAccount);
+    }
+
+    @GetMapping("/all")
     @Transactional
     public ResponseEntity<Object> getPersonalAccounts(@RequestParam Long userId,
                                                       @RequestParam Long authId) {
         UserSessionDto user = new UserSessionDto(userId, authId);
         List<PersonalGasAccount> gasAccounts = personalGasAccountService.getAccountsByUser(user);
-        return ResponseHandler.generateResponse("Login is successful", HttpStatus.OK, gasAccounts);
+        return ResponseHandler.generateResponse("OK", HttpStatus.OK, gasAccounts);
     }
 
 

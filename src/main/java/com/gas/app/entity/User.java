@@ -25,6 +25,4 @@ public class User {
     @JsonManagedReference
     private Auth auth;
 
-
-
 }

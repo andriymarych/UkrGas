@@ -1,5 +1,4 @@
 import {formatDate} from "../utils/date-formatter.js";
-import {formatFractionalPart} from "../utils/number-formatter.js";
 
 
 window.addEventListener('load', () => {
@@ -9,8 +8,6 @@ window.addEventListener('load', () => {
 
 const initializePage = () => {
     loadUserAccountData();
-
-
 }
 
 async function loadUserAccountData() {

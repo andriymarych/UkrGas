@@ -34,5 +34,4 @@ public class Address {
     private Integer apartmentNumber;
 
 
-
 }
