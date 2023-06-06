@@ -54,12 +54,17 @@
 
 }
 
+.overpaid-status{
+    color: #207700;
+}
+.debt-status{
+    color: #e10000;
+}
 .balance-value {
     font-size: 23px;
     font-weight: 400;
     position: relative;
     margin: 28px 0 0 70px;
-
 }
 
 #balance-value-span {
@@ -83,7 +88,7 @@
     left:310px
 }
 .info-span{
-    margin: 30px 0 0 70px
+    margin: 30px 80px 0 70px
 }
 .tariff-container-header{
     margin: 35px auto 55px auto;
