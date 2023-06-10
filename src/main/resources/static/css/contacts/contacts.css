@@ -16,8 +16,9 @@ body{
     text-align: center;
 }
 .gas-plant-bg{
+    margin-top: 250px;
     width: 100%;
-    height: 800px;
+    height: 500px;
     background-image: linear-gradient(rgb(0 21 39 / 85%), rgb(0 19 35 / 95%)),
     url(../../img/contacts/gasPlant.jpg);
     background-size: cover;

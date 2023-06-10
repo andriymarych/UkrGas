@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -44,23 +45,22 @@ public class MeterageService {
                 getAccountByAccountId(requestDto.userSession(), requestDto.gasAccountId());
 
         MeterReading meterReading = new MeterReading(requestDto.meterReading());
-        validateMeterReading(meterReading);
-
         meterReading.setPersonalGasAccount(personalGasAccount);
+        validateMeterReading(meterReading);
         return meterReadingRepository.save(meterReading);
     }
 
     @Transactional
     public void validateMeterReading(MeterReading meterReading) {
 
-        MeterReading lastMeterReading = meterReadingRepository
-                .getLastMeterReading(meterReading.getPersonalGasAccount().getId())
-                .orElseThrow(
+        Optional<MeterReading> lastMeterReading = meterReadingRepository
+                .getLastMeterReading(meterReading.getPersonalGasAccount().getId());
+               /* .orElseThrow(
                         () -> new ServiceException("Could not find last meter reading " +
                                 "of the account[" + meterReading.getPersonalGasAccount().getId() + "] ",
-                                HttpStatus.NOT_FOUND));
+                                HttpStatus.NOT_FOUND));*/
 
-        if (lastMeterReading.getMeterReading() > meterReading.getMeterReading()) {
+        if (lastMeterReading.isPresent()  && lastMeterReading.get().getMeterReading() > meterReading.getMeterReading()) {
             throw new ServiceException("The entered value of the meter reading is less than the previous one",
                     HttpStatus.CONFLICT);
         }

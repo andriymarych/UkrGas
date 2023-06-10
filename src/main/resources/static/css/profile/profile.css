@@ -18,7 +18,7 @@
     height: 90px;
     margin: 70px 10px 20px 40px;
     border-radius: 10px;
-    border: solid 1px #004aad;
+    border: solid 1.5px #004aad;
     background-color: #fff;
     transition: transform 0.3s ease-out;
 }
@@ -30,7 +30,7 @@
     height: 440px;
     margin: 45px 10px 20px 40px;
     border-radius: 10px;
-    border: solid 1px #004aad;
+    border: solid 1.5px #004aad;
     background-color: #fff;
     transition: transform 0.3s ease-out;
 }
@@ -42,7 +42,7 @@
     height: 568px;
     margin: 70px 10px 20px 40px;
     border-radius: 10px;
-    border: solid 1px #004aad;
+    border: solid 1.5px #004aad;
     background-color: #fff;
     transition: transform 0.3s ease-out;
 }
@@ -62,7 +62,7 @@
 }
 .balance-value {
     font-size: 23px;
-    font-weight: 400;
+    font-weight: 600;
     position: relative;
     margin: 28px 0 0 70px;
 }

@@ -67,6 +67,7 @@ const sendUserData = (data) => {
 }
 
 
+
 const  errorParser = (errorMessage) => {
     if(errorMessage.includes("Email")){
         return userAlreadyExistsErrorParser(errorMessage);
@@ -87,4 +88,9 @@ const errorMessageVariableExtractor = (errorMessage) => {
     var regex = /(?<=\[).+?(?=\])/g;
     return regex.exec(errorMessage);
 }
-
+const setUserData = (response) => {
+    sessionStorage.setItem('isUserAuthorized', 'true');
+    sessionStorage.setItem('userId', response.data.userId);
+    sessionStorage.setItem('authId', response.data.authId);
+    window.location.href = '../';
+}

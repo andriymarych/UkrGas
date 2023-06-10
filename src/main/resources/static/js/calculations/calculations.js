@@ -45,7 +45,7 @@ const setMeterReadings = (data) => {
 
     const calculationsData = data.calculations;
 
-    calculationsData.sort((a,b) => b.id - a.id);
+
 
 
     calculationsData.forEach((calculation) => {
