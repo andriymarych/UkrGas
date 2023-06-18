@@ -16,11 +16,11 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/v1/personal-account/")
+@RequestMapping("/api/v2/personal-accounts/{personalAccountId}")
 public class CalculationRestController {
 
     private final CalculationService calculationService;
-    @GetMapping("/{personalAccountId}/calculations/")
+    @GetMapping("/calculations")
     @Transactional
     public ResponseEntity<Object> getCalculations(@PathVariable Long personalAccountId,
                                               @RequestParam Long userId,

@@ -1,5 +1,6 @@
 package com.gas.app.repository;
 
+import com.gas.app.dto.MeterReadingDto;
 import com.gas.app.entity.MeterReading;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -9,10 +10,11 @@ import java.util.Optional;
 
 public interface MeterReadingRepository extends JpaRepository<MeterReading, Long> {
 
-    @Query("select distinct meterReading from MeterReading meterReading " +
-            "left join fetch meterReading.personalGasAccount account " +
+    @Query("select new com.gas.app.dto.MeterReadingDto(meterReading.id," +
+            "meterReading.meterReading, meterReading.date, account.id) from MeterReading meterReading " +
+            "inner join meterReading.personalGasAccount account " +
              "where account.id = :personalAccountId")
-    Optional<List<MeterReading>> findMeterReadingsByPersonalAccountId(Long personalAccountId);
+    Optional<List<MeterReadingDto>> findMeterReadingsByPersonalAccountId(Long personalAccountId);
 
 
     @Query("select meterReading from MeterReading meterReading " +

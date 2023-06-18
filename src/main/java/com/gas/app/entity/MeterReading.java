@@ -18,7 +18,7 @@ public class MeterReading {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "id")
-    private long id;
+    private Long id;
 
     @Column(name = "meter_reading")
     private Double meterReading;

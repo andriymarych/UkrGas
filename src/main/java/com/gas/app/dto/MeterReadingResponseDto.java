@@ -5,5 +5,5 @@ import com.gas.app.entity.PersonalGasAccount;
 
 import java.util.List;
 
-public record MeterReadingResponseDto(PersonalGasAccount personalGasAccount, List<MeterReading> meterReadings) {
+public record MeterReadingResponseDto(PersonalGasAccount personalGasAccount, List<MeterReadingDto> meterReadings) {
 }

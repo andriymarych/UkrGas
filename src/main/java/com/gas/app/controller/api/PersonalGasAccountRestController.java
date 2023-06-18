@@ -14,12 +14,20 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/v1/personal-account/")
+@RequestMapping("/api/v2/personal-accounts")
 
 public class PersonalGasAccountRestController {
 
     private final PersonalGasAccountService personalGasAccountService;
 
+    @GetMapping
+    @Transactional
+    public ResponseEntity<Object> getPersonalAccounts(@RequestParam Long userId,
+                                                      @RequestParam Long authId) {
+        UserSessionDto user = new UserSessionDto(userId, authId);
+        List<PersonalGasAccount> gasAccounts = personalGasAccountService.getAccountsByUser(user);
+        return ResponseHandler.generateResponse("OK", HttpStatus.OK, gasAccounts);
+    }
 
     @GetMapping("/{personalAccountId}")
     @Transactional
@@ -31,14 +39,7 @@ public class PersonalGasAccountRestController {
         return ResponseHandler.generateResponse("OK", HttpStatus.OK, gasAccount);
     }
 
-    @GetMapping("/all")
-    @Transactional
-    public ResponseEntity<Object> getPersonalAccounts(@RequestParam Long userId,
-                                                      @RequestParam Long authId) {
-        UserSessionDto user = new UserSessionDto(userId, authId);
-        List<PersonalGasAccount> gasAccounts = personalGasAccountService.getAccountsByUser(user);
-        return ResponseHandler.generateResponse("OK", HttpStatus.OK, gasAccounts);
-    }
+
 
 
 }

@@ -15,11 +15,11 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/v1/personal-account/")
+@RequestMapping("/api/v2/personal-accounts/{personalAccountId}")
 public class PaymentRestController {
 
     private final PaymentService paymentService;
-    @GetMapping("/{personalAccountId}/payments/")
+    @GetMapping("/payments")
     @Transactional
     public ResponseEntity<Object> getPayments(@PathVariable Long personalAccountId,
                                                @RequestParam Long userId,
@@ -32,9 +32,10 @@ public class PaymentRestController {
         return ResponseHandler.generateResponse("OK",
                 HttpStatus.OK, paymentResponseDto);
     }
-    @PostMapping("/payment/")
+    @PostMapping("/payments")
     @Transactional
-    public ResponseEntity<Object> savePayment(@RequestBody PaymentRequestDto requestDto) {
+    public ResponseEntity<Object> savePayment(@PathVariable Long personalAccountId,
+                                              @RequestBody PaymentRequestDto requestDto) {
 
         Payment payment = paymentService
                 .savePayment(requestDto);

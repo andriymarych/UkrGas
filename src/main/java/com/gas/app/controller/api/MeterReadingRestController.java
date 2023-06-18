@@ -14,11 +14,11 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/v1/personal-account/")
+@RequestMapping("/api/v2/personal-accounts/{personalAccountId}")
 public class MeterReadingRestController {
 
     private final MeterageService meterageService;
-    @GetMapping("/{personalAccountId}/meter-readings/")
+    @GetMapping("/meter-readings")
     @Transactional
     public ResponseEntity<Object> getMeterReadings(@PathVariable Long personalAccountId,
                                                @RequestParam Long userId,
@@ -31,9 +31,10 @@ public class MeterReadingRestController {
         return ResponseHandler.generateResponse("OK",
                 HttpStatus.OK, meterReadingResponseDto);
     }
-    @PostMapping("/meter-reading/")
+    @PostMapping("/meter-readings")
     @Transactional
-    public ResponseEntity<Object> saveMeterReading(@RequestBody MeterReadingRequestDto requestDto) {
+    public ResponseEntity<Object> saveMeterReading(@PathVariable Long personalAccountId,
+                                                   @RequestBody MeterReadingRequestDto requestDto) {
 
         MeterReading meterReading = meterageService
                 .saveMeterReading(requestDto);

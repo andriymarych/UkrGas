@@ -10,12 +10,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/v1/feedback")
+@RequestMapping("/api/v2/feedback")
 @RequiredArgsConstructor
 public class FeedbackRestController {
 
     private final FeedbackService service;
-    @PostMapping("/create")
+    @PostMapping
     public ResponseEntity<Object> saveBooking(@RequestBody FeedbackDto feedbackDto) {
         Feedback feedback = service.saveFeedback(feedbackDto);
         return ResponseHandler.generateResponse("Feedback was successfully created", HttpStatus.CREATED, feedback);
