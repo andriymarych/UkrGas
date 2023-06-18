@@ -106,7 +106,7 @@ async function loadUserPersonalGasAccounts () {
                 'Content-Type': 'application/json',
             }
         };
-        let request =  "/api/v1/personal-account/all?" + params.toString();
+        let request =  "/api/v2/personal-accounts?" + params.toString();
         const response =
             await fetch(request, settings);
         const responseBody = await response.json();

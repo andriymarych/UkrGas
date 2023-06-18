@@ -37,7 +37,7 @@ async function loadUserPayments () {
             }
         };
         let accountId  = sessionStorage.getItem('current-personal-account');
-        let request =  `/api/v1/personal-account/${accountId}/payments/?` + params.toString();
+        let request =  `/api/v2/personal-accounts/${accountId}/payments?` + params.toString();
         const response =
             await fetch(request, settings);
         const responseBody = await response.json();
@@ -134,7 +134,8 @@ const savePayment = () => {
     setTimeout(() => window.location.reload(), 350);
 }
 const sendPaymentData = (data) => {
-    fetch('/api/v1/personal-account/payment/', {
+    let accountId  = sessionStorage.getItem('current-personal-account');
+    fetch(`/api/v2/personal-accounts/${accountId}/payments`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'

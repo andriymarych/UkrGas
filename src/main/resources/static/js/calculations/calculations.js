@@ -27,7 +27,7 @@ async function loadUserCalculations () {
             }
         };
         let accountId  = sessionStorage.getItem('current-personal-account');
-        let request =  `/api/v1/personal-account/${accountId}/calculations/?` + params.toString();
+        let request =  `/api/v2/personal-accounts/${accountId}/calculations?` + params.toString();
         const response =
             await fetch(request, settings);
         const responseBody = await response.json();

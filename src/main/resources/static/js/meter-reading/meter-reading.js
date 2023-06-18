@@ -29,7 +29,7 @@ async function loadUserMeterReadings () {
             }
         };
         let accountId  = sessionStorage.getItem('current-personal-account');
-        let request =  `/api/v1/personal-account/${accountId}/meter-readings/?` + params.toString();
+        let request =  `/api/v2/personal-accounts/${accountId}/meter-readings?` + params.toString();
         const response =
             await fetch(request, settings);
         const responseBody = await response.json();
@@ -152,7 +152,9 @@ const saveMeterReading = () => {
     setTimeout(() => window.location.reload(), 350);
 }
 const sendMeterReadingData = (data) => {
-    fetch('/api/v1/personal-account/meter-reading/', {
+    let accountId  = sessionStorage.getItem('current-personal-account');
+
+    fetch(`/api/v2/personal-accounts/${accountId}/meter-readings`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'

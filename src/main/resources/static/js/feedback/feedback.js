@@ -12,7 +12,7 @@ const createFeedback = () => {
         || feedbackCategory === '' || content ==='') {
         label.innerHTML = '* Заповніть усі  поля';
         return;
-    }if(content.length < 10){
+    }if(content.length < 30){
         label.innerHTML = '* Текстове поле звернення повинне містити більше 30 символів';
         return;
     }
@@ -33,7 +33,7 @@ const createFeedback = () => {
 const sendFeedbackData = (data) => {
     console.log(data);
     console.log(data.password);
-    fetch('api/v1/feedback/create', {
+    fetch('api/v2/feedback', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'

@@ -25,7 +25,7 @@ async function loadUserAccountData() {
             }
         };
         let accountId = sessionStorage.getItem('current-personal-account');
-        let request = `/api/v1/personal-account/${accountId}?` + params.toString();
+        let request = `/api/v2/personal-accounts/${accountId}?` + params.toString();
         const response =
             await fetch(request, settings);
         const responseBody = await response.json();
