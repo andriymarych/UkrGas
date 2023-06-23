@@ -19,7 +19,7 @@ import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
-public class MeterageService {
+public class MeterReadingService {
     private final MeterReadingRepository meterReadingRepository;
     private final PersonalGasAccountService accountService;
 
@@ -56,11 +56,6 @@ public class MeterageService {
 
         Optional<MeterReading> lastMeterReading = meterReadingRepository
                 .getLastMeterReading(meterReading.getPersonalGasAccount().getId());
-               /* .orElseThrow(
-                        () -> new ServiceException("Could not find last meter reading " +
-                                "of the account[" + meterReading.getPersonalGasAccount().getId() + "] ",
-                                HttpStatus.NOT_FOUND));*/
-
         if (lastMeterReading.isPresent()  && lastMeterReading.get().getMeterReading() > meterReading.getMeterReading()) {
             throw new ServiceException("The entered value of the meter reading is less than the previous one",
                     HttpStatus.CONFLICT);

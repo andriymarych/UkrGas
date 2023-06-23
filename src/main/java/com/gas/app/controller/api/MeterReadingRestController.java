@@ -4,7 +4,7 @@ import com.gas.app.dto.MeterReadingRequestDto;
 import com.gas.app.dto.MeterReadingResponseDto;
 import com.gas.app.dto.UserSessionDto;
 import com.gas.app.entity.MeterReading;
-import com.gas.app.service.MeterageService;
+import com.gas.app.service.MeterReadingService;
 import com.gas.app.util.ResponseHandler;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/v2/personal-accounts/{personalAccountId}")
 public class MeterReadingRestController {
 
-    private final MeterageService meterageService;
+    private final MeterReadingService meterReadingService;
     @GetMapping("/meter-readings")
     @Transactional
     public ResponseEntity<Object> getMeterReadings(@PathVariable Long personalAccountId,
@@ -25,7 +25,7 @@ public class MeterReadingRestController {
                                                @RequestParam Long authId) {
 
         UserSessionDto userSessionDto = new UserSessionDto(userId, authId);
-        MeterReadingResponseDto meterReadingResponseDto = meterageService
+        MeterReadingResponseDto meterReadingResponseDto = meterReadingService
                 .getMeterReadingsByPersonalAccountId(userSessionDto, personalAccountId);
 
         return ResponseHandler.generateResponse("OK",
@@ -36,7 +36,7 @@ public class MeterReadingRestController {
     public ResponseEntity<Object> saveMeterReading(@PathVariable Long personalAccountId,
                                                    @RequestBody MeterReadingRequestDto requestDto) {
 
-        MeterReading meterReading = meterageService
+        MeterReading meterReading = meterReadingService
                 .saveMeterReading(requestDto);
 
         return ResponseHandler

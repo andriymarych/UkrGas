@@ -2,6 +2,7 @@ package com.gas.app.repository;
 
 import com.gas.app.dto.MeterReadingDto;
 import com.gas.app.entity.MeterReading;
+import com.gas.app.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
@@ -22,6 +23,18 @@ public interface MeterReadingRepository extends JpaRepository<MeterReading, Long
             "where account.id = :personalAccountId " +
             "order by meterReading.id desc limit 1")
     Optional<MeterReading> getLastMeterReading(Long personalAccountId);
+    @Query("select distinct user from MeterReading meterReading " +
+            "join meterReading.personalGasAccount account " +
+            "join  account.address " +
+            "join  account.person " +
+            "join  account.accountTariff accountTarrif " +
+            "join  accountTarrif.tariff " +
+            "join account.user user " +
+            "join fetch user.auth " +
+            "where account not in (select distinct account from MeterReading meterReading " +
+            "inner join meterReading.personalGasAccount account " +
+            "where month(meterReading.date) = month(current_date))" )
+    List<User> findUserWithUntransmittedMeterReading();
 
 
     @Query(value = "select id, meter_reading, date " +
