@@ -40,7 +40,7 @@ public class UserService {
     }
 
 
-    @Transactional
+    @Transactional(readOnly = true)
     public User authenticateUser(String email, String password) {
         User user = userRepository.findUserByEmail(email).orElseThrow(
                 () -> new ServiceException("User with email [" + email + "] is not found ", HttpStatus.UNAUTHORIZED));

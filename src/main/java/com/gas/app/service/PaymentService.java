@@ -18,7 +18,7 @@ import java.util.List;
 public class PaymentService {
     private final PaymentRepository paymentRepository;
     private final PersonalGasAccountService accountService;
-    @Transactional
+    @Transactional(readOnly = true)
     public PaymentResponseDto getPaymentsByPersonalAccountId(UserSessionDto userSessionDto,
                                                                   Long personalAccountId) {
 
@@ -48,7 +48,7 @@ public class PaymentService {
 
         return paymentRepository.save(payment);
     }
-    @Transactional
+
     public void validateAmountPaid(Double amountPaid) {
 
         if (amountPaid <= 0) {

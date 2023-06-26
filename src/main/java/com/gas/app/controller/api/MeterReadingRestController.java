@@ -9,7 +9,6 @@ import com.gas.app.util.ResponseHandler;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -19,7 +18,6 @@ public class MeterReadingRestController {
 
     private final MeterReadingService meterReadingService;
     @GetMapping("/meter-readings")
-    @Transactional
     public ResponseEntity<Object> getMeterReadings(@PathVariable Long personalAccountId,
                                                @RequestParam Long userId,
                                                @RequestParam Long authId) {
@@ -32,7 +30,6 @@ public class MeterReadingRestController {
                 HttpStatus.OK, meterReadingResponseDto);
     }
     @PostMapping("/meter-readings")
-    @Transactional
     public ResponseEntity<Object> saveMeterReading(@PathVariable Long personalAccountId,
                                                    @RequestBody MeterReadingRequestDto requestDto) {
 

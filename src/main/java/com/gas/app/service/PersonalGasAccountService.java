@@ -19,7 +19,7 @@ public class PersonalGasAccountService {
     private final PersonalGasAccountRepository personalGasAccountRepository;
     private final AuthService authService;
 
-    @Transactional
+    @Transactional(readOnly = true)
     public PersonalGasAccount getAccountByAccountId(UserSessionDto userSessionDto, Long accountId) {
 
         verifyUser(userSessionDto);
@@ -29,7 +29,7 @@ public class PersonalGasAccountService {
                 .orElseThrow(() -> new ServiceException("Could not find gas account by id [" + accountId + "]", HttpStatus.NOT_FOUND));
     }
 
-    @Transactional
+    @Transactional(readOnly = true)
     public PersonalGasAccount getAccountByAccountNumber(String accountNumber) {
 
         return personalGasAccountRepository
@@ -38,7 +38,7 @@ public class PersonalGasAccountService {
                         + accountNumber + "]", HttpStatus.NOT_FOUND));
     }
 
-    @Transactional
+    @Transactional(readOnly = true)
     public List<PersonalGasAccount> getAccountsByUser(UserSessionDto userSessionDto) {
 
         verifyUser(userSessionDto);
@@ -48,7 +48,7 @@ public class PersonalGasAccountService {
                 .orElseThrow(() -> new ServiceException("Could not find gas accounts by user id [" + userSessionDto.userId() + "]", HttpStatus.NOT_FOUND));
     }
 
-    @Transactional
+    @Transactional(readOnly = true)
     public void verifyUser(UserSessionDto userRequest) {
         authService.verifyAuth(userRequest);
     }

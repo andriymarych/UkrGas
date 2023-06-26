@@ -23,7 +23,7 @@ public class MeterReadingService {
     private final MeterReadingRepository meterReadingRepository;
     private final PersonalGasAccountService accountService;
 
-    @Transactional
+    @Transactional(readOnly = true)
     public MeterReadingResponseDto getMeterReadingsByPersonalAccountId(UserSessionDto userSessionDto,
                                                                   Long personalAccountId) {
 
@@ -51,7 +51,7 @@ public class MeterReadingService {
         return meterReadingRepository.save(meterReading);
     }
 
-    @Transactional
+    @Transactional(readOnly = true)
     public void validateMeterReading(MeterReading meterReading) {
 
         Optional<MeterReading> lastMeterReading = meterReadingRepository

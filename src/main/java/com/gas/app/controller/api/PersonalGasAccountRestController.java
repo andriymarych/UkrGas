@@ -7,7 +7,6 @@ import com.gas.app.util.ResponseHandler;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -21,7 +20,6 @@ public class PersonalGasAccountRestController {
     private final PersonalGasAccountService personalGasAccountService;
 
     @GetMapping
-    @Transactional
     public ResponseEntity<Object> getPersonalAccounts(@RequestParam Long userId,
                                                       @RequestParam Long authId) {
         UserSessionDto user = new UserSessionDto(userId, authId);
@@ -30,7 +28,6 @@ public class PersonalGasAccountRestController {
     }
 
     @GetMapping("/{personalAccountId}")
-    @Transactional
     public ResponseEntity<Object> getPersonalAccountById(@PathVariable Long personalAccountId,
                                                              @RequestParam Long userId,
                                                       @RequestParam Long authId) {
@@ -38,9 +35,6 @@ public class PersonalGasAccountRestController {
         PersonalGasAccount gasAccount = personalGasAccountService.getAccountByAccountId(user,personalAccountId);
         return ResponseHandler.generateResponse("OK", HttpStatus.OK, gasAccount);
     }
-
-
-
 
 }
 

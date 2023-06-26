@@ -18,7 +18,7 @@ import java.util.List;
 public class CalculationService {
     private final CalculationRepository calculationRepository;
     private final PersonalGasAccountService accountService;
-    @Transactional
+    @Transactional(readOnly = true)
     public CalculationResponseDto getCalculationsByPersonalAccountId(UserSessionDto userSessionDto,
                                                              Long personalAccountId) {
 

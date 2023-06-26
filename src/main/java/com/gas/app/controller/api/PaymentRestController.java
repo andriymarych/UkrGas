@@ -10,7 +10,6 @@ import com.gas.app.util.ResponseHandler;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -20,7 +19,6 @@ public class PaymentRestController {
 
     private final PaymentService paymentService;
     @GetMapping("/payments")
-    @Transactional
     public ResponseEntity<Object> getPayments(@PathVariable Long personalAccountId,
                                                @RequestParam Long userId,
                                                @RequestParam Long authId) {
@@ -33,7 +31,6 @@ public class PaymentRestController {
                 HttpStatus.OK, paymentResponseDto);
     }
     @PostMapping("/payments")
-    @Transactional
     public ResponseEntity<Object> savePayment(@PathVariable Long personalAccountId,
                                               @RequestBody PaymentRequestDto requestDto) {
 

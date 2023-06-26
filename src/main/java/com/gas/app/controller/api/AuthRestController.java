@@ -10,7 +10,6 @@ import com.gas.app.util.ResponseHandler;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,7 +23,6 @@ public class AuthRestController {
     private final UserService userService;
 
     @PostMapping("/login")
-    @Transactional
     public ResponseEntity<Object> login(@RequestBody UserLoginDto userForm) {
         User user = userService.authenticateUser(userForm.email(), userForm.password());
         UserSessionDto userSessionDto = new UserSessionDto(user.getId(),user.getAuth().getId());
@@ -32,7 +30,6 @@ public class AuthRestController {
     }
 
     @PostMapping("/registration")
-    @Transactional
     public ResponseEntity<Object> registration(@RequestBody UserRegistrationDto userForm) {
         User user = userService.registerUser(userForm);
         UserSessionDto userSessionDto = new UserSessionDto(user.getId(),user.getAuth().getId());

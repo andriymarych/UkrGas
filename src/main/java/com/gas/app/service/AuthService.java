@@ -23,19 +23,18 @@ public class AuthService {
     private final BCryptPasswordEncoder passwordEncoder;
 
 
-    @Transactional
+    @Transactional(readOnly = true)
     public boolean isEmailAlreadyInUse(String email) {
         return authRepository.findAuthByEmail(email)
                 .isPresent();
     }
 
-    @Transactional
     public Auth generateAuth(UserRegistrationDto userForm) {
         String encodedPassword = passwordEncoder.encode(userForm.password());
         return new Auth(userForm.email(), encodedPassword);
     }
 
-    @Transactional
+    @Transactional(readOnly = true)
     public void verifyAuth(UserSessionDto userSessionDto) {
 
         Long userId = userSessionDto.userId();
