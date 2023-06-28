@@ -1,6 +1,6 @@
 package com.gas.app.service.email;
 
-import com.gas.app.repository.MeterReadingRepository;
+import com.gas.app.repository.personalAccount.MeterReadingRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
