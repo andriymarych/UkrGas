@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Відгук</title>
+  <link rel="stylesheet" type="text/css" href="/css/common/style.css">
+  <link rel="stylesheet" type="text/css" href="/css/common/header.css">
+  <link rel="stylesheet" type="text/css" href="/css/common/login-form.css">
+  <link rel="stylesheet" type="text/css" href="/css/feedback/feedback.css">
+  <link rel="icon" type="image/x-icon" href="/img/common/icon.png">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+</head>
+<body>
+<div id="background-popup"></div>
+<header th:replace="~{fragments/header :: header}" id="header">
+</header>
+<div th:replace="~{fragments/login-form :: login-form}">
+
+</div>
+<main>
+  <div id="main-section">
+    <form id="form-container">
+
+      <h1 class="form-header">Заповніть форму для звернення</h1>
+
+      <p class="first-header">
+        <span class="full-name-header">ПІБ</span>
+        <span class="email-header">Електронна пошта</span>
+      </p>
+
+      <input type="text" id="full-name-input" class="feedback-form" required>
+      <input type="text" id="email-input" class="feedback-form" required>
+
+      <p class="second-header">
+        <span class="type-header">Тип звернення</span>
+        <span class="category-header">Категорія</span>
+      </p>
+
+      <select name="typeId" id="feedback-type" class="feedback-form" required>
+        <option value="" disabled="disabled" selected="selected">Оберіть тип звернення</option>
+        <option value="1">Скарга</option>
+        <option value="2">Пропозиція</option>
+        <option value="3">Запитання</option>
+        <option value="4">Інше</option>
+      </select>
+
+      <select  name="categoryId" id="feedback-category"  class="feedback-form" required>
+        <option value="" disabled="disabled" selected="selected">Оберіть категорію</option>
+        <option value="1">Фінансові питання та розрахунки</option>
+        <option value="2">Зміна постачальника</option>
+        <option value="3">Тарифи та умови договору</option>
+      </select>
+
+      <textarea name="feedback-content" required id="feedback-content" cols="20" rows="8" maxlength="500" placeholder="Текст вашого звернення" class="textarea-form"></textarea>
+      <label id="feedback-label"></label>
+      <button type="button" id="create-feedback-button" onclick="createFeedback()">Відправити</button>
+
+    </form>
+  </div>
+
+</main>
+<footer th:replace="~{fragments/footer :: footer}">
+</footer>
+
+<script src="/js/common/login-form.js"></script>
+<script src="/js/common/header-initializer.js"></script>
+<script src="/js/feedback/feedback.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
+
+</body>
+</html>

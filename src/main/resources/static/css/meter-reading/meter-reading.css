@@ -1,0 +1,119 @@
+
+.main-section {
+    margin-top: 180px;
+    height: 610px;
+    width: 100%;
+}
+
+.page-header {
+    margin-left: 135px;
+    font-size: 26px;
+    font-weight: 300;
+
+}
+
+.meter-container {
+    display: flex;
+    margin-top: 70px;
+    margin-left: 70px;
+    margin-right: 70px;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    gap: 0.2em;
+}
+
+.meter-box {
+    width: 640px;
+    height: 440px;
+    align-items: center;
+    margin: auto;
+    border-radius: 20px;
+    border: solid 2px #004aad;
+    background-color: white;
+    transition: transform 0.3s ease-out;
+}
+
+.meter-box-header {
+    text-align: center;
+    margin-top: 60px;
+}
+
+.meter-input-box-description {
+    color: #6b6b6b;
+    text-align: center;
+    font-weight: 400;
+    margin-top: 60px;
+}
+#feedback-response {
+    text-align: center;
+    font-weight: 350;
+    font-size: 23px;
+    margin-top: 80px;
+}
+#first-line-response{
+    color: green;
+}
+
+#second-line-response{
+    color: #454545;
+}
+#meter-reading-input {
+    display: block;
+    width: 300px;
+    margin: 20px auto 0 auto;
+    border: 2px solid #989898;
+    border-radius: 10px;
+    padding: 12px;
+    font-size: 20px;
+}
+
+#meter-reading-label {
+    height: 20px;
+    color: red;
+    display: block;
+    margin: 15px auto 0 auto;
+    text-align: center;
+}
+
+#save-button {
+    display: block;
+    width: 230px;
+    height: 60px;
+    margin: 25px auto 0 auto;
+    background-color: #235ab3;
+    color: #fff;
+    border-style: none;
+    border-radius: 10px;
+    font-size: larger;
+    cursor: pointer;
+}
+
+#meter-readings-container {
+    margin-top: 30px;
+    height: 240px;
+    overflow-y: scroll;
+}
+
+.reading-record {
+    color: #484848;
+    display: block;
+    text-align: center;
+    margin: 0 auto 15px auto;
+}
+
+.gas-meter-number {
+    display: inline-block;
+    text-align: left;
+    width: 130px;
+}
+
+.reading-date {
+    display: inline-block;
+    width: 175px;
+}
+
+.meter-reading-value {
+    display: inline-block;
+    text-align: end;
+    width: 130px;
+}

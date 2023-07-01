@@ -4,64 +4,87 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>UKR GAS</title>
-    <link rel="stylesheet" type="text/css" href="/css/style.css">
-    <link rel="stylesheet" type="text/css" href="/css/header.css">
-    <link rel="stylesheet" type="text/css" href="/css/login-form.css">
-    <link rel="stylesheet" type="text/css" href="/css/slider.css">
-    <link rel="stylesheet" type="text/css" href="/css/index.css">
+    <title>Головна</title>
+    <link rel="stylesheet" type="text/css" href="/css/common/style.css">
+    <link rel="stylesheet" type="text/css" href="/css/common/header.css">
+    <link rel="stylesheet" type="text/css" href="/css/common/login-form.css">
+    <link rel="stylesheet" type="text/css" href="/css/index/slider.css">
+    <link rel="stylesheet" type="text/css" href="/css/index/index.css">
     <link rel="icon" type="image/x-icon" href="/img/common/icon.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css"/>
     <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet"></head>
 <body>
 <div id="background-popup"></div>
-<header th:replace="fragments/header :: header" id="header">
+
+<header th:replace="~{fragments/header :: header}" id="header">
 </header>
-<div th:replace="fragments/login-form :: login-form">
+<div th:replace="~{fragments/login-form :: login-form}">
 
 </div>
 <main>
-<section class="slider-container">
-    <div class="swiper">
-        <div id="swiper-wrapper" class="swiper-wrapper">
-          <div class="swiper-slide">
-              <a href="/payments">
-                  <img src="/img/index/slider-1.png"  alt="показники">
-              </a>
-          </div>
-            <div class="swiper-slide">
-                <a href="/application">
-                    <img src="/img/index/slider-2.png"  alt="показники">
-                </a>
+    <section class="fuel-price-container">
+        <div class="fuel-price-div">
+            <p> LPG(Газ): <span class="fuel-price" id="lpg-price"></span>
+                <span class="percent-change" id="lpg-pct"></span>
+                <span class="arrow material-symbols-outlined" id="lpg-arrow"></span>
+            <p>
+        </div>
+        <div class="fuel-price-div">
+            <p>Дизель: <span class="fuel-price" id="diesel-price"></span>
+                <span class="percent-change" id="diesel-pct"></span>
+                <span class="arrow material-symbols-outlined" id="diesel-arrow" ></span>
+            <p>
+        </div>
+        <div class="fuel-price-div">
+            <p> А-92: <span class="fuel-price" id="gasoline-price"></span>
+                <span class="percent-change" id="gasoline-pct"></span>
+                <span class="arrow material-symbols-outlined" id="gasoline-arrow"></span>
+            <p>
+        </div>
+
+    </section>
+    <section class="slider-container">
+        <div class="swiper">
+            <div id="swiper-wrapper" class="swiper-wrapper">
+                <div class="swiper-slide">
+                    <a href="/payments" class="pageAnchor">
+                        <img src="/img/index/slider-1.png" alt="показники">
+                    </a>
+                </div>
+                <div class="swiper-slide">
+                    <a href="/feedback">
+                        <img src="/img/index/slider-2.png" alt="показники">
+                    </a>
+                </div>
             </div>
-        </div>
 
-        <div class="prev-button">
-            <div class="swiper-button-prev"></div>
-        </div>
-        <div class="swiper-button-next"></div>
+            <div class="prev-button">
+                <div class="swiper-button-prev"></div>
+            </div>
+            <div class="swiper-button-next"></div>
 
-    </div>
+        </div>
 </section>
 <div class="action-container">
 
-    <a th:href="@{/meterage}">
+    <a th:href="@{/meter-reading}" class="pageAnchor">
     <div class="action-box">
         <img id="meterage-img" src="/img/index/meterage.png"  alt="показники">
         <p class="action-description">Передати показання</p>
     </div>
     </a>
-    <a th:href="@{/payments}">
+    <a th:href="@{/payments}" class="pageAnchor">
         <div class="action-box">
             <img id="payments-img" src="/img/index/payments.png"  alt="Сплатити">
             <p class="action-description">Сплатити газ</p>
         </div>
     </a>
-    <a th:href="@{/calculations}">
+    <a th:href="@{/calculations}" class="pageAnchor">
         <div class="action-box">
             <img id="calculations-img" src="/img/index/calculations.png"  alt="Розрахунки">
             <p class="action-description">Розрахунки</p>
@@ -70,11 +93,12 @@
 
 </div>
 </main>
-<footer th:replace="fragments/footer :: footer">
+<footer th:replace="~{fragments/footer :: footer}">
 </footer>
 
 <script src="/js/common/login-form.js"></script>
-<script type="module" src="/js/index/index.js"></script>
+<script src="/js/index/index.js"></script>
+<script src="/js/common/header-initializer.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
 <script src="/js/index/slider-animation.js"></script>
 

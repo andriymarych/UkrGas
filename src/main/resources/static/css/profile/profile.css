@@ -1,0 +1,109 @@
+.main-section {
+    margin-top: 145px;
+    height: 670px;
+    width: 100%;
+}
+
+.info-box {
+    width: 1380px;
+    height: 560px;
+    margin: 35px auto 0 auto;
+
+    transition: transform 0.3s ease-out;
+}
+
+.balance-container {
+    position: absolute;
+    width: 680px;
+    height: 90px;
+    margin: 70px 10px 20px 40px;
+    border-radius: 10px;
+    border: solid 1.5px #004aad;
+    background-color: #fff;
+    transition: transform 0.3s ease-out;
+}
+
+.personal-info-container {
+    position: absolute;
+    top: 300px;
+    width: 680px;
+    height: 440px;
+    margin: 45px 10px 20px 40px;
+    border-radius: 10px;
+    border: solid 1.5px #004aad;
+    background-color: #fff;
+    transition: transform 0.3s ease-out;
+}
+
+.tariff-info-container {
+    position: absolute;
+    left: 840px;
+    width: 570px;
+    height: 568px;
+    margin: 70px 10px 20px 40px;
+    border-radius: 10px;
+    border: solid 1.5px #004aad;
+    background-color: #fff;
+    transition: transform 0.3s ease-out;
+}
+
+.balance-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+
+}
+
+.overpaid-status{
+    color: #207700;
+}
+.debt-status{
+    color: #e10000;
+}
+.balance-value {
+    font-size: 23px;
+    font-weight: 600;
+    position: relative;
+    margin: 28px 0 0 70px;
+}
+
+#balance-value-span {
+    font-size: 23px;
+    font-weight: 400;
+    position: relative;
+    margin: 28px 75px 0 0;
+}
+.personal-info-header{
+    margin: 35px auto 40px auto;
+    text-align: center;
+    font-weight: 600;
+}
+.info-header{
+    font-weight: 500;
+    margin: 30px 0 0 70px
+}
+.info-div{
+    position: absolute;
+    top:82px;
+    left:310px
+}
+.info-span{
+    margin: 30px 80px 0 70px
+}
+.tariff-container-header{
+    margin: 35px auto 55px auto;
+    text-align: center;
+    font-weight: 600;
+}
+.tariff-header{
+    font-weight: 500;
+    margin: 30px 0 70px 70px
+}
+.tariff-div{
+    position: absolute;
+    top:95px;
+    left:310px
+}
+.tariff-info-span{
+    margin: 30px 0 70px 0;
+}

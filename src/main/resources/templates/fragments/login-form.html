@@ -1,40 +1,26 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta charset="UTF-8">
-  <title>ThymeLeaf Fragment:login-form</title>
+    <meta charset="UTF-8">
+    <title>ThymeLeaf Fragment:login-form</title>
 </head>
 
 <body>
+
 <div th:fragment="login-form">
-<div class="login-popup">
-  <div id="login-form">
-    <span class="material-icons" id="close-login-button">close</span>
-    <h2>Вхід</h2>
-    <input type="email" class="input-field" name="email" id="email" placeholder="Email">
-    <input type="password" class="input-field" name="password" id="password" placeholder="Пароль">
-    <label id="login-label"></label>
-    <button id="login-popup-button" onclick="loginUser()">Увійти</button>
-    <button id="registration-popup-button">Реєстрація</button>
-  </div>
+    <div class="login-popup">
+        <div id="login-form">
+            <span class="material-icons" id="close-login-button">close</span>
+            <h2>Вхід</h2>
+            <input type="email" class="input-field" name="email" id="email" placeholder="Email">
+            <input type="password" class="input-field" name="password" id="password" placeholder="Пароль">
+            <label id="login-label"></label>
+            <button id="login-popup-button" onclick="loginUser()">Увійти</button>
+            <a id="registration-popup-button" th:href="@{/registration}">Реєстрація</a>
+        </div>
+    </div>
 </div>
 
-<div class="registration-popup">
-  <div id="registration-form">
-    <span class="material-icons" id="close-registration-button">close</span>
-    <h2>Реєстрація</h2>
-    <input type="text" class="input-field" name="name" id="registration-name" placeholder="Імʼя">
-    <input type="text" class="input-field" name="surname" id="registration-surname" placeholder="Прізвище">
-    <input type="email" class="input-field" name="email" id="registration-email" placeholder="Email">
-    <input type="password" class="input-field" name="password" id="registration-password" placeholder="Пароль">
-    <input type="password" class="input-field" name="repeat-password" id="repeat-password"
-           placeholder="Підтвердження пароля">
-    <label id="registration-label"></label>
-    <button id="create-account-button" onclick="resisterNewUser()">Зареєструватися</button>
-    <button id="login-form-button"> Увійти в обліковий запис</button>
-  </div>
-</div>
-</div>
 
 </body>
 </html>

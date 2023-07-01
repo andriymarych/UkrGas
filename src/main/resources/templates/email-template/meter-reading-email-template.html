@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="EN">
+<head>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+    <title>Simple Transactional Email</title>
+    <style>
+        @media only screen and (max-width: 620px) {
+            table.body h1 {
+                font-size: 28px !important;
+                margin-bottom: 10px !important;
+            }
+
+            table.body p,
+            table.body ul,
+            table.body ol,
+            table.body td,
+            table.body span,
+            table.body a {
+                font-size: 16px !important;
+            }
+
+            table.body .wrapper,
+            table.body {
+                padding: 10px !important;
+            }
+
+            table.body .content {
+                padding: 0 !important;
+            }
+
+            table.body .container {
+                padding: 0 !important;
+                width: 100% !important;
+            }
+
+            table.body .main {
+                border-left-width: 0 !important;
+                border-radius: 0 !important;
+                border-right-width: 0 !important;
+            }
+
+            table.body .btn table {
+                width: 100% !important;
+            }
+
+            table.body .btn a {
+                width: 100% !important;
+            }
+
+            table.body {
+                height: auto !important;
+                max-width: 100% !important;
+                width: auto !important;
+            }
+        }
+
+        @media all {
+            .ExternalClass p,
+            .ExternalClass span,
+            .ExternalClass font,
+            .ExternalClass td,
+            .ExternalClass div {
+                line-height: 100%;
+            }
+
+            .apple-link a {
+                color: inherit !important;
+                font-family: inherit !important;
+                font-size: inherit !important;
+                font-weight: inherit !important;
+                line-height: inherit !important;
+                text-decoration: none !important;
+            }
+
+            #MessageViewBody a {
+                color: inherit;
+                text-decoration: none;
+                font-size: inherit;
+                font-family: inherit;
+                font-weight: inherit;
+                line-height: inherit;
+            }
+
+            .btn-primary table td:hover {
+                background-color: #00255b !important;
+            }
+
+            .btn-primary a:hover {
+                background-color: #00255b !important;
+                border-color: #00255b !important;
+            }
+        }
+    </style>
+</head>
+<body style="background-color: #f6f6f6; font-family: sans-serif; -webkit-font-smoothing: antialiased; font-size: 14px; line-height: 1.4; margin: 0; padding: 0; -ms-text-size-adjust: 100%; -webkit-text-size-adjust: 100%;">
+<table class="body"
+       role="presentation"
+       style="border-collapse: separate; mso-table-lspace: 0; mso-table-rspace: 0; background-color: #f6f6f6; width: 100%;">
+    <tr>
+        <td style="font-family: sans-serif; font-size: 14px; vertical-align: top;"></td>
+        <td class="container"
+            style="font-family: sans-serif; font-size: 14px; vertical-align: top; display: block; max-width: 580px; padding: 10px; width: 580px; margin: 0 auto;">
+            <div class="content"
+                 style="box-sizing: border-box; display: block; margin: 0 auto; max-width: 580px; padding: 10px;">
+
+                <table class="main" role="presentation"
+                       style="border-collapse: separate; mso-table-lspace: 0; mso-table-rspace: 0; background: #ffffff; border-radius: 3px; width: 100%;">
+
+                    <tr>
+                        <td class="wrapper"
+                            style="font-family: sans-serif; font-size: 14px; vertical-align: top; box-sizing: border-box; padding: 0;">
+                            <table role="presentation"
+                                   style="border-collapse: separate; mso-table-lspace: 0; mso-table-rspace: 0; width: 100%;">
+                                <tr>
+                                    <td style="font-family: sans-serif; background-color: #1d49a7; width: 100%; height: 60px">
+                                        <p
+                                                style="position: relative; text-align: center; color: #727272; margin: 0 0 0 0  ">
+                                            <a
+                                                    class="logo" href="https://localhost:8443/">
+                                                <img id="logo" src="https://i.ibb.co/vJLXY7K/logo.png" width="80px"
+                                                     height="80px" style="margin: 0">
+                                            </a>
+                                        </p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="font-family: sans-serif; font-size: 14px; vertical-align: top;">
+                                        <p style="color:black; font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 45px 45px 40px;text-align: center">
+                                            <b>Шановний користувачу</b></p>
+                                        <p style="color:black; font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0 0 45px;text-align: center">
+                                            Для отримання коректного показання у платіжках просимо вас передати
+                                            показники лічильника до 5-го числа поточного місяця</p>
+                                        <table class="btn btn-primary"
+                                               role="presentation"
+                                               style="border-collapse: separate; mso-table-lspace: 0; mso-table-rspace: 0; box-sizing: border-box; width: 100%;">
+                                            <tbody>
+                                            <tr>
+                                                <td style="font-family: sans-serif; font-size: 14px; vertical-align: top; padding-bottom: 15px;">
+                                                    <table role="presentation"
+                                                           style="border-collapse: separate; mso-table-lspace: 0; mso-table-rspace: 0; width: auto; margin: auto">
+                                                        <tbody>
+                                                        <tr>
+                                                            <td
+                                                                    style="font-family: sans-serif; font-size: 14px; vertical-align: top; border-radius: 5px; text-align: center; background-color: #004aad;">
+                                                                <a
+                                                                        href="https://localhost:8443"
+                                                                        style="border-radius: 5px; box-sizing: border-box; cursor: pointer; display: inline-block; font-size: 14px; font-weight: bold; margin: 0; padding: 8px 20px; text-decoration: none; text-transform: capitalize; background-color: #004aad; border: 1px solid #004aad;color: #ffffff;"
+                                                                        target="_blank">Передати Показання</a></td>
+                                                        </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+
+                                        <p class="footer-description"
+                                           style="position: relative; text-align: center; color: #727272; font-size: 17px;">
+                                            <a href="https://web.telegram.org/" class="footer-icon"
+                                               style="margin-right: 10px; text-decoration: none">
+                                                <img src="https://i.ibb.co/FDGtnFL/telegram.png" alt="telegram"
+                                                     width="30px" height="30px">
+                                            </a>
+                                            <a href="https://www.instagram.com/" class="footer-icon"
+                                               style="text-decoration: none">
+                                                <img src="https://i.ibb.co/YtW6qBK/instagram.png" alt="instagram"
+                                                     width="30px" height="30px">
+                                            </a>
+                                        </p>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+
+                </table>
+
+                <div class="footer" style="clear: both; margin-top: 10px; text-align: center; width: 100%;">
+                    <table  role="presentation"
+                           style="border-collapse: separate; mso-table-lspace: 0; mso-table-rspace: 0; width: 100%;">
+                        <tr>
+                            <td class="content-block powered-by"
+                                style="font-family: sans-serif; vertical-align: top; padding-bottom: 10px; padding-top: 10px; color: #999999; font-size: 12px; text-align: center;">
+                                2023 UKR GAS | Всі права захищені
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+
+            </div>
+        </td>
+        <td style="font-family: sans-serif; font-size: 14px; vertical-align: top;"></td>
+    </tr>
+</table>
+</body>
+</html>

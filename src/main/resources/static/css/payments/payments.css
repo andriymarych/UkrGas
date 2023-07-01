@@ -1,0 +1,148 @@
+
+.main-section {
+    margin-top: 180px;
+    height: 610px;
+    width: 100%;
+}
+
+.page-header {
+    margin: 0 0 0 135px;
+    font-size: 26px;
+    font-weight: 200;
+}
+.page-status{
+    display: flex;
+    justify-content: space-between;
+    margin-right: 140px;
+}
+
+.balance{
+    margin-top: 0;
+    font-weight: 400;
+}
+.balance-value{
+    margin-bottom: 5px;
+}
+#balance-value-span{
+    font-weight: 400;
+    margin-left: 20px;
+
+}
+#balance-status{
+    margin-top: 0;
+    font-weight: 400;
+    text-align: end;
+
+}
+.overpaid-status{
+    color: #207700;
+}
+.debt-status{
+    color: #e10000;
+}
+.payment-container{
+    display: flex;
+    margin: 15px 70px 0 70px;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    gap: 0.2em;
+}
+.payment-box-header{
+    text-align: center;
+    margin-top: 60px;
+}
+.payment-box{
+    width: 640px;
+    height: 440px;
+    align-items: center;
+    margin: auto;
+    border-radius: 20px;
+    border: solid 2px #004aad;
+    background-color: white;
+    transition: transform 0.3s ease-out;
+}
+.payment-input-header{
+    font-size: 24px;
+    font-weight: 400;
+    text-align: left;
+    margin: 70px 0 30px 100px;
+}
+.meterage-input-box-description{
+    color: #6b6b6b;
+    text-align: center;
+    font-weight: 400;
+    margin-top: 60px;
+}
+#payment-amount-input{
+    display: block;
+    position: absolute;
+    margin-top: -75px;
+    margin-left: 390px;
+    width: 100px;
+    border: 2px solid #989898;
+    border-radius: 10px;
+    padding: 12px;
+    text-align: center;
+    font-size: 20px;
+}
+.currency{
+    display: inline-block;
+    margin-left: 400px;
+}
+.total-payment-value{
+    font-size: 24px;
+    font-weight: 400;
+    display: block;
+    text-align: center;
+    margin: 125px auto 0 auto;
+}
+#total-price{
+    margin-left: 20px;
+    font-weight: 200;
+}
+#payment-label {
+    height: 20px;
+    color: red;
+    display: block;
+    margin: 15px auto 0 auto;
+    text-align: center;
+}
+
+#pay-button{
+    display: block;
+    width: 230px;
+    height: 60px;
+    margin: 30px auto 0 auto;
+    background-color: #235ab3;
+    color: #fff;
+    border-style: none;
+    border-radius: 10px;
+    font-size: larger;
+    cursor: pointer;
+}
+#payment-container{
+    margin-top: 30px;
+    height: 240px;
+    overflow-y: scroll;
+}
+.payment-record{
+    color: #484848;
+    display: block;
+    text-align: center;
+    margin: 0 auto 15px auto;
+}
+.payment-number{
+    display: inline-block;
+    text-align: left;
+    width: 130px;
+}
+.payment-date{
+    display: inline-block;
+    width: 175px;
+}
+.payment-amount-paid{
+    display: inline-block;
+    text-align: end;
+    width: 130px;
+}
+

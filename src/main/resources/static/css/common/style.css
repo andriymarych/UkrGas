@@ -1,0 +1,35 @@
+body{
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    background-color: #f2f2f2;
+}
+
+a{
+    text-decoration: none;
+}
+
+
+
+footer{
+    height: 100px;
+}
+.footer-description {
+    position: relative;
+    top: 45px;
+    text-align: center;
+    color: #727272;
+    font-size: 17px;
+}
+.footer-icon{
+    position: inherit;
+    margin-left: 10px;
+    top:7px;
+    display: inline-flex;
+    height: 27px;
+    width: 27px;
+}
+#text-description{
+    margin-left: 10px;
+}
