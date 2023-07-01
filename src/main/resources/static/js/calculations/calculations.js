@@ -31,16 +31,16 @@ async function loadUserCalculations () {
         const response =
             await fetch(request, settings);
         const responseBody = await response.json();
-        setMeterReadingsData(responseBody.data);
+        setCalculationsData(responseBody.data);
 
     } catch (e) {
         console.error("Error: " + e );
     }
 }
-const setMeterReadingsData = (data) =>{
-    setMeterReadings(data);
+const setCalculationsData = (data) =>{
+    setCalculations(data);
 }
-const setMeterReadings = (data) => {
+const setCalculations = (data) => {
 
 
     const calculationsData = data.calculations;

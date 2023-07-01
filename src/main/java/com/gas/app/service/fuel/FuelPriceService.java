@@ -54,8 +54,8 @@ public class FuelPriceService {
 
     private FuelPriceChangeDto getFuelPriceChangeDto(List<FuelPrice> fuelPriceForTheLastTwoDaysList) {
 
-        FuelPrice newFuelPrice = fuelPriceForTheLastTwoDaysList.get(0);
-        FuelPrice oldFuelPrice = fuelPriceForTheLastTwoDaysList.get(1);
+        FuelPrice oldFuelPrice = fuelPriceForTheLastTwoDaysList.get(0);
+        FuelPrice newFuelPrice = fuelPriceForTheLastTwoDaysList.get(1);
         Double newPriceValue = newFuelPrice.getPrice();
         Double priceChange = newPriceValue- oldFuelPrice.getPrice() ;
         Double priceChangePct = (newFuelPrice.getPrice() - oldFuelPrice.getPrice()) / oldFuelPrice.getPrice() * 100;

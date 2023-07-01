@@ -47,3 +47,33 @@
     color: #626161;
     text-decoration:none ;
 }
+.fuel-price-container{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 100px;
+    justify-content: center;
+    margin-top:150px;
+    margin-left: auto;
+    margin-right: auto;
+}
+.fuel-price-div p{
+   font-size: 22px;
+}
+.fuel-price{
+    margin-left: 5px;
+}
+.percent-change{
+    margin-left: 0;
+}
+.arrow{
+    position: relative;
+    top:13px;
+    left: -10px;
+    font-size: 45px !important;
+}
+.price-raise{
+    color: #4e7700;
+}
+.price-reduction{
+    color: #d20000;
+}
