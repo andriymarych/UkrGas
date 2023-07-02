@@ -78,7 +78,7 @@ const verifyUser = (input) => {
         })
         .catch(error => {
             let errorBody = JSON.parse(error.message);
-            document.getElementById('login-label').innerHTML = errorParser(errorBody.message);
+            document.getElementById('login-label').innerHTML = loginErrorParser(errorBody.message);
         });
 
 }
@@ -106,7 +106,7 @@ const clearPopUp = () => {
     document.getElementById('password').value = "";
     loginLabel.innerHTML = "";
 }
-const errorParser = (errorMessage) => {
+const loginErrorParser = (errorMessage) => {
     if (errorMessage.includes("password")) {
         return "* Ви ввели невірний пароль"
     } else {

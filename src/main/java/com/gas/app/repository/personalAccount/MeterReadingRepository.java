@@ -14,7 +14,8 @@ public interface MeterReadingRepository extends JpaRepository<MeterReading, Long
     @Query("select new com.gas.app.dto.personalAccount.meterReading.MeterReadingDto(meterReading.id," +
             "meterReading.meterReading, meterReading.date, account.id) from MeterReading meterReading " +
             "inner join meterReading.personalGasAccount account " +
-             "where account.id = :personalAccountId")
+            "where account.id = :personalAccountId " +
+            "order by meterReading.id DESC ")
     Optional<List<MeterReadingDto>> findMeterReadingsByPersonalAccountId(Long personalAccountId);
 
 

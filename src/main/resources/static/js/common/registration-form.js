@@ -61,21 +61,21 @@ const sendUserData = (data) => {
         })
         .catch(error => {
             let errorBody = JSON.parse(error.message);
-            document.getElementById('registration-label').innerHTML = errorParser(errorBody.message);
+            document.getElementById('registration-label').innerHTML = registrationErrorParser(errorBody.message);
 
         });
 }
 
 
 
-const  errorParser = (errorMessage) => {
+const  registrationErrorParser = (errorMessage) => {
     if(errorMessage.includes("Email")){
         return userAlreadyExistsErrorParser(errorMessage);
     }else{
         return personalGasAccountNotFoundErrorParser(errorMessage);
     }
-
 }
+
 const userAlreadyExistsErrorParser = (errorMessage) => {
     var email = errorMessageVariableExtractor(errorMessage);
     return "Адреса " + email + " вже зареєстрована у системі"
@@ -88,9 +88,4 @@ const errorMessageVariableExtractor = (errorMessage) => {
     var regex = /(?<=\[).+?(?=\])/g;
     return regex.exec(errorMessage);
 }
-const setUserData = (response) => {
-    sessionStorage.setItem('isUserAuthorized', 'true');
-    sessionStorage.setItem('userId', response.data.userId);
-    sessionStorage.setItem('authId', response.data.authId);
-    window.location.href = '../';
-}
+
