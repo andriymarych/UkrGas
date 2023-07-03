@@ -133,16 +133,16 @@ To get started with this Spring Boot project, follow the steps below:
 
 11. Get a free API key at https://currencyapi.com/ and specify it in `src/main/resources/application.properties` file:
 
-```
-currencyRate.api.key=your-api-key
-```
+    ```
+    currencyRate.api.key=your-api-key
+    ```
 
-11. Get a free API key at https://collectapi.com/api/gasPrice/gas-prices-api and specify it
+12. Get a free API key at https://collectapi.com/api/gasPrice/gas-prices-api and specify it
     in `src/main/resources/application.properties` file:
 
-```
-gasPrice.api.key=your-api-key
-```
+    ```
+    gasPrice.api.key=your-api-key
+    ```
 <br>
 In the future, the installation process will be simplified by Docker containerization :whale: 
 
