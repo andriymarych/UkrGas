@@ -40,6 +40,6 @@ public class MeterReadingRestController {
                 .generateResponse("Meter reading ["
                                 + meterReading.getMeterReading() +
                                 "] has been successfully saved",
-                HttpStatus.OK, meterReading);
+                HttpStatus.CREATED, meterReading);
     }
 }

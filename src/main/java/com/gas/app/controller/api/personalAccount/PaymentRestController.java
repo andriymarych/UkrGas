@@ -42,6 +42,6 @@ public class PaymentRestController {
                                 + payment.getId() +
                                 "] in the amount "
                                 + payment.getAmountPaid() + " UAH has been successfully saved",
-                        HttpStatus.OK, payment);
+                        HttpStatus.CREATED, payment);
     }
 }
