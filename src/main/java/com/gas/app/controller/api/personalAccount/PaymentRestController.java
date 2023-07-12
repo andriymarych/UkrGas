@@ -3,7 +3,6 @@ package com.gas.app.controller.api.personalAccount;
 
 import com.gas.app.dto.personalAccount.payment.PaymentRequestDto;
 import com.gas.app.dto.personalAccount.payment.PaymentResponseDto;
-import com.gas.app.dto.user.UserSessionDto;
 import com.gas.app.entity.personalAccount.Payment;
 import com.gas.app.service.personalAccount.PaymentService;
 import com.gas.app.util.ResponseHandler;
@@ -19,13 +18,10 @@ public class PaymentRestController {
 
     private final PaymentService paymentService;
     @GetMapping("/payments")
-    public ResponseEntity<Object> getPayments(@PathVariable Long personalAccountId,
-                                               @RequestParam Long userId,
-                                               @RequestParam Long authId) {
+    public ResponseEntity<Object> getPayments(@PathVariable Long personalAccountId) {
 
-        UserSessionDto userSessionDto = new UserSessionDto(userId, authId);
         PaymentResponseDto paymentResponseDto = paymentService
-                .getPaymentsByPersonalAccountId(userSessionDto, personalAccountId);
+                .getPaymentsByPersonalAccountId(personalAccountId);
 
         return ResponseHandler.generateResponse("OK",
                 HttpStatus.OK, paymentResponseDto);
@@ -35,7 +31,7 @@ public class PaymentRestController {
                                               @RequestBody PaymentRequestDto requestDto) {
 
         Payment payment = paymentService
-                .savePayment(requestDto);
+                .savePayment(personalAccountId, requestDto);
 
         return ResponseHandler
                 .generateResponse("Payment ["

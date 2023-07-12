@@ -3,7 +3,6 @@ package com.gas.app.service.personalAccount;
 
 import com.gas.app.dto.personalAccount.payment.PaymentRequestDto;
 import com.gas.app.dto.personalAccount.payment.PaymentResponseDto;
-import com.gas.app.dto.user.UserSessionDto;
 import com.gas.app.entity.personalAccount.Payment;
 import com.gas.app.entity.personalAccount.PersonalGasAccount;
 import com.gas.app.exception.ServiceException;
@@ -21,11 +20,10 @@ public class PaymentService {
     private final PaymentRepository paymentRepository;
     private final PersonalGasAccountService accountService;
     @Transactional(readOnly = true)
-    public PaymentResponseDto getPaymentsByPersonalAccountId(UserSessionDto userSessionDto,
-                                                             Long personalAccountId) {
+    public PaymentResponseDto getPaymentsByPersonalAccountId(Long personalAccountId) {
 
         PersonalGasAccount personalGasAccount = accountService.
-                getAccountByAccountId(userSessionDto, personalAccountId);
+                getAccountByAccountId(personalAccountId);
 
         List<Payment> payments = paymentRepository.
                 findPaymentsByPersonalAccountId(personalGasAccount.getId())
@@ -37,12 +35,12 @@ public class PaymentService {
     }
 
     @Transactional
-    public Payment savePayment(PaymentRequestDto requestDto) {
+    public Payment savePayment(Long gasAccountId, PaymentRequestDto requestDto) {
 
         validateAmountPaid(requestDto.amountPaid());
 
         PersonalGasAccount personalGasAccount = accountService.
-                getAccountByAccountId(requestDto.userSession(), requestDto.gasAccountId());
+                getAccountByAccountId(gasAccountId);
 
         Payment payment = new Payment(requestDto.amountPaid());
         payment.setPersonalGasAccount(personalGasAccount);

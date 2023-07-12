@@ -3,11 +3,10 @@ package com.gas.app.service.personalAccount;
 
 import com.gas.app.dto.personalAccount.meterReading.MeterReadingDto;
 import com.gas.app.dto.personalAccount.meterReading.MeterReadingRequestDto;
-import com.gas.app.entity.personalAccount.MeterReading;
-import com.gas.app.exception.ServiceException;
 import com.gas.app.dto.personalAccount.meterReading.MeterReadingResponseDto;
-import com.gas.app.dto.user.UserSessionDto;
+import com.gas.app.entity.personalAccount.MeterReading;
 import com.gas.app.entity.personalAccount.PersonalGasAccount;
+import com.gas.app.exception.ServiceException;
 import com.gas.app.repository.personalAccount.MeterReadingRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -20,15 +19,15 @@ import java.util.Optional;
 @Service
 @RequiredArgsConstructor
 public class MeterReadingService {
+
     private final MeterReadingRepository meterReadingRepository;
     private final PersonalGasAccountService accountService;
 
     @Transactional(readOnly = true)
-    public MeterReadingResponseDto getMeterReadingsByPersonalAccountId(UserSessionDto userSessionDto,
-                                                                  Long personalAccountId) {
+    public MeterReadingResponseDto getMeterReadingsByPersonalAccountId(Long personalAccountId) {
 
         PersonalGasAccount personalGasAccount = accountService.
-                getAccountByAccountId(userSessionDto, personalAccountId);
+                getAccountByAccountId(personalAccountId);
 
         List<MeterReadingDto> meterReadings = meterReadingRepository.
                 findMeterReadingsByPersonalAccountId(personalGasAccount.getId())
@@ -40,10 +39,10 @@ public class MeterReadingService {
     }
 
     @Transactional
-    public MeterReading saveMeterReading(MeterReadingRequestDto requestDto) {
+    public MeterReading saveMeterReading(Long personalAccountId, MeterReadingRequestDto requestDto) {
 
         PersonalGasAccount personalGasAccount = accountService.
-                getAccountByAccountId(requestDto.userSession(), requestDto.gasAccountId());
+                getAccountByAccountId(personalAccountId);
 
         MeterReading meterReading = new MeterReading(requestDto.meterReading());
         meterReading.setPersonalGasAccount(personalGasAccount);

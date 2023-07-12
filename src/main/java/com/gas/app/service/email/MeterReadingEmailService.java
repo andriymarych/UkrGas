@@ -19,7 +19,7 @@ public class MeterReadingEmailService {
 
         meterReadingRepository.findUserWithUntransmittedMeterReading()
                 .forEach(
-                        (user) -> mailService.sendEmail(user.getAuth().getEmail(),
+                        (user) -> mailService.sendEmail(user.getEmail(),
                                 "Показання",
                                 "meter-reading-email-template.html"));
 

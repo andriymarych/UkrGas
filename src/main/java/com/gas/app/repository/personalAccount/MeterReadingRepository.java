@@ -2,7 +2,7 @@ package com.gas.app.repository.personalAccount;
 
 import com.gas.app.dto.personalAccount.meterReading.MeterReadingDto;
 import com.gas.app.entity.personalAccount.MeterReading;
-import com.gas.app.entity.user.User;
+import com.gas.app.entity.security.user.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
@@ -31,7 +31,6 @@ public interface MeterReadingRepository extends JpaRepository<MeterReading, Long
             "join  account.accountTariff accountTarrif " +
             "join  accountTarrif.tariff " +
             "join account.user user " +
-            "join fetch user.auth " +
             "where account not in (select distinct account from MeterReading meterReading " +
             "inner join meterReading.personalGasAccount account " +
             "where month(meterReading.date) = month(current_date))" )

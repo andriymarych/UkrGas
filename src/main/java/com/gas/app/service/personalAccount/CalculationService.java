@@ -1,7 +1,6 @@
 package com.gas.app.service.personalAccount;
 
 import com.gas.app.dto.personalAccount.calculation.CalculationResponseDto;
-import com.gas.app.dto.user.UserSessionDto;
 import com.gas.app.entity.personalAccount.Calculation;
 import com.gas.app.entity.personalAccount.PersonalGasAccount;
 import com.gas.app.exception.ServiceException;
@@ -20,11 +19,10 @@ public class CalculationService {
     private final CalculationRepository calculationRepository;
     private final PersonalGasAccountService accountService;
     @Transactional(readOnly = true)
-    public CalculationResponseDto getCalculationsByPersonalAccountId(UserSessionDto userSessionDto,
-                                                                     Long personalAccountId) {
+    public CalculationResponseDto getCalculationsByPersonalAccountId(Long personalAccountId) {
 
         PersonalGasAccount personalGasAccount = accountService.
-                getAccountByAccountId(userSessionDto, personalAccountId);
+                getAccountByAccountId(personalAccountId);
 
         List<Calculation> calculations = calculationRepository.
                 findCalculationsWithTariffByPersonalAccountId(personalGasAccount.getId())

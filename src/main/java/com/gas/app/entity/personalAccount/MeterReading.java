@@ -1,7 +1,11 @@
 package com.gas.app.entity.personalAccount;
 
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
+import org.hibernate.annotations.Generated;
 import org.hibernate.annotations.GenerationTime;
 
 import java.sql.Date;
@@ -23,7 +27,7 @@ public class MeterReading {
     private Double meterReading;
 
     @Column(name = "date", insertable = false)
-    @org.hibernate.annotations.Generated(GenerationTime.INSERT)
+    @Generated(GenerationTime.INSERT)
     private Date date;
 
     @ManyToOne(fetch = FetchType.LAZY)
