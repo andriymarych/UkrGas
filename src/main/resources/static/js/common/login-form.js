@@ -1,3 +1,5 @@
+import {saveTokensToCookies, setCookie} from "../utils/cookie-service.js";
+
 const loginBtn = document.getElementById("main-login-button");
 
 const closeLoginFormBtn = document.getElementById("close-login-button");
@@ -5,7 +7,7 @@ const loginLabel = document.getElementById("login-label");
 
 
 const shadowBG = document.getElementById("background-popup");
-const controlDisapearingBG = (flag) => {
+const DisappearingModeBG = (flag) => {
     shadowBG.style.backgroundColor = "rgba(0, 0, 0, 0.6)";
     (flag)
         ? shadowBG.style.visibility = "visible"
@@ -17,19 +19,19 @@ const controlDisapearingBG = (flag) => {
 
 loginBtn.addEventListener('click', () => {
     document.querySelector(".login-popup").classList.add("active");
-    controlDisapearingBG(1);
+    DisappearingModeBG(1);
 });
 
 closeLoginFormBtn.addEventListener('click', () => {
     document.querySelector(".login-popup").classList.remove("active");
-    controlDisapearingBG(0);
+    DisappearingModeBG(0);
 });
 shadowBG.addEventListener('click', () => {
     document.querySelector(".login-popup").classList.remove("active");
-    controlDisapearingBG(0);
+    DisappearingModeBG(0);
 })
 
-const loginUser = () => {
+window.loginUser = function ()  {
     const label = document.getElementById('login-label');
 
     const email = document.getElementById('email').value;
@@ -56,7 +58,7 @@ const loginUser = () => {
 }
 
 const verifyUser = (input) => {
-    fetch('/auth/login', {
+    fetch('/api/v2/auth/login', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -72,8 +74,9 @@ const verifyUser = (input) => {
             return response.json();
         })
         .then(data => {
+            saveTokensToCookies(data.data.accessToken, data.data.refreshToken)
             document.getElementById('login-label').innerHTML = '';
-            setUserData(data);
+            setUserData();
             removePopUp();
         })
         .catch(error => {
@@ -83,23 +86,15 @@ const verifyUser = (input) => {
 
 }
 
-const setUserData = (response) => {
-    sessionStorage.setItem('isUserAuthorized', 'true');
-    sessionStorage.setItem('userId', response.data.userId);
-    sessionStorage.setItem('authId', response.data.authId);
+const setUserData = () => {
+    setCookie('is_user_authorized', 'true', 1);
+    //sessionStorage.setItem('is-user-authorized', 'true');
     window.location.href = '../';
-}
-const sessionLogout = () => {
-    sessionStorage.setItem('isUserAuthorized', 'false');
-    sessionStorage.removeItem('current-personal-account');
-    sessionStorage.removeItem('userId');
-    sessionStorage.removeItem('authId');
-    location.reload();
 }
 
 const removePopUp = () => {
     document.querySelector(".login-popup").classList.remove("active");
-    controlDisapearingBG(0);
+    DisappearingModeBG(0);
 }
 const clearPopUp = () => {
     document.getElementById('email').value = "";
@@ -113,3 +108,4 @@ const loginErrorParser = (errorMessage) => {
         return "* Користувача із введеним логіном не існує"
     }
 }
+export{DisappearingModeBG}

@@ -24,11 +24,6 @@ const initializePage = () => {
 }
 async function loadUserPayments () {
     try {
-        const params = new URLSearchParams({
-            userId: sessionStorage.getItem("userId"),
-            authId: sessionStorage.getItem("authId")
-        });
-
         const settings = {
             method: 'GET',
             headers: {
@@ -37,7 +32,7 @@ async function loadUserPayments () {
             }
         };
         let accountId  = sessionStorage.getItem('current-personal-account');
-        let request =  `/api/v2/personal-accounts/${accountId}/payments?` + params.toString();
+        let request =  `/api/v2/personal-accounts/${accountId}/payments`
         const response =
             await fetch(request, settings);
         const responseBody = await response.json();
@@ -52,7 +47,6 @@ const setPaymentsData = (data) =>{
     setPayments(data);
 }
 const setBalance = (data) => {
-    const balanceDiv = document.getElementById('balance');
     const balanceValueSpan = document.getElementById('balance-value-span');
     const balanceStatus = document.getElementById('balance-status');
     const balanceValue = formatFractionalPart(data.personalGasAccount.balance);
@@ -70,7 +64,6 @@ const setBalance = (data) => {
 
 }
 const setPayments = (data) => {
-
 
     const payments = data.payments;
 
@@ -99,7 +92,6 @@ const setPayments = (data) => {
 
         paymentContainer.appendChild(paymentRecordP);
 
-
     });
 }
 const savePayment = () => {
@@ -121,13 +113,7 @@ const savePayment = () => {
     else {
         label.innerHTML = '';
     }
-    const userSession = {
-        userId: sessionStorage.getItem("userId"),
-        authId: sessionStorage.getItem("authId"),
-    }
     const data = {
-        userSession: userSession,
-        gasAccountId : sessionStorage.getItem('current-personal-account'),
         amountPaid : paymentAmountInput.value
     }
     sendPaymentData(data);

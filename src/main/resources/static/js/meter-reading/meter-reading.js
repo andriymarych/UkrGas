@@ -4,7 +4,12 @@ import {formatFractionalPart} from "../utils/number-formatter.js";
 const meterReadingsContainer = document.getElementById('meter-readings-container');
 let lastMeterReadingValue;
 const saveButton = document.getElementById("save-button");
+window.addEventListener('DOMContentLoaded', function() {
+
+
+});
 window.addEventListener('load', () => {
+
     initializePage();
 });
 saveButton.addEventListener("click", () =>{
@@ -15,12 +20,8 @@ const initializePage = () => {
     loadUserMeterReadings();
 }
 async function loadUserMeterReadings () {
-    try {
-        const params = new URLSearchParams({
-            userId: sessionStorage.getItem("userId"),
-            authId: sessionStorage.getItem("authId")
-        });
 
+    try {
         const settings = {
             method: 'GET',
             headers: {
@@ -29,7 +30,7 @@ async function loadUserMeterReadings () {
             }
         };
         let accountId  = sessionStorage.getItem('current-personal-account');
-        let request =  `/api/v2/personal-accounts/${accountId}/meter-readings?` + params.toString();
+        let request =  `/api/v2/personal-accounts/${accountId}/meter-readings`
         const response =
             await fetch(request, settings);
         const responseBody = await response.json();
@@ -139,13 +140,7 @@ const saveMeterReading = () => {
     else {
         label.innerHTML = '';
     }
-    const userSession = {
-        userId: sessionStorage.getItem("userId"),
-        authId: sessionStorage.getItem("authId"),
-    }
     const data = {
-        userSession: userSession,
-        gasAccountId : sessionStorage.getItem('current-personal-account'),
         meterReading : meterReadingInput
     }
     sendMeterReadingData(data);

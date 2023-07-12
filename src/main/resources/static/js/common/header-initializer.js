@@ -1,9 +1,13 @@
+import {cookiesLogout, getCookie, setCookie} from "../utils/cookie-service.js";
+import {DisappearingModeBG} from "./login-form.js";
+
+
 const personalAccountDropdown = document.getElementById("personal-account-list");
-let isUserAuthorized = sessionStorage.getItem('isUserAuthorized') === "true";
+let isUserAuthorized;
+
 const navbar = document.getElementById("nav-bar-list");
 let logoutButton;
 let preventClose;
-
 
 
 window.addEventListener('load', () => {
@@ -30,10 +34,9 @@ document.addEventListener('click', () => {
     }
     if (personalAccountDropdown.classList.contains("selected") && !preventClose) {
         personalAccountDropdown.classList.remove("selected");
-        controlDisapearingBG(0);
+        DisappearingModeBG(0);
     }
 })
-
 
 
 personalAccountDropdown.addEventListener("click", function (e) {
@@ -55,6 +58,7 @@ const initializeHeader = () => {
     setAuthorizeButton();
 }
 const initializeNavBar = () => {
+    isUserAuthorized = getCookie('is_user_authorized');
     if (!isUserAuthorized) {
         initializeUnauthorizedNavBar();
     } else {
@@ -76,8 +80,8 @@ const initializeAuthorizedNavBar = () => {
 
     navbar.appendChild(profile);
 }
-const setAuthorizeButton = () => {
 
+const setAuthorizeButton = () => {
     if (!isUserAuthorized) {
         document.getElementById('main-login-button').hidden = false;
     } else {
@@ -92,29 +96,34 @@ const initializePersonalAccountsDropdown = () => {
     loadUserPersonalGasAccounts();
 }
 
-async function loadUserPersonalGasAccounts () {
-    try {
-        const params = new URLSearchParams({
-            userId: sessionStorage.getItem("userId"),
-            authId: sessionStorage.getItem("authId"),
-        });
 
-        const settings = {
-            method: 'GET',
-            headers: {
-                Accept: 'application/json',
-                'Content-Type': 'application/json',
+async function loadUserPersonalGasAccounts() {
+
+    fetch('/api/v2/personal-accounts', {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+    })
+        .then(response => {
+            if (!response.ok) {
+                return response.text().then(text => {
+                    throw new Error(text)
+                })
             }
-        };
-        let request =  "/api/v2/personal-accounts?" + params.toString();
-        const response =
-            await fetch(request, settings);
-        const responseBody = await response.json();
-        setUserPersonalAccounts(responseBody.data);
+            return response.json();
+        })
+        .then(data => {
+            setUserPersonalAccounts(data.data);
+            setCookie('is_user_authorized', 'true', 1);
+            sessionStorage.setItem('is-user-authorized', 'true');
+            console.log(sessionStorage.getItem('is-user-authorized'));
 
-    } catch (e) {
-        console.error("Error: " + e );
-    }
+        }).catch(() => {
+        setCookie('is_user_authorized', 'false', 1);
+    });
+
+
 }
 const setUserPersonalAccounts = (userPersonalGasAccounts) => {
 
@@ -126,7 +135,7 @@ const setUserPersonalAccounts = (userPersonalGasAccounts) => {
         personalAccountDiv.setAttribute('class', 'personal-account-item');
 
         let accountIcon = document.createElement('img');
-        accountIcon.setAttribute('src','/img/common/account-icon.png');
+        accountIcon.setAttribute('src', '/images/common/account-icon.png');
 
         let accountNumberSpan = document.createElement('span');
         accountNumberSpan.setAttribute('class', 'account-number-span');
@@ -175,11 +184,13 @@ const addUserExitButton = () =>{
     personalAccountDropdown.appendChild(logoutDiv);
     logoutButton = logoutDiv;
 }
-
-const logout = () =>{
+window.logout = () => {
     document.getElementById("logout").remove();
-    sessionLogout();
+    cookiesLogout();
+    window.location.href='../';
+
 }
+
 const initializeCommonMenuItem = () => {
 
     const feedback = document.createElement("a");

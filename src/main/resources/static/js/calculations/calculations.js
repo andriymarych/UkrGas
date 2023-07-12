@@ -14,10 +14,6 @@ const initializePage = () => {
 }
 async function loadUserCalculations () {
     try {
-        const params = new URLSearchParams({
-            userId: sessionStorage.getItem("userId"),
-            authId: sessionStorage.getItem("authId")
-        });
 
         const settings = {
             method: 'GET',
@@ -27,7 +23,7 @@ async function loadUserCalculations () {
             }
         };
         let accountId  = sessionStorage.getItem('current-personal-account');
-        let request =  `/api/v2/personal-accounts/${accountId}/calculations?` + params.toString();
+        let request =  `/api/v2/personal-accounts/${accountId}/calculations`;
         const response =
             await fetch(request, settings);
         const responseBody = await response.json();
