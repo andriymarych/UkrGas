@@ -6,13 +6,13 @@
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
         <version>3.0.6</version>
-        <relativePath/> <!-- lookup parent from repository -->
+        <relativePath/>
     </parent>
     <groupId>com.gas</groupId>
     <artifactId>gas-application</artifactId>
     <version>0.1.0</version>
     <name>GasApplication</name>
-    <description>Student project for servicing gas consumers</description>
+    <description>Web application that provides convenient and prompt service for gas consumers</description>
     <properties>
         <java.version>17</java.version>
     </properties>
@@ -106,7 +106,7 @@
                 <configuration>
                     <excludes>
                         <exclude>
-                            <groupId>org.projectlombok</groupId>
+                            <groupId>org.project-lombok</groupId>
                             <artifactId>lombok</artifactId>
                         </exclude>
                     </excludes>

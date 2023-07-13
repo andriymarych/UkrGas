@@ -1,18 +1,17 @@
-package com.gas.app.controller;
-
+package com.gas.app.controller.view;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
-@RequestMapping("/feedback")
+@RequestMapping("/meter-reading")
 @RequiredArgsConstructor
-public class FeedbackController {
+public class MeterReadingController {
+
 
     @GetMapping
     public String getPage() {
-        return "feedback";
+        return "meter-reading";
     }
-
 }

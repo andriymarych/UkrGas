@@ -1,4 +1,4 @@
-package com.gas.app.controller;
+package com.gas.app.controller.view;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -6,12 +6,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/calculations")
+@RequestMapping("/payments")
 @RequiredArgsConstructor
-public class CalculationsController {
-
+public class PaymentsController {
     @GetMapping
     public String getPage() {
-        return "calculations";
+        return "payments";
     }
 }
+

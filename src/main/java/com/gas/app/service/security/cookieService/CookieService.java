@@ -30,6 +30,14 @@ public class CookieService {
         return null;
     }
 
+    public void clearSessionCookies(@NonNull HttpServletResponse response) {
+        List<String> cookies = List.of("access_token", "refresh_token", "is_user_authorized");
+        cookies.forEach( cookie -> {
+                    deleteCookie(response, cookie);
+                }
+        );
+    }
+
     public void addCookie(@NonNull HttpServletResponse response,
                           String name, String value) {
         Cookie accessTokenCookie = new Cookie(name, value);
@@ -41,21 +49,11 @@ public class CookieService {
         accessTokenCookie.setDomain("localhost");
         response.addCookie(accessTokenCookie);
     }
+
     public void deleteCookie(@NonNull HttpServletResponse response,
                           String name) {
         Cookie accessTokenCookie = new Cookie(name, null);
         accessTokenCookie.setMaxAge(0);
         response.addCookie(accessTokenCookie);
     }
-
-    public void clearSessionCookies(@NonNull HttpServletResponse response) {
-        List<String> cookies = List.of("access_token", "refresh_token", "is_user_authorized");
-        cookies.forEach( cookie -> {
-                    Cookie accessTokenCookie = new Cookie(cookie, null);
-                    accessTokenCookie.setMaxAge(0);
-                    response.addCookie(accessTokenCookie);
-                }
-        );
-    }
-
 }
