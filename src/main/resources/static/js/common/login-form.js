@@ -81,7 +81,7 @@ const verifyUser = (input) => {
         })
         .catch(error => {
             let errorBody = JSON.parse(error.message);
-            document.getElementById('login-label').innerHTML = loginErrorParser(errorBody.message);
+            document.getElementById('login-label').innerHTML = "*Ви ввели невірні дані облікового запису";
         });
 
 }
@@ -101,11 +101,5 @@ const clearPopUp = () => {
     document.getElementById('password').value = "";
     loginLabel.innerHTML = "";
 }
-const loginErrorParser = (errorMessage) => {
-    if (errorMessage.includes("password")) {
-        return "* Ви ввели невірний пароль"
-    } else {
-        return "* Користувача із введеним логіном не існує"
-    }
-}
+
 export{DisappearingModeBG}
