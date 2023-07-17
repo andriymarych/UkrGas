@@ -8,8 +8,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-import java.util.List;
-
 @Entity
 @Table(name = "telegram_user")
 @Getter
@@ -32,17 +30,11 @@ public class TelegramUser {
     @Column(name = "verified")
     private Boolean verified;
 
+    @ManyToOne
+    @JoinColumn(name = "current_personal_gas_account_id",referencedColumnName = "id")
+    private PersonalGasAccount currentPersonalGasAccount;
+
     @Column(name = "last_bot_state")
     @Enumerated(EnumType.STRING)
     private BotState botState = BotState.REGISTRATION;
-
-    @ManyToMany
-    @JoinColumn(name = "personal_gas_account_number", referencedColumnName = "account_number")
-    private List<PersonalGasAccount> personalGasAccounts;
-
-    public boolean addPersonalGasAccount(PersonalGasAccount personalGasAccount) {
-        return personalGasAccounts.add(personalGasAccount);
-    }
-
-
 }

@@ -8,7 +8,8 @@ import java.util.Optional;
 public interface TelegramUserRepository extends JpaRepository<TelegramUser, Long> {
 
 
-    boolean existsTelegramUserByUsername(String username);
+
 
     Optional<TelegramUser> findTelegramUserByUsername(String username);
+
 }
