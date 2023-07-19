@@ -3,7 +3,6 @@ package com.gas.app.service.telegram.command;
 import com.gas.app.entity.telegram.BotState;
 import com.gas.app.entity.telegram.TelegramUser;
 import com.gas.app.repository.telegram.TelegramUserRepository;
-import com.gas.app.service.telegram.CommandContainer;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

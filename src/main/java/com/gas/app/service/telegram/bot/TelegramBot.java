@@ -1,4 +1,4 @@
-package com.gas.app.service.telegram;
+package com.gas.app.service.telegram.bot;
 
 import com.gas.app.service.telegram.command.CommandResolver;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,4 +1,4 @@
-package com.gas.app.service.telegram.command.impl.registration;
+package com.gas.app.service.telegram.command.impl.personalAccount.registration;
 
 import com.gas.app.entity.personalAccount.PersonalGasAccount;
 import com.gas.app.entity.telegram.BotState;

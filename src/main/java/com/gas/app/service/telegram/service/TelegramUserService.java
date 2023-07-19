@@ -1,4 +1,4 @@
-package com.gas.app.service.telegram;
+package com.gas.app.service.telegram.service;
 
 import com.gas.app.entity.personalAccount.PersonalGasAccount;
 import com.gas.app.entity.telegram.TelegramUser;

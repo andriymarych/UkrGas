@@ -1,4 +1,4 @@
-package com.gas.app.service.telegram.command.impl.registration;
+package com.gas.app.service.telegram.command.impl.personalAccount.registration;
 
 import com.gas.app.entity.personalAccount.PersonalGasAccount;
 import com.gas.app.entity.telegram.BotState;
@@ -14,7 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Update;
 
-@Service("PERSONAL_GAS_ACCOUNT_ADDING")
+@Service("PERSONAL_GAS_ACCOUNT_INPUT")
 @RequiredArgsConstructor
 public class PersonalGasAccountAddingCommand implements Command {
 

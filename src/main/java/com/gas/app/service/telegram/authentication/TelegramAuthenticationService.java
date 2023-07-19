@@ -7,7 +7,7 @@ import com.gas.app.entity.telegram.TelegramUserGasPersonalAccount;
 import com.gas.app.entity.telegram.TelegramUserGasPersonalAccountKey;
 import com.gas.app.exception.ServiceException;
 import com.gas.app.repository.telegram.TelegramUserGasPersonalAccountRepository;
-import com.gas.app.service.telegram.TelegramUserService;
+import com.gas.app.service.telegram.service.TelegramUserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;

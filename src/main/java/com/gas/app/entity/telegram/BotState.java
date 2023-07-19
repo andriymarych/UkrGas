@@ -1,8 +1,5 @@
 package com.gas.app.entity.telegram;
 
-import java.util.Arrays;
-import java.util.List;
-
 public enum BotState {
     START("/start"),
     UNAUTHORIZED_MENU("НЕАВТОРИЗОВАНЕ МЕНЮ"),
@@ -11,7 +8,7 @@ public enum BotState {
     PERSONAL_GAS_ACCOUNT_REGISTRATION("ДОБАВИТИ ОСОБОВИЙ РАХУНОК"),
     FUEL_PRICE("ЦІНИ НА ПАЛИВО"),
     FUEL_PRICE_CURRENCY_MENU_SELECT("АКТУАЛЬНІ ЦІНИ НА ПАЛИВО"),
-    PERSONAL_GAS_ACCOUNT_ADDING("ДОБАВЛЕННЯ ОСОБОВОГО РАХУНКУ"),
+    PERSONAL_GAS_ACCOUNT_INPUT("ДОБАВЛЕННЯ ОСОБОВОГО РАХУНКУ"),
     PERSONAL_GAS_ACCOUNT_VERIFYING("ПІДТВЕРДЖЕННЯ ОСОБОВОГО РАХУНКУ"),
     PERSONAL_GAS_ACCOUNT_MENU("ОСОБОВІ РАХУНКИ"),
     PERSONAL_GAS_ACCOUNT_MENU_SELECT("ВИБІР ОПЦІЇ МЕНЮ ОСОБОВИХ РАХУНКІВ"),

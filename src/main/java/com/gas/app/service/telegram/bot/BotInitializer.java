@@ -1,4 +1,4 @@
-package com.gas.app.service.telegram;
+package com.gas.app.service.telegram.bot;
 
 
 import lombok.AllArgsConstructor;
