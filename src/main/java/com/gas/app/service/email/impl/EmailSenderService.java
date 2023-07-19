@@ -3,7 +3,6 @@ package com.gas.app.service.email.impl;
 import com.gas.app.service.email.MailService;
 import com.gas.app.service.email.ThymeLeafService;
 import jakarta.mail.MessagingException;
-import jakarta.mail.internet.MimeBodyPart;
 import jakarta.mail.internet.MimeMessage;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
