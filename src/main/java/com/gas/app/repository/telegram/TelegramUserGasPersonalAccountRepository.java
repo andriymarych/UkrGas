@@ -15,7 +15,14 @@ public interface TelegramUserGasPersonalAccountRepository extends JpaRepository<
             "from TelegramUserGasPersonalAccount  telegramUserPersonalGasAccount " +
             "where telegramUserPersonalGasAccount.key.telegramUser = :telegramUser " +
             "and telegramUserPersonalGasAccount.verified = false")
-    Optional<TelegramUserGasPersonalAccount> findTelegramUserGasPersonalAccountByUserId(TelegramUser telegramUser);
+    Optional<TelegramUserGasPersonalAccount> findTelegramUserGasPersonalAccountByUser(TelegramUser telegramUser);
+
+    @Query("select count(*) > 0 " +
+            "from TelegramUserGasPersonalAccount  telegramUserPersonalGasAccount " +
+            "inner join fetch TelegramUser user " +
+            "where user.username = :username " +
+            "and telegramUserPersonalGasAccount.verified = true")
+    Boolean findTelegramUserGasPersonalAccountByUsername(String username);
 
 
 }

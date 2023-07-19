@@ -9,9 +9,9 @@ import org.telegram.telegrambots.meta.api.objects.Update;
 
 import java.util.List;
 
-@Service("UNAUTHORIZED_MENU")
+@Service("UNAUTHORIZED_MENU_SELECT")
 @RequiredArgsConstructor
-public class UnauthorizedMenuCommand implements Command {
+public class UnauthorizedMenuSelectCommand implements Command {
 
     private final MenuItemResolver menuItemResolver;
 

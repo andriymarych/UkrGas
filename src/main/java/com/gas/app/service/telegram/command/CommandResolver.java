@@ -2,7 +2,6 @@ package com.gas.app.service.telegram.command;
 
 import com.gas.app.entity.telegram.BotState;
 import com.gas.app.entity.telegram.TelegramUser;
-import com.gas.app.exception.ServiceException;
 import com.gas.app.repository.telegram.TelegramUserRepository;
 import com.gas.app.service.telegram.CommandContainer;
 import lombok.RequiredArgsConstructor;
@@ -20,12 +19,12 @@ public class CommandResolver {
     private final TelegramUserRepository telegramUserRepository;
     private final CommandContainer commandContainer;
 
-@Transactional(noRollbackFor = ServiceException.class)
+    @Transactional
     public SendMessage getMessageResponse(Update update) {
         String username = update.getMessage().getFrom().getUserName();
         Optional<TelegramUser> user = telegramUserRepository.findTelegramUserByUsername(username);
         if (user.isEmpty()) {
-            return commandContainer.get("UNAUTHORIZED_MENU").execute(update);
+            return commandContainer.get("START").execute(update);
         }
         BotState state = user.get().getBotState();
         return commandContainer

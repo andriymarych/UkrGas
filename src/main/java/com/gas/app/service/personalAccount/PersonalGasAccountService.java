@@ -26,7 +26,7 @@ public class PersonalGasAccountService {
                 .orElseThrow(() -> new ServiceException("Could not find gas account by id [" + accountId + "]", HttpStatus.NOT_FOUND));
     }
 
-    @Transactional(readOnly = true)
+    @Transactional(readOnly = true, noRollbackFor = ServiceException.class)
     public PersonalGasAccount getAccountByAccountNumber(String accountNumber) {
 
         return personalGasAccountRepository

@@ -36,5 +36,5 @@ public class TelegramUser {
 
     @Column(name = "last_bot_state")
     @Enumerated(EnumType.STRING)
-    private BotState botState = BotState.REGISTRATION;
+    private BotState botState = BotState.UNAUTHORIZED_MENU;
 }

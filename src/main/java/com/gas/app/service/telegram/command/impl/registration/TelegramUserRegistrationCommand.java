@@ -6,7 +6,6 @@ import com.gas.app.repository.telegram.TelegramUserRepository;
 import com.gas.app.service.telegram.command.Command;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboardRemove;
@@ -18,7 +17,6 @@ public class TelegramUserRegistrationCommand implements Command {
     private final TelegramUserRepository telegramUserRepository;
 
     @Override
-    @Transactional
     public SendMessage execute(Update update) {
         registerTelegramUser(update);
         return buildSendMessage(update,

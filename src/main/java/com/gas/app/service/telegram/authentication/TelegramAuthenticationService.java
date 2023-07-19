@@ -7,7 +7,7 @@ import com.gas.app.entity.telegram.TelegramUserGasPersonalAccount;
 import com.gas.app.entity.telegram.TelegramUserGasPersonalAccountKey;
 import com.gas.app.exception.ServiceException;
 import com.gas.app.repository.telegram.TelegramUserGasPersonalAccountRepository;
-import com.gas.app.repository.telegram.TelegramUserRepository;
+import com.gas.app.service.telegram.TelegramUserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -17,14 +17,14 @@ import org.springframework.transaction.annotation.Transactional;
 @RequiredArgsConstructor
 public class TelegramAuthenticationService {
 
-    private final TelegramUserRepository telegramUserRepository;
+    private final TelegramUserService telegramUserService;
     private final TelegramUserGasPersonalAccountRepository telegramUserGasPersonalAccountRepository;
 
-    @Transactional
+    @Transactional(noRollbackFor = ServiceException.class)
     public PersonalGasAccount authenticateGasAccount(TelegramUser user, Long gasMeterNumber) {
 
         TelegramUserGasPersonalAccount  telegramUserGasPersonalAccount= telegramUserGasPersonalAccountRepository
-                .findTelegramUserGasPersonalAccountByUserId(user)
+                .findTelegramUserGasPersonalAccountByUser(user)
                 .orElseThrow(()-> new ServiceException("Unverified personal gas account of Telegram user "
                         + user.getUsername() +
                         " is not found",
@@ -41,11 +41,8 @@ public class TelegramAuthenticationService {
     }
 
     public TelegramUser getUserByUsername(String username){
-        return  telegramUserRepository
-                .findTelegramUserByUsername(username)
-                .orElseThrow(()-> new ServiceException("Telegram user with username " + username +
-                        " is not found",
-                        HttpStatus.NOT_FOUND));
+        return  telegramUserService
+                .getTelegramUserByUsername(username);
     }
     public void addPersonalGasAccount(TelegramUser user, PersonalGasAccount personalGasAccount){
         TelegramUserGasPersonalAccount telegramUserGasPersonalAccount = new TelegramUserGasPersonalAccount();

@@ -37,7 +37,7 @@ public class PersonalGasAccountAddingCommand implements Command {
             setPersonalGasAccount(update);
         } catch (ServiceException e) {
             return buildSendMessage(update,
-                    "Особового рахунку " + accountNumber + " не існує\n" +
+                    "Особового рахунку №" + accountNumber + " не існує\n" +
                             "Повторіть спробу");
         }
         return buildSendMessage(update,

@@ -20,14 +20,6 @@ public class TelegramUserGasPersonalAccount {
     @EmbeddedId
     private TelegramUserGasPersonalAccountKey key;
 
-   /* @MapsId("telegramUser")
-    @ManyToOne(cascade = CascadeType.REMOVE)
-    private TelegramUser telegramUser;
-
-    @MapsId("personalGasAccount")
-    @ManyToOne
-    private PersonalGasAccount personalGasAccount;*/
-
     @Column(name = "verified")
     private Boolean verified = false;
 
