@@ -82,7 +82,7 @@ const setMeterReadings = (data) => {
 
         let meterReadingValue = document.createElement('span');
         meterReadingValue.setAttribute('class','meter-reading-value');
-        meterReadingValue.innerHTML = formatFractionalPart(meterReading.meterReading) + ' м³';
+        meterReadingValue.innerHTML = formatFractionalPart(meterReading.value) + ' м³';
 
         readingRecordP.appendChild(meterNumberSpan);
         readingRecordP.appendChild(readingDate);

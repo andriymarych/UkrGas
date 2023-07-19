@@ -24,6 +24,11 @@ public interface MeterReadingRepository extends JpaRepository<MeterReading, Long
             "where account.id = :personalAccountId " +
             "order by meterReading.id desc limit 1")
     Optional<MeterReading> getLastMeterReading(Long personalAccountId);
+    @Query("select count(*) > 0 " +
+            "from MeterReading  meterReading " +
+            "where meterReading.personalGasAccount.id = :personalAccountId " +
+            "and month(meterReading.date) = month(current_date)")
+    Boolean isBillingPeriodClosed(Long personalAccountId);
     @Query("select distinct user from MeterReading meterReading " +
             "join meterReading.personalGasAccount account " +
             "join  account.address " +

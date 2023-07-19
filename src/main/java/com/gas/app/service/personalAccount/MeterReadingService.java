@@ -11,6 +11,7 @@ import com.gas.app.repository.personalAccount.MeterReadingRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
@@ -38,7 +39,7 @@ public class MeterReadingService {
         return new MeterReadingResponseDto(personalGasAccount, meterReadings);
     }
 
-    @Transactional
+    @Transactional(propagation = Propagation.REQUIRES_NEW)
     public MeterReading saveMeterReading(Long personalAccountId, MeterReadingRequestDto requestDto) {
 
         PersonalGasAccount personalGasAccount = accountService.
@@ -46,19 +47,22 @@ public class MeterReadingService {
 
         MeterReading meterReading = new MeterReading(requestDto.meterReading());
         meterReading.setPersonalGasAccount(personalGasAccount);
-        validateMeterReading(meterReading);
-        return meterReadingRepository.save(meterReading);
-    }
-
-    @Transactional(readOnly = true)
-    public void validateMeterReading(MeterReading meterReading) {
-
-        Optional<MeterReading> lastMeterReading = meterReadingRepository
-                .getLastMeterReading(meterReading.getPersonalGasAccount().getId());
-        if (lastMeterReading.isPresent()  && lastMeterReading.get().getMeterReading() > meterReading.getMeterReading()) {
+        if(isMeterReadingValid(meterReading)){
+            return meterReadingRepository.save(meterReading);
+        }else {
             throw new ServiceException("The entered value of the meter reading is less than the previous one",
                     HttpStatus.CONFLICT);
         }
+    }
+    @Transactional(readOnly = true)
+    public boolean isBillingPeriodClosed(Long personalAccountId){
+        return meterReadingRepository.isBillingPeriodClosed(personalAccountId);
+    }
+    @Transactional(readOnly = true)
+    public boolean isMeterReadingValid(MeterReading meterReading) {
+        Optional<MeterReading> lastMeterReading = meterReadingRepository
+                .getLastMeterReading(meterReading.getPersonalGasAccount().getId());
+        return lastMeterReading.isEmpty() || lastMeterReading.get().getMeterReading() <= meterReading.getMeterReading();
 
     }
 
