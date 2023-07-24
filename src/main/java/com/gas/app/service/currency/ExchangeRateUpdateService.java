@@ -38,7 +38,7 @@ public class ExchangeRateUpdateService {
 
     //Exchange rates are updated every day at 00:00
     @Transactional
-    @Scheduled(cron = "0 1 0 * * ?")
+    @Scheduled(cron = "0 3 0 * * ?")
     public void currencyRateDailyUpdate() {
 
         List<ExchangeRate> currencyRates = getCurrencyRateListFromApi()

@@ -5,6 +5,7 @@ import com.gas.app.entity.currency.StandardCurrencyEnum;
 import com.gas.app.service.fuel.FuelPriceService;
 import com.gas.app.util.ResponseHandler;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;

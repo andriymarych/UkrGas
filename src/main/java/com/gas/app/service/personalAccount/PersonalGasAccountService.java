@@ -6,6 +6,8 @@ import com.gas.app.entity.security.user.User;
 import com.gas.app.exception.ServiceException;
 import com.gas.app.repository.personalAccount.PersonalGasAccountRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -37,7 +39,6 @@ public class PersonalGasAccountService {
 
     @Transactional(readOnly = true)
     public List<PersonalGasAccount> getAccountsByUser(User user) {
-
         return personalGasAccountRepository
                 .findAccountsByUser(user)
                 .orElseThrow(() -> new ServiceException("Could not find gas accounts by user id [" + user.getId() + "]", HttpStatus.NOT_FOUND));
