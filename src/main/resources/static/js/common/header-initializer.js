@@ -58,7 +58,7 @@ const initializeHeader = () => {
     setAuthorizeButton();
 }
 const initializeNavBar = () => {
-    isUserAuthorized = getCookie('is_user_authorized');
+    isUserAuthorized = getCookie('is_user_authorized') === 'true';
     if (!isUserAuthorized) {
         initializeUnauthorizedNavBar();
     } else {
@@ -107,6 +107,7 @@ async function loadUserPersonalGasAccounts() {
     })
         .then(response => {
             if (!response.ok) {
+                logout();
                 return response.text().then(text => {
                     throw new Error(text)
                 })
