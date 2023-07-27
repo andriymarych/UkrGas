@@ -233,7 +233,7 @@ Template for reminding users to submit meter readings on time, which is automati
 </div>
 <br>
 
-## Contacts
+## Contacts ✉️
 <br>
 <div align="center">
 
