@@ -5,7 +5,7 @@
 -- Dumped from database version 14.5
 -- Dumped by pg_dump version 14.4
 
--- Started on 2023-07-22 01:44:27 EEST
+-- Started on 2023-07-27 22:31:33 EEST
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -68,11 +68,11 @@ SET default_table_access_method = heap;
 --
 
 CREATE TABLE ukr_gas.account_tariff (
-    id bigint NOT NULL,
-    discount double precision,
-    end_date date,
-    start_date date,
-    tariff_id bigint
+                                        id bigint NOT NULL,
+                                        discount double precision,
+                                        end_date date,
+                                        start_date date,
+                                        tariff_id bigint
 );
 
 
@@ -108,12 +108,12 @@ ALTER SEQUENCE ukr_gas.account_tariff_id_seq OWNED BY ukr_gas.account_tariff.id;
 --
 
 CREATE TABLE ukr_gas.address (
-    id bigint NOT NULL,
-    apartment_number integer,
-    city character varying(255),
-    house_number integer,
-    region character varying(255),
-    street character varying(255)
+                                 id bigint NOT NULL,
+                                 apartment_number integer,
+                                 city character varying(255),
+                                 house_number integer,
+                                 region character varying(255),
+                                 street character varying(255)
 );
 
 
@@ -149,9 +149,9 @@ ALTER SEQUENCE ukr_gas.address_id_seq OWNED BY ukr_gas.address.id;
 --
 
 CREATE TABLE ukr_gas.auth (
-    id bigint NOT NULL,
-    email character varying(255),
-    password character varying(255)
+                              id bigint NOT NULL,
+                              email character varying(255),
+                              password character varying(255)
 );
 
 
@@ -187,14 +187,14 @@ ALTER SEQUENCE ukr_gas.auth_id_seq OWNED BY ukr_gas.auth.id;
 --
 
 CREATE TABLE ukr_gas.calculation (
-    id bigint NOT NULL,
-    personal_gas_account_id bigint,
-    amount_consumed double precision,
-    accrued_payment double precision,
-    paid_payment double precision,
-    balance double precision,
-    tariff_id bigint,
-    date date DEFAULT now()
+                                     id bigint NOT NULL,
+                                     personal_gas_account_id bigint,
+                                     amount_consumed double precision,
+                                     accrued_payment double precision,
+                                     paid_payment double precision,
+                                     balance double precision,
+                                     tariff_id bigint,
+                                     date date DEFAULT now()
 );
 
 
@@ -230,11 +230,11 @@ ALTER SEQUENCE ukr_gas.calculation_id_seq OWNED BY ukr_gas.calculation.id;
 --
 
 CREATE TABLE ukr_gas.exchange_rate (
-    id bigint NOT NULL,
-    currency_from character varying(3) DEFAULT 'USD'::character varying,
-    currency_to character varying(3) NOT NULL,
-    exchange_rate numeric(10,4) NOT NULL,
-    date date DEFAULT now()
+                                       id bigint NOT NULL,
+                                       currency_from character varying(3) DEFAULT 'USD'::character varying,
+                                       currency_to character varying(3) NOT NULL,
+                                       exchange_rate numeric(10,4) NOT NULL,
+                                       date date DEFAULT now()
 );
 
 
@@ -270,14 +270,14 @@ ALTER SEQUENCE ukr_gas.currency_rate_id_seq OWNED BY ukr_gas.exchange_rate.id;
 --
 
 CREATE TABLE ukr_gas.feedback (
-    id bigint NOT NULL,
-    status character varying(50) DEFAULT 'Open'::character varying,
-    full_name character varying(150),
-    email character varying(70),
-    category_id integer,
-    type_id integer,
-    content character varying(2000),
-    "timestamp" timestamp with time zone DEFAULT now()
+                                  id bigint NOT NULL,
+                                  status character varying(50) DEFAULT 'Open'::character varying,
+                                  full_name character varying(150),
+                                  email character varying(70),
+                                  category_id integer,
+                                  type_id integer,
+                                  content character varying(2000),
+                                  "timestamp" timestamp with time zone DEFAULT now()
 );
 
 
@@ -289,8 +289,8 @@ ALTER TABLE ukr_gas.feedback OWNER TO postgres;
 --
 
 CREATE TABLE ukr_gas.feedback_category (
-    id integer NOT NULL,
-    category character varying(60)
+                                           id integer NOT NULL,
+                                           category character varying(60)
 );
 
 
@@ -326,8 +326,8 @@ ALTER SEQUENCE ukr_gas.feedback_id_seq OWNED BY ukr_gas.feedback.id;
 --
 
 CREATE TABLE ukr_gas.feedback_type (
-    id integer NOT NULL,
-    type character varying(60)
+                                       id integer NOT NULL,
+                                       type character varying(60)
 );
 
 
@@ -339,12 +339,12 @@ ALTER TABLE ukr_gas.feedback_type OWNER TO postgres;
 --
 
 CREATE TABLE ukr_gas.fuel_price (
-    id bigint NOT NULL,
-    type character varying(30) NOT NULL,
-    price numeric(10,3) NOT NULL,
-    currency character varying(3),
-    country character varying(50),
-    date date DEFAULT now()
+                                    id bigint NOT NULL,
+                                    type character varying(30) NOT NULL,
+                                    price numeric(10,3) NOT NULL,
+                                    currency character varying(3),
+                                    country character varying(50),
+                                    date date DEFAULT now()
 );
 
 
@@ -380,15 +380,15 @@ ALTER SEQUENCE ukr_gas.fuel_price_id_seq OWNED BY ukr_gas.fuel_price.id;
 --
 
 CREATE TABLE ukr_gas.personal_gas_account (
-    id bigint NOT NULL,
-    person_id bigint,
-    user_id bigint,
-    balance numeric(8,2),
-    iec_number character varying(255),
-    gas_meter_number bigint,
-    address_id bigint,
-    account_number character varying(20),
-    tariff_id bigint
+                                              id bigint NOT NULL,
+                                              person_id bigint,
+                                              user_id bigint,
+                                              balance numeric(8,2),
+                                              iec_number character varying(255),
+                                              gas_meter_number bigint,
+                                              address_id bigint,
+                                              account_number character varying(20),
+                                              tariff_id bigint
 );
 
 
@@ -424,10 +424,10 @@ ALTER SEQUENCE ukr_gas.gas_account_id_seq OWNED BY ukr_gas.personal_gas_account.
 --
 
 CREATE TABLE ukr_gas.meter_reading (
-    id bigint NOT NULL,
-    date date DEFAULT now(),
-    meter_reading numeric(10,2),
-    personal_gas_account_id bigint
+                                       id bigint NOT NULL,
+                                       date date DEFAULT now(),
+                                       meter_reading numeric(10,2),
+                                       personal_gas_account_id bigint
 );
 
 
@@ -463,10 +463,10 @@ ALTER SEQUENCE ukr_gas.meter_reading_id_seq OWNED BY ukr_gas.meter_reading.id;
 --
 
 CREATE TABLE ukr_gas.payment (
-    id bigint NOT NULL,
-    amount_paid numeric(8,2),
-    date timestamp with time zone DEFAULT now(),
-    personal_gas_account_id bigint
+                                 id bigint NOT NULL,
+                                 amount_paid numeric(8,2),
+                                 date timestamp with time zone DEFAULT now(),
+                                 personal_gas_account_id bigint
 );
 
 
@@ -502,9 +502,9 @@ ALTER SEQUENCE ukr_gas.payment_id_seq OWNED BY ukr_gas.payment.id;
 --
 
 CREATE TABLE ukr_gas.person (
-    id bigint NOT NULL,
-    first_name character varying(70),
-    last_name character varying(70)
+                                id bigint NOT NULL,
+                                first_name character varying(70),
+                                last_name character varying(70)
 );
 
 
@@ -516,9 +516,9 @@ ALTER TABLE ukr_gas.person OWNER TO postgres;
 --
 
 CREATE TABLE ukr_gas.tariff (
-    id bigint NOT NULL,
-    plan character varying(255),
-    price double precision
+                                id bigint NOT NULL,
+                                plan character varying(255),
+                                price double precision
 );
 
 
@@ -554,12 +554,12 @@ ALTER SEQUENCE ukr_gas.tariff_id_seq OWNED BY ukr_gas.tariff.id;
 --
 
 CREATE TABLE ukr_gas.telegram_user (
-    id bigint NOT NULL,
-    username character varying(40),
-    chat_id bigint,
-    verified boolean DEFAULT false,
-    current_personal_gas_account_id bigint,
-    last_bot_state character varying(50)
+                                       id bigint NOT NULL,
+                                       username character varying(40),
+                                       chat_id bigint,
+                                       verified boolean DEFAULT false,
+                                       current_personal_gas_account_id bigint,
+                                       last_bot_state character varying(50)
 );
 
 
@@ -595,9 +595,9 @@ ALTER SEQUENCE ukr_gas.telegram_user_id_seq OWNED BY ukr_gas.telegram_user.id;
 --
 
 CREATE TABLE ukr_gas.telegram_user_personal_gas_account (
-    user_id bigint NOT NULL,
-    personal_gas_account_id bigint NOT NULL,
-    verified boolean DEFAULT false
+                                                            user_id bigint NOT NULL,
+                                                            personal_gas_account_id bigint NOT NULL,
+                                                            verified boolean DEFAULT false
 );
 
 
@@ -624,12 +624,12 @@ ALTER TABLE ukr_gas.token_id_seq OWNER TO postgres;
 --
 
 CREATE TABLE ukr_gas.token (
-    id bigint DEFAULT nextval('ukr_gas.token_id_seq'::regclass) NOT NULL,
-    token character varying(250),
-    type character varying(30),
-    expired boolean,
-    revoked boolean,
-    user_id bigint
+                               id bigint DEFAULT nextval('ukr_gas.token_id_seq'::regclass) NOT NULL,
+                               token character varying(250),
+                               type character varying(30),
+                               expired boolean,
+                               revoked boolean,
+                               user_id bigint
 );
 
 
@@ -641,13 +641,13 @@ ALTER TABLE ukr_gas.token OWNER TO postgres;
 --
 
 CREATE TABLE ukr_gas."user" (
-    id bigint NOT NULL,
-    first_name character varying(40),
-    last_name character varying(40),
-    email character varying(40),
-    password character varying(250),
-    role character varying(20),
-    creation_date date DEFAULT now()
+                                id bigint NOT NULL,
+                                first_name character varying(40),
+                                last_name character varying(40),
+                                email character varying(40),
+                                password character varying(250),
+                                role character varying(20),
+                                creation_date date DEFAULT now()
 );
 
 
@@ -825,8 +825,8 @@ COPY ukr_gas.auth (id, email, password) FROM stdin;
 --
 
 COPY ukr_gas.calculation (id, personal_gas_account_id, amount_consumed, accrued_payment, paid_payment, balance, tariff_id, date) FROM stdin;
-2	3	100	795.689	695.23	-140	1	2023-04-15
-1	3	65	510	610	0	1	2023-05-15
+1	1	65	510	610	0	1	2023-05-15
+2	1	100	795.689	695.23	-140	1	2023-04-15
 \.
 
 
@@ -864,9 +864,15 @@ COPY ukr_gas.exchange_rate (id, currency_from, currency_to, exchange_rate, date)
 31	USD	EUR	0.8907	2023-07-18
 32	USD	UAH	36.6535	2023-07-18
 33	USD	USD	1.0000	2023-07-18
-36	USD	USD	1.0000	2023-07-22
-35	USD	UAH	36.7384	2023-07-22
-34	USD	EUR	0.8898	2023-07-22
+35	USD	UAH	36.7384	2023-07-23
+38	USD	UAH	36.7613	2023-07-24
+34	USD	EUR	0.8898	2023-07-23
+36	USD	USD	1.0000	2023-07-23
+39	USD	USD	1.0000	2023-07-24
+37	USD	EUR	0.8982	2023-07-24
+40	USD	EUR	0.9050	2023-07-27
+42	USD	USD	1.0000	2023-07-27
+41	USD	UAH	36.9406	2023-07-27
 \.
 
 
@@ -922,15 +928,15 @@ COPY ukr_gas.feedback_type (id, type) FROM stdin;
 --
 
 COPY ukr_gas.fuel_price (id, type, price, currency, country, date) FROM stdin;
+19	LPG	0.660	USD	Ukraine	2023-07-26
+21	GASOLINE	1.329	USD	Ukraine	2023-07-26
+20	DIESEL	1.351	USD	Ukraine	2023-07-26
+22	LPG	0.661	USD	Ukraine	2023-07-27
+23	DIESEL	1.352	USD	Ukraine	2023-07-27
+24	GASOLINE	1.331	USD	Ukraine	2023-07-27
 17	DIESEL	1.363	USD	Ukraine	2023-07-17
 16	LPG	0.651	USD	Ukraine	2023-07-17
 18	GASOLINE	1.318	USD	Ukraine	2023-07-17
-19	LPG	0.660	USD	Ukraine	2023-07-21
-21	GASOLINE	1.329	USD	Ukraine	2023-07-21
-22	LPG	0.661	USD	Ukraine	2023-07-22
-20	DIESEL	1.351	USD	Ukraine	2023-07-21
-23	DIESEL	1.352	USD	Ukraine	2023-07-22
-24	GASOLINE	1.331	USD	Ukraine	2023-07-22
 \.
 
 
@@ -944,14 +950,14 @@ COPY ukr_gas.meter_reading (id, date, meter_reading, personal_gas_account_id) FR
 2	2023-02-03	31820.00	1
 3	2023-03-04	32105.00	1
 1	2023-01-01	31456.00	1
-7	2023-03-05	32301.00	1
-22	2023-04-03	32405.00	1
 23	2023-06-03	32301.00	2
 34	2023-07-02	32405.00	2
-25	2023-02-02	32504.00	1
-37	2023-07-12	32607.00	1
 35	2023-05-05	32115.00	3
 36	2023-06-01	32225.00	3
+22	2023-05-03	32405.00	1
+7	2023-04-05	32301.00	1
+25	2023-06-02	32504.00	1
+41	2023-07-27	32620.00	1
 \.
 
 
@@ -963,40 +969,28 @@ COPY ukr_gas.meter_reading (id, date, meter_reading, personal_gas_account_id) FR
 
 COPY ukr_gas.payment (id, amount_paid, date, personal_gas_account_id) FROM stdin;
 23504	420.00	2023-06-04 01:05:31.933074+03	1
-23505	420.00	2023-06-04 01:20:23.361589+03	1
-23506	420.00	2023-06-04 01:26:45.462584+03	1
-23507	420.00	2023-06-04 01:39:19.028355+03	1
-23508	420.00	2023-06-04 01:40:50.127043+03	1
-23509	420.00	2023-06-04 01:46:57.204051+03	1
-23510	420.00	2023-06-04 01:47:29.078009+03	1
-23511	420.00	2023-06-04 01:47:36.209042+03	1
 23512	25.50	2023-06-04 11:39:06.713319+03	1
-23513	1400.00	2023-06-04 14:59:13.464675+03	1
-23514	100.00	2023-06-04 14:59:37.324352+03	1
 23502	200.00	2023-05-17 00:00:00+03	1
 23503	455.23	2023-05-06 00:00:00+03	1
-23515	1.00	2023-06-04 22:45:45.994186+03	1
-23516	1.00	2023-06-04 22:47:12.842608+03	1
 23520	10.00	2023-06-07 14:11:04.237352+03	1
 23521	400.00	2023-06-07 14:28:32.854422+03	1
 23522	10.00	2023-06-16 09:58:11.395986+03	1
-23523	5.00	2023-06-18 13:14:07.352404+03	1
-23524	1.00	2023-06-18 13:14:09.881224+03	1
-23525	1.00	2023-06-28 23:02:54.563723+03	2
-23526	1.00	2023-07-01 21:17:33.734275+03	1
 23527	57.23	2023-07-02 20:56:44.923506+03	1
 23533	150.00	2023-07-02 21:37:13.2763+03	1
-23534	3.00	2023-07-10 11:41:56.697783+03	2
-23535	3.00	2023-07-12 11:17:05.762702+03	1
-23536	2.00	2023-07-12 11:17:11.363625+03	1
-23537	1.00	2023-07-12 11:32:02.543813+03	1
-23538	10.00	2023-07-12 12:00:17.250336+03	1
-23539	5.00	2023-07-12 12:02:13.731304+03	1
-23540	2.00	2023-07-12 12:02:16.230096+03	1
 23541	5.00	2023-07-12 23:27:11.546767+03	1
-23542	5.00	2023-07-12 23:29:01.479523+03	1
 23543	35.00	2023-07-18 23:13:13.587322+03	3
 23544	700.12	2023-07-19 14:46:29.819014+03	3
+23552	20.00	2023-07-26 12:31:18.868297+03	3
+23553	5.00	2023-07-26 16:12:17.817368+03	3
+23549	70.00	2023-07-24 23:04:33.730256+03	1
+23548	240.00	2023-07-24 23:03:59.810967+03	1
+23534	35.00	2023-07-10 11:41:56.697783+03	2
+23545	35.00	2023-07-24 22:54:31.300105+03	1
+23542	150.00	2023-07-12 23:29:01.479523+03	1
+23516	1.00	2023-05-04 22:47:12.842608+03	1
+23515	120.00	2023-05-01 22:45:45.994186+03	1
+23514	100.00	2023-04-15 14:59:37.324+03	1
+23513	1400.00	2023-04-08 14:59:13.464675+03	1
 \.
 
 
@@ -1019,9 +1013,9 @@ COPY ukr_gas.person (id, first_name, last_name) FROM stdin;
 --
 
 COPY ukr_gas.personal_gas_account (id, person_id, user_id, balance, iec_number, gas_meter_number, address_id, account_number, tariff_id) FROM stdin;
-1	1001	14	47.65	56XM16A507384234	342014	5	03234124	1
 2	1002	\N	24.00	23IA16A509084853	975032	6	07753146	2
-3	1002	14	735.12	98XC1609684888A3	869321	6	04682124	2
+3	1002	14	760.12	98XC1609684888A3	869321	6	04682124	2
+1	1001	\N	100.65	56XM16A507384234	342014	5	03234124	1
 \.
 
 
@@ -1044,7 +1038,7 @@ COPY ukr_gas.tariff (id, plan, price) FROM stdin;
 --
 
 COPY ukr_gas.telegram_user (id, username, chat_id, verified, current_personal_gas_account_id, last_bot_state) FROM stdin;
-13	andriymarych	521682137	\N	3	MAIN_MENU_SELECT
+20	andriymarych	521682137	\N	1	MAIN_MENU_SELECT
 \.
 
 
@@ -1055,7 +1049,7 @@ COPY ukr_gas.telegram_user (id, username, chat_id, verified, current_personal_ga
 --
 
 COPY ukr_gas.telegram_user_personal_gas_account (user_id, personal_gas_account_id, verified) FROM stdin;
-13	3	t
+20	1	t
 \.
 
 
@@ -1172,6 +1166,7 @@ COPY ukr_gas.token (id, token, type, expired, revoked, user_id) FROM stdin;
 104	eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhbmRyaXVtYXJpY2hAZ21haWwuY29tIiwiaWF0IjoxNjg5MTg2MTA2LCJleHAiOjE2ODkxODYyMjZ9.yPCHj33KShbE2iSDy940a9KZAU9H0SL0oeHZdEp9yRk	BEARER	t	t	14
 105	eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhbmRyaXVtYXJpY2hAZ21haWwuY29tIiwiaWF0IjoxNjg5MTg2MTU0LCJleHAiOjE2ODkxODYyNzR9.nLFIp8zlIRmkeAmQxaozgNC-NQ5QhE58CoPPTMwgYQg	BEARER	t	t	14
 106	eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhbmRyaXVtYXJpY2hAZ21haWwuY29tIiwiaWF0IjoxNjg5MTg2MjE1LCJleHAiOjE2ODkxODYzMzV9.OeCo4xst8cK3QEKA19o8zizntHbwVjV0Q3s_XHEKc-g	BEARER	t	t	14
+188	eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhbmRyaXVtYXJpY2hAZ21haWwuY29tIiwiaWF0IjoxNjkwMzE2MTYwLCJleHAiOjE2OTA0MDI1NjB9.JOth0aoxvqO9YCYCyzmJQJu8CqMdWYa9z_oWgWXWFZE	BEARER	t	t	14
 107	eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhbmRyaXVtYXJpY2hAZ21haWwuY29tIiwiaWF0IjoxNjg5MTg2MzQ2LCJleHAiOjE2ODkxODY0NjZ9.FfDD067bbD1jEdPZMEsZRTgTFU-BrgPXTEzzeYdeGH8	BEARER	t	t	14
 109	eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhbmRyaXVtYXJpY2hAZ21haWwuY29tIiwiaWF0IjoxNjg5MTg2NTgxLCJleHAiOjE2ODkxOTg1ODF9._OpPEc9VIDGwuLP_SY9vBglmH3X3QrPCAFR2mGWrfuU	BEARER	t	t	14
 108	eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhbmRyaXVtYXJpY2hAZ21haWwuY29tIiwiaWF0IjoxNjg5MTg2NDczLCJleHAiOjE2ODkxOTg0NzN9.Xqb30BUXTxetXtose7QhbTEPYJAY36MgBvbrm6jvnSA	BEARER	t	t	14
@@ -1207,14 +1202,20 @@ COPY ukr_gas.token (id, token, type, expired, revoked, user_id) FROM stdin;
 139	eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhbmRyaXVtYXJpY2hAZ21haWwuY29tIiwiaWF0IjoxNjg5MTkyOTM2LCJleHAiOjE2ODkxOTI5NDh9.-dMebBqmCzlTx_DZLY17AG7yCEC2wCgXlvOmrF0Yho4	BEARER	t	t	14
 140	eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhbmRyaXVtYXJpY2hAZ21haWwuY29tIiwiaWF0IjoxNjg5MTkzMDk0LCJleHAiOjE2ODkxOTMxMDZ9.KbnJr6Wej3ITedRcf0_0iKtCY4ECN7o0oc6y7n0ZZ-I	BEARER	t	t	14
 141	eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhbmRyaXVtYXJpY2hAZ21haWwuY29tIiwiaWF0IjoxNjg5MTkzMTEwLCJleHAiOjE2ODkxOTMxMjJ9.ERwG6PgE1b6pS8ujhNYZ_6HPCFHmuUXQB_cL40CPjfU	BEARER	t	t	14
+189	eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhbmRyaXVtYXJpY2hAZ21haWwuY29tIiwiaWF0IjoxNjkwMzU4NDY0LCJleHAiOjE2OTA0NDQ4NjR9.4u8PvAeDc9xZAKmzAbjBa_7rFfdzE3dDlc2Iqcec7jQ	BEARER	t	t	14
+190	eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhbmRyaXVtYXJpY2hAZ21haWwuY29tIiwiaWF0IjoxNjkwMzc4NDY1LCJleHAiOjE2OTA0NjQ4NjV9.RUaYHanEfaGAuh9i7awtDqrVs5Ss3KUDEbxh5avnI4Y	BEARER	t	t	14
 150	eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhbmRyaXVtYXJpY2hAZ21haWwuY29tIiwiaWF0IjoxNjg5MTkzMTQwLCJleHAiOjE2ODkxOTMxNTJ9.GldzN0RdxIGrFtCMynYnAHjex2wG-11O8qR8qMvPtfo	BEARER	t	t	14
+191	eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhbmRyaXVtYXJpY2hAZ21haWwuY29tIiwiaWF0IjoxNjkwMzg0MDcxLCJleHAiOjE2OTA0NzA0NzF9.m5VJI6NClnTQhMpmELfLupPEvFjJigUH9X-S9cuOAt0	BEARER	t	t	14
+192	eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhbmRyaXVtYXJpY2hAZ21haWwuY29tIiwiaWF0IjoxNjkwMzg0MDc4LCJleHAiOjE2OTA0NzA0Nzh9.XIxKaAWNV10PMz7DMT6sLzDfN3RsJqthrLYucyIS9_E	BEARER	t	t	14
 143	eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhbmRyaXVtYXJpY2hAZ21haWwuY29tIiwiaWF0IjoxNjg5MTkzMTQwLCJleHAiOjE2ODkxOTMxNTJ9.GldzN0RdxIGrFtCMynYnAHjex2wG-11O8qR8qMvPtfo	BEARER	t	t	14
 144	eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhbmRyaXVtYXJpY2hAZ21haWwuY29tIiwiaWF0IjoxNjg5MTkzMTQwLCJleHAiOjE2ODkxOTMxNTJ9.GldzN0RdxIGrFtCMynYnAHjex2wG-11O8qR8qMvPtfo	BEARER	t	t	14
 145	eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhbmRyaXVtYXJpY2hAZ21haWwuY29tIiwiaWF0IjoxNjg5MTkzMTQwLCJleHAiOjE2ODkxOTMxNTJ9.GldzN0RdxIGrFtCMynYnAHjex2wG-11O8qR8qMvPtfo	BEARER	t	t	14
 147	eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhbmRyaXVtYXJpY2hAZ21haWwuY29tIiwiaWF0IjoxNjg5MTkzMTQwLCJleHAiOjE2ODkxOTMxNTJ9.GldzN0RdxIGrFtCMynYnAHjex2wG-11O8qR8qMvPtfo	BEARER	t	t	14
 149	eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhbmRyaXVtYXJpY2hAZ21haWwuY29tIiwiaWF0IjoxNjg5MTkzMTQwLCJleHAiOjE2ODkxOTMxNTJ9.GldzN0RdxIGrFtCMynYnAHjex2wG-11O8qR8qMvPtfo	BEARER	t	t	14
+193	eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhbmRyaXVtYXJpY2hAZ21haWwuY29tIiwiaWF0IjoxNjkwMzkwMjE5LCJleHAiOjE2OTA0NzY2MTl9.7B9UosyLPRhihkOhVZHjktd9j_kUaFv7lpxn61km0gs	BEARER	t	t	14
 146	eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhbmRyaXVtYXJpY2hAZ21haWwuY29tIiwiaWF0IjoxNjg5MTkzMTQwLCJleHAiOjE2ODkxOTMxNTJ9.GldzN0RdxIGrFtCMynYnAHjex2wG-11O8qR8qMvPtfo	BEARER	t	t	14
 153	eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhbmRyaXVtYXJpY2hAZ21haWwuY29tIiwiaWF0IjoxNjg5MTkzMTQwLCJleHAiOjE2ODkxOTMxNTJ9.GldzN0RdxIGrFtCMynYnAHjex2wG-11O8qR8qMvPtfo	BEARER	t	t	14
+194	eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhbmRyaXVtYXJpY2hAZ21haWwuY29tIiwiaWF0IjoxNjkwNDU0NTI5LCJleHAiOjE2OTA1NDA5Mjl9.3gDwPl42QJ8GJSZHiJQTw-sZkecl0qgwfagjR9tHp_w	BEARER	f	f	14
 142	eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhbmRyaXVtYXJpY2hAZ21haWwuY29tIiwiaWF0IjoxNjg5MTkzMTI4LCJleHAiOjE2ODkxOTMxNDB9.urHt3qjHU2AKuKaIsr9Cpy3es8baRPfKIfig3fIGBSM	BEARER	t	t	14
 151	eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhbmRyaXVtYXJpY2hAZ21haWwuY29tIiwiaWF0IjoxNjg5MTkzMTQwLCJleHAiOjE2ODkxOTMxNTJ9.GldzN0RdxIGrFtCMynYnAHjex2wG-11O8qR8qMvPtfo	BEARER	t	t	14
 152	eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhbmRyaXVtYXJpY2hAZ21haWwuY29tIiwiaWF0IjoxNjg5MTkzMTQwLCJleHAiOjE2ODkxOTMxNTJ9.GldzN0RdxIGrFtCMynYnAHjex2wG-11O8qR8qMvPtfo	BEARER	t	t	14
@@ -1235,8 +1236,10 @@ COPY ukr_gas.token (id, token, type, expired, revoked, user_id) FROM stdin;
 170	eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhbmRyaXVtYXJpY2hAZ21haWwuY29tIiwiaWF0IjoxNjg5MTkzNDE5LCJleHAiOjE2ODkxOTM0MzF9.lM2huNvSKNBC2CmCinAy7yXmXs1DkAIXcyKb5KHRTOg	BEARER	t	t	14
 159	eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhbmRyaXVtYXJpY2hAZ21haWwuY29tIiwiaWF0IjoxNjg5MTkzMzIwLCJleHAiOjE2ODkxOTMzMzJ9.WdDYdl8VhdJcq0seI0xfJ8Xx_e9XUI8N7vWDrjdCa_k	BEARER	t	t	14
 169	eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhbmRyaXVtYXJpY2hAZ21haWwuY29tIiwiaWF0IjoxNjg5MTkzNDE5LCJleHAiOjE2ODkxOTM0MzF9.lM2huNvSKNBC2CmCinAy7yXmXs1DkAIXcyKb5KHRTOg	BEARER	t	t	14
+187	eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhbmRyaXVtYXJpY2hAZ21haWwuY29tIiwiaWF0IjoxNjkwMjI4NDY1LCJleHAiOjE2OTAzMTQ4NjV9.qdn3TJn_L7V_jIMQ_VgTZc3v2Dj9hJkjd_Ii1fevxjM	BEARER	t	t	14
 165	eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhbmRyaXVtYXJpY2hAZ21haWwuY29tIiwiaWF0IjoxNjg5MTkzNDE5LCJleHAiOjE2ODkxOTM0MzF9.lM2huNvSKNBC2CmCinAy7yXmXs1DkAIXcyKb5KHRTOg	BEARER	t	t	14
 171	eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhbmRyaXVtYXJpY2hAZ21haWwuY29tIiwiaWF0IjoxNjg5MTkzNDE5LCJleHAiOjE2ODkxOTM0MzF9.lM2huNvSKNBC2CmCinAy7yXmXs1DkAIXcyKb5KHRTOg	BEARER	t	t	14
+186	eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhbmRyaXVtYXJpY2hAZ21haWwuY29tIiwiaWF0IjoxNjkwMDU4MzcyLCJleHAiOjE2OTAxNDQ3NzJ9.qSgNUIsm7FigcE2Td-O6Vv14NckR9FqgV61TDtPm7Z8	BEARER	t	t	14
 173	eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhbmRyaXVtYXJpY2hAZ21haWwuY29tIiwiaWF0IjoxNjg5MTkzNDQxLCJleHAiOjE2ODkxOTM0NDh9.MeA4WBUSmkekUMlaWoeLTOOeMtrxicAf-SnMWr3HTKE	BEARER	t	t	14
 174	eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhbmRyaXVtYXJpY2hAZ21haWwuY29tIiwiaWF0IjoxNjg5MTkzNDUyLCJleHAiOjE2ODkxOTM0NTl9.A_xG7RsavUKzm11NpvvrGU78OCHVrERoxWE6ZV75uzg	BEARER	t	t	14
 175	eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhbmRyaXVtYXJpY2hAZ21haWwuY29tIiwiaWF0IjoxNjg5MTkzNjA3LCJleHAiOjE2ODkyODAwMDd9.Bgs3TEO9OXUOjjU0GeDK_tN5SQ9Xcz1a-WmKnIrSMOw	BEARER	t	t	14
@@ -1249,7 +1252,7 @@ COPY ukr_gas.token (id, token, type, expired, revoked, user_id) FROM stdin;
 182	eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhbmRyaXVtYXJpY2hAZ21haWwuY29tIiwiaWF0IjoxNjg5MzYzNDE1LCJleHAiOjE2ODk0NDk4MTV9.y59BnuB84TkfGsPxkz8_Cc4t0hy6mUj1x_FBNuCy6sA	BEARER	t	t	14
 183	eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhbmRyaXVtYXJpY2hAZ21haWwuY29tIiwiaWF0IjoxNjg5NjkyMTA0LCJleHAiOjE2ODk3Nzg1MDR9.VYHSTokfhtX0KMwdZRX46338MxKwySxHFN6g2uhzuaw	BEARER	t	t	14
 184	eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhbmRyaXVtYXJpY2hAZ21haWwuY29tIiwiaWF0IjoxNjg5NzExMTQxLCJleHAiOjE2ODk3OTc1NDF9.kVEJ9vZ23QP7-AYOlJTuh8dwxN9DMRm_ZNFj7HObSFI	BEARER	t	t	14
-185	eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhbmRyaXVtYXJpY2hAZ21haWwuY29tIiwiaWF0IjoxNjg5ODYwNzM3LCJleHAiOjE2ODk5NDcxMzd9.0RKvO4MbqbPudDgRnPejAWC6W5vQGS-ef_lexE8IDnY	BEARER	f	f	14
+185	eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhbmRyaXVtYXJpY2hAZ21haWwuY29tIiwiaWF0IjoxNjg5ODYwNzM3LCJleHAiOjE2ODk5NDcxMzd9.0RKvO4MbqbPudDgRnPejAWC6W5vQGS-ef_lexE8IDnY	BEARER	t	t	14
 148	eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhbmRyaXVtYXJpY2hAZ21haWwuY29tIiwiaWF0IjoxNjg5MTkzMTQwLCJleHAiOjE2ODkxOTMxNTJ9.GldzN0RdxIGrFtCMynYnAHjex2wG-11O8qR8qMvPtfo	BEARER	t	t	14
 \.
 
@@ -1326,7 +1329,7 @@ SELECT pg_catalog.setval('ukr_gas.calculation_id_seq', 3, true);
 -- Name: currency_rate_id_seq; Type: SEQUENCE SET; Schema: ukr_gas; Owner: postgres
 --
 
-SELECT pg_catalog.setval('ukr_gas.currency_rate_id_seq', 36, true);
+SELECT pg_catalog.setval('ukr_gas.currency_rate_id_seq', 42, true);
 
 
 --
@@ -1362,7 +1365,7 @@ SELECT pg_catalog.setval('ukr_gas.gas_account_id_seq', 2, true);
 -- Name: meter_reading_id_seq; Type: SEQUENCE SET; Schema: ukr_gas; Owner: postgres
 --
 
-SELECT pg_catalog.setval('ukr_gas.meter_reading_id_seq', 39, true);
+SELECT pg_catalog.setval('ukr_gas.meter_reading_id_seq', 41, true);
 
 
 --
@@ -1371,7 +1374,7 @@ SELECT pg_catalog.setval('ukr_gas.meter_reading_id_seq', 39, true);
 -- Name: payment_id_seq; Type: SEQUENCE SET; Schema: ukr_gas; Owner: postgres
 --
 
-SELECT pg_catalog.setval('ukr_gas.payment_id_seq', 23544, true);
+SELECT pg_catalog.setval('ukr_gas.payment_id_seq', 23553, true);
 
 
 --
@@ -1389,7 +1392,7 @@ SELECT pg_catalog.setval('ukr_gas.tariff_id_seq', 1, false);
 -- Name: telegram_user_id_seq; Type: SEQUENCE SET; Schema: ukr_gas; Owner: postgres
 --
 
-SELECT pg_catalog.setval('ukr_gas.telegram_user_id_seq', 13, true);
+SELECT pg_catalog.setval('ukr_gas.telegram_user_id_seq', 20, true);
 
 
 --
@@ -1398,7 +1401,7 @@ SELECT pg_catalog.setval('ukr_gas.telegram_user_id_seq', 13, true);
 -- Name: token_id_seq; Type: SEQUENCE SET; Schema: ukr_gas; Owner: postgres
 --
 
-SELECT pg_catalog.setval('ukr_gas.token_id_seq', 185, true);
+SELECT pg_catalog.setval('ukr_gas.token_id_seq', 194, true);
 
 
 --
@@ -1752,7 +1755,7 @@ ALTER TABLE ONLY ukr_gas.telegram_user_personal_gas_account
     ADD CONSTRAINT "FK_UserId" FOREIGN KEY (user_id) REFERENCES ukr_gas.telegram_user(id) ON DELETE CASCADE NOT VALID;
 
 
--- Completed on 2023-07-22 01:44:28 EEST
+-- Completed on 2023-07-27 22:31:33 EEST
 
 --
 -- PostgreSQL database dump complete
