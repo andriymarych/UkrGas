@@ -1,9 +1,12 @@
 package com.gas.app.entity.general;
 
 import jakarta.persistence.*;
-import lombok.*;
-import org.hibernate.annotations.GenerationTime;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 import org.hibernate.annotations.Generated;
+import org.hibernate.annotations.GenerationTime;
 
 import java.sql.Timestamp;
 

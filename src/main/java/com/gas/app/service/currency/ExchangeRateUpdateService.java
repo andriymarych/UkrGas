@@ -1,7 +1,7 @@
 package com.gas.app.service.currency;
 
-import com.gas.app.dto.currency.ExchangeRateResponseDto;
 import com.gas.app.dto.currency.ExchangeRateDto;
+import com.gas.app.dto.currency.ExchangeRateResponseDto;
 import com.gas.app.entity.currency.ExchangeRate;
 import com.gas.app.entity.currency.StandardCurrencyEnum;
 import com.gas.app.exception.ServiceException;
@@ -38,7 +38,7 @@ public class ExchangeRateUpdateService {
 
     //Exchange rates are updated every day at 00:00
     @Transactional
-    @Scheduled(cron = "0 1 0 * * ?")
+    @Scheduled(cron = "0 3 0 * * ?")
     public void currencyRateDailyUpdate() {
 
         List<ExchangeRate> currencyRates = getCurrencyRateListFromApi()

@@ -1,6 +1,12 @@
+import {DisappearingModeBG} from "../common/login-form.js";
+import {getCookie} from "../utils/cookie-service.js";
+
 const anchors = document.getElementsByClassName('pageAnchor');
 
+let isUserAuthorized = getCookie('is_user_authorized') ;
+
 for (let i = 0; i < anchors.length ; i++) {
+    console.log(getCookie('is_user_authorized'));
     anchors[i].addEventListener("click",
         function (event) {
             event.preventDefault();
@@ -14,7 +20,7 @@ for (let i = 0; i < anchors.length ; i++) {
 }
 const openLoginPopUp = () => {
     document.querySelector(".login-popup").classList.add("active");
-    controlDisapearingBG(1);
+    DisappearingModeBG(1);
 }
 window.addEventListener('load', () => {
     initializePage();

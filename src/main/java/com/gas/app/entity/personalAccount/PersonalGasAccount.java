@@ -1,10 +1,12 @@
 package com.gas.app.entity.personalAccount;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.gas.app.entity.user.User;
+import com.gas.app.entity.security.user.User;
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
 
 @Entity
@@ -47,7 +49,6 @@ public class PersonalGasAccount {
 
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn( name = "address_id", referencedColumnName = "id")
-    @JsonManagedReference
     private Address address;
 
 }

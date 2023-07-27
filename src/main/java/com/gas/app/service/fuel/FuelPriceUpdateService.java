@@ -6,6 +6,7 @@ import com.gas.app.entity.fuel.FuelPrice;
 import com.gas.app.repository.fuel.FuelPriceRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.http.MediaType;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
@@ -27,9 +28,10 @@ public class FuelPriceUpdateService {
     private final FuelPriceRepository fuelPriceRepository;
     private final FuelPriceDtoMapper fuelPriceDtoMapper;
 
-    //Fuel prices are updated every day at 00:01
+    //Fuel prices are updated every day at 00:02
     @Transactional
-    @Scheduled(cron = "0 2 0 * * ?")
+    @CacheEvict(value = "fuelPrices", allEntries = true)
+    @Scheduled(cron = "0 4 0 * * ?")
     public void fuelPriceDailyUpdate() {
         List<FuelPrice> fuelPrices = getFuelPriceListFromApi()
                 .stream()

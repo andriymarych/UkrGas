@@ -10,7 +10,7 @@
     <link rel="stylesheet" type="text/css" href="/css/common/login-form.css">
     <link rel="stylesheet" type="text/css" href="/css/index/slider.css">
     <link rel="stylesheet" type="text/css" href="/css/index/index.css">
-    <link rel="icon" type="image/x-icon" href="/img/common/icon.png">
+    <link rel="icon" type="image/x-icon" href="/images/common/icon.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -53,12 +53,12 @@
             <div id="swiper-wrapper" class="swiper-wrapper">
                 <div class="swiper-slide">
                     <a href="/payments" class="pageAnchor">
-                        <img src="/img/index/slider-1.png" alt="показники">
+                        <img src="/images/index/slider-1.png" alt="показники">
                     </a>
                 </div>
                 <div class="swiper-slide">
                     <a href="/feedback">
-                        <img src="/img/index/slider-2.png" alt="показники">
+                        <img src="/images/index/slider-2.png" alt="показники">
                     </a>
                 </div>
             </div>
@@ -74,19 +74,19 @@
 
     <a th:href="@{/meter-reading}" class="pageAnchor">
     <div class="action-box">
-        <img id="meterage-img" src="/img/index/meterage.png"  alt="показники">
+        <img id="meterage-img" src="/images/index/meterage.png" alt="показники">
         <p class="action-description">Передати показання</p>
     </div>
     </a>
     <a th:href="@{/payments}" class="pageAnchor">
         <div class="action-box">
-            <img id="payments-img" src="/img/index/payments.png"  alt="Сплатити">
+            <img id="payments-img" src="/images/index/payments.png" alt="Сплатити">
             <p class="action-description">Сплатити газ</p>
         </div>
     </a>
     <a th:href="@{/calculations}" class="pageAnchor">
         <div class="action-box">
-            <img id="calculations-img" src="/img/index/calculations.png"  alt="Розрахунки">
+            <img id="calculations-img" src="/images/index/calculations.png" alt="Розрахунки">
             <p class="action-description">Розрахунки</p>
         </div>
     </a>
@@ -96,9 +96,9 @@
 <footer th:replace="~{fragments/footer :: footer}">
 </footer>
 
-<script src="/js/common/login-form.js"></script>
-<script src="/js/index/index.js"></script>
-<script src="/js/common/header-initializer.js"></script>
+<script src="/js/common/login-form.js" type="module"></script>
+<script src="/js/common/header-initializer.js" type="module"></script>
+<script src="/js/index/index.js" type="module" ></script>
 <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
 <script src="/js/index/slider-animation.js"></script>
 

@@ -3,12 +3,13 @@ package com.gas.app.service.personalAccount;
 
 import com.gas.app.dto.personalAccount.payment.PaymentRequestDto;
 import com.gas.app.dto.personalAccount.payment.PaymentResponseDto;
-import com.gas.app.dto.user.UserSessionDto;
 import com.gas.app.entity.personalAccount.Payment;
 import com.gas.app.entity.personalAccount.PersonalGasAccount;
 import com.gas.app.exception.ServiceException;
 import com.gas.app.repository.personalAccount.PaymentRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,11 +22,11 @@ public class PaymentService {
     private final PaymentRepository paymentRepository;
     private final PersonalGasAccountService accountService;
     @Transactional(readOnly = true)
-    public PaymentResponseDto getPaymentsByPersonalAccountId(UserSessionDto userSessionDto,
-                                                             Long personalAccountId) {
+    @Cacheable("payments")
+    public PaymentResponseDto getPaymentsByPersonalAccountId(Long personalAccountId) {
 
         PersonalGasAccount personalGasAccount = accountService.
-                getAccountByAccountId(userSessionDto, personalAccountId);
+                getAccountByAccountId(personalAccountId);
 
         List<Payment> payments = paymentRepository.
                 findPaymentsByPersonalAccountId(personalGasAccount.getId())
@@ -37,12 +38,13 @@ public class PaymentService {
     }
 
     @Transactional
-    public Payment savePayment(PaymentRequestDto requestDto) {
+    @CacheEvict(value = "payments",key = "#gasAccountId")
+    public Payment savePayment(Long gasAccountId, PaymentRequestDto requestDto) {
 
         validateAmountPaid(requestDto.amountPaid());
 
         PersonalGasAccount personalGasAccount = accountService.
-                getAccountByAccountId(requestDto.userSession(), requestDto.gasAccountId());
+                getAccountByAccountId(gasAccountId);
 
         Payment payment = new Payment(requestDto.amountPaid());
         payment.setPersonalGasAccount(personalGasAccount);

@@ -3,32 +3,38 @@ package com.gas.app.service.personalAccount;
 
 import com.gas.app.dto.personalAccount.meterReading.MeterReadingDto;
 import com.gas.app.dto.personalAccount.meterReading.MeterReadingRequestDto;
-import com.gas.app.entity.personalAccount.MeterReading;
-import com.gas.app.exception.ServiceException;
 import com.gas.app.dto.personalAccount.meterReading.MeterReadingResponseDto;
-import com.gas.app.dto.user.UserSessionDto;
+import com.gas.app.entity.personalAccount.MeterReading;
 import com.gas.app.entity.personalAccount.PersonalGasAccount;
+import com.gas.app.exception.ServiceException;
 import com.gas.app.repository.personalAccount.MeterReadingRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
 
 @Service
+@CacheConfig(cacheNames = "meterReadings")
 @RequiredArgsConstructor
 public class MeterReadingService {
+
     private final MeterReadingRepository meterReadingRepository;
     private final PersonalGasAccountService accountService;
 
     @Transactional(readOnly = true)
-    public MeterReadingResponseDto getMeterReadingsByPersonalAccountId(UserSessionDto userSessionDto,
-                                                                  Long personalAccountId) {
+    @Cacheable
+    public MeterReadingResponseDto getMeterReadingsByPersonalAccountId(Long personalAccountId) {
 
         PersonalGasAccount personalGasAccount = accountService.
-                getAccountByAccountId(userSessionDto, personalAccountId);
+                getAccountByAccountId(personalAccountId);
 
         List<MeterReadingDto> meterReadings = meterReadingRepository.
                 findMeterReadingsByPersonalAccountId(personalGasAccount.getId())
@@ -39,27 +45,31 @@ public class MeterReadingService {
         return new MeterReadingResponseDto(personalGasAccount, meterReadings);
     }
 
-    @Transactional
-    public MeterReading saveMeterReading(MeterReadingRequestDto requestDto) {
+    @Transactional(propagation = Propagation.REQUIRES_NEW)
+    @CacheEvict(key = "#personalAccountId")
+    public MeterReading saveMeterReading(Long personalAccountId, MeterReadingRequestDto requestDto) {
 
         PersonalGasAccount personalGasAccount = accountService.
-                getAccountByAccountId(requestDto.userSession(), requestDto.gasAccountId());
+                getAccountByAccountId(personalAccountId);
 
         MeterReading meterReading = new MeterReading(requestDto.meterReading());
         meterReading.setPersonalGasAccount(personalGasAccount);
-        validateMeterReading(meterReading);
-        return meterReadingRepository.save(meterReading);
-    }
-
-    @Transactional(readOnly = true)
-    public void validateMeterReading(MeterReading meterReading) {
-
-        Optional<MeterReading> lastMeterReading = meterReadingRepository
-                .getLastMeterReading(meterReading.getPersonalGasAccount().getId());
-        if (lastMeterReading.isPresent()  && lastMeterReading.get().getMeterReading() > meterReading.getMeterReading()) {
+        if(isMeterReadingValid(meterReading)){
+            return meterReadingRepository.save(meterReading);
+        }else {
             throw new ServiceException("The entered value of the meter reading is less than the previous one",
                     HttpStatus.CONFLICT);
         }
+    }
+    @Transactional(readOnly = true)
+    public boolean isBillingPeriodClosed(Long personalAccountId){
+        return meterReadingRepository.isBillingPeriodClosed(personalAccountId);
+    }
+    @Transactional(readOnly = true)
+    public boolean isMeterReadingValid(MeterReading meterReading) {
+        Optional<MeterReading> lastMeterReading = meterReadingRepository
+                .getLastMeterReading(meterReading.getPersonalGasAccount().getId());
+        return lastMeterReading.isEmpty() || lastMeterReading.get().getMeterReading() <= meterReading.getMeterReading();
 
     }
 

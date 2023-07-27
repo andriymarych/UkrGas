@@ -19,8 +19,6 @@ target/
 *.iml
 *.ipr
 .properties
-*.png
-*.svg
 
 ### NetBeans ###
 /nbproject/private/

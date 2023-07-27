@@ -6,10 +6,13 @@ import com.gas.app.entity.fuel.FuelPrice;
 import com.gas.app.repository.fuel.FuelPriceRepository;
 import com.gas.app.service.currency.CurrencyConversionService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -22,16 +25,16 @@ public class FuelPriceService {
     private final FuelPriceRepository fuelPriceRepository;
     private final CurrencyConversionService conversionService;
 
-    @Transactional(readOnly = true)
+    @Transactional(readOnly = true, propagation = Propagation.REQUIRES_NEW)
+    @Cacheable("fuelPrices")
     public List<FuelPriceChangeDto> getFuelPrices(StandardCurrencyEnum currency) {
 
-        List<FuelPrice> fuelPrices = fuelPriceRepository.getFuelPriceForTheLastTwoDays();
+        List<FuelPrice> fuelPrices = List.copyOf(fuelPriceRepository.getFuelPriceForTheLastTwoDays());
         fuelPrices.forEach(
                 fuelPrice -> {
                     fuelPrice.setPrice(conversionService.convertFromUSD(currency,fuelPrice.getPrice()));
                     fuelPrice.setCurrency(currency);
                 }
-
         );
         return getFuelPriceChangeDtoList(fuelPrices);
     }
@@ -53,7 +56,7 @@ public class FuelPriceService {
     }
 
     private FuelPriceChangeDto getFuelPriceChangeDto(List<FuelPrice> fuelPriceForTheLastTwoDaysList) {
-
+        fuelPriceForTheLastTwoDaysList.sort(Comparator.comparing(FuelPrice::getDate));
         FuelPrice oldFuelPrice = fuelPriceForTheLastTwoDaysList.get(0);
         FuelPrice newFuelPrice = fuelPriceForTheLastTwoDaysList.get(1);
         Double newPriceValue = newFuelPrice.getPrice();

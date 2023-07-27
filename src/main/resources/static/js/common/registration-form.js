@@ -1,6 +1,3 @@
-
-
-
 const registerNewUser = () => {
     const label = document.getElementById('registration-label');
 
@@ -43,7 +40,7 @@ const registerNewUser = () => {
 const sendUserData = (data) => {
     console.log(data);
     console.log(data.password);
-    fetch('/auth/registration', {
+    fetch('api/v2/auth/register', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'

@@ -2,7 +2,7 @@ package com.gas.app.repository.personalAccount;
 
 import com.gas.app.dto.personalAccount.meterReading.MeterReadingDto;
 import com.gas.app.entity.personalAccount.MeterReading;
-import com.gas.app.entity.user.User;
+import com.gas.app.entity.security.user.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
@@ -24,6 +24,11 @@ public interface MeterReadingRepository extends JpaRepository<MeterReading, Long
             "where account.id = :personalAccountId " +
             "order by meterReading.id desc limit 1")
     Optional<MeterReading> getLastMeterReading(Long personalAccountId);
+    @Query("select count(*) > 0 " +
+            "from MeterReading  meterReading " +
+            "where meterReading.personalGasAccount.id = :personalAccountId " +
+            "and month(meterReading.date) = month(current_date)")
+    Boolean isBillingPeriodClosed(Long personalAccountId);
     @Query("select distinct user from MeterReading meterReading " +
             "join meterReading.personalGasAccount account " +
             "join  account.address " +
@@ -31,7 +36,6 @@ public interface MeterReadingRepository extends JpaRepository<MeterReading, Long
             "join  account.accountTariff accountTarrif " +
             "join  accountTarrif.tariff " +
             "join account.user user " +
-            "join fetch user.auth " +
             "where account not in (select distinct account from MeterReading meterReading " +
             "inner join meterReading.personalGasAccount account " +
             "where month(meterReading.date) = month(current_date))" )

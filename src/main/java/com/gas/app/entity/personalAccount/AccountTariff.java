@@ -1,8 +1,10 @@
 package com.gas.app.entity.personalAccount;
 
 import jakarta.persistence.*;
-import lombok.*;
-
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
 import java.sql.Date;
 

@@ -8,12 +8,13 @@ import com.gas.app.repository.personalAccount.MeterReadingRepository;
 import com.gas.app.repository.personalAccount.PaymentRepository;
 import com.gas.app.repository.personalAccount.PersonalGasAccountRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-
-import java.util.*;
+import java.util.List;
+import java.util.NoSuchElementException;
 
 @Service
 @RequiredArgsConstructor
@@ -27,6 +28,7 @@ public class SettlementService {
 
     @Transactional
     @Scheduled(cron = "0 0 4 15 * ?")
+    @CacheEvict(value = "calculations", allEntries = true)
     public void doMonthAccountCalculation() {
 
         accountRepository.findAllAccounts().forEach(

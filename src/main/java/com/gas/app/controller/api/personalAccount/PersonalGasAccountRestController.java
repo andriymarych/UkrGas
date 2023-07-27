@@ -1,13 +1,16 @@
 package com.gas.app.controller.api.personalAccount;
 
-import com.gas.app.dto.user.UserSessionDto;
 import com.gas.app.entity.personalAccount.PersonalGasAccount;
 import com.gas.app.service.personalAccount.PersonalGasAccountService;
+import com.gas.app.service.security.AuthenticationService;
 import com.gas.app.util.ResponseHandler;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
@@ -18,21 +21,19 @@ import java.util.List;
 public class PersonalGasAccountRestController {
 
     private final PersonalGasAccountService personalGasAccountService;
+    private final AuthenticationService authenticationService;
 
     @GetMapping
-    public ResponseEntity<Object> getPersonalAccounts(@RequestParam Long userId,
-                                                      @RequestParam Long authId) {
-        UserSessionDto user = new UserSessionDto(userId, authId);
-        List<PersonalGasAccount> gasAccounts = personalGasAccountService.getAccountsByUser(user);
+    public ResponseEntity<Object> getPersonalAccounts() {
+
+        List<PersonalGasAccount> gasAccounts = personalGasAccountService
+                .getAccountsByUser(authenticationService.getCurrentUser());
         return ResponseHandler.generateResponse("OK", HttpStatus.OK, gasAccounts);
     }
 
     @GetMapping("/{personalAccountId}")
-    public ResponseEntity<Object> getPersonalAccountById(@PathVariable Long personalAccountId,
-                                                             @RequestParam Long userId,
-                                                      @RequestParam Long authId) {
-        UserSessionDto user = new UserSessionDto(userId, authId);
-        PersonalGasAccount gasAccount = personalGasAccountService.getAccountByAccountId(user,personalAccountId);
+    public ResponseEntity<Object> getPersonalAccountById(@PathVariable Long personalAccountId) {
+        PersonalGasAccount gasAccount = personalGasAccountService.getAccountByAccountId(personalAccountId);
         return ResponseHandler.generateResponse("OK", HttpStatus.OK, gasAccount);
     }
 
