@@ -185,10 +185,23 @@ const addUserExitButton = () =>{
     personalAccountDropdown.appendChild(logoutDiv);
     logoutButton = logoutDiv;
 }
-window.logout = () => {
-    document.getElementById("logout").remove();
-    cookiesLogout();
-    window.location.href='../';
+window.logout = async () => {
+    await fetch('/api/v2/auth/logout', {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+    })
+        .then(response => {
+            if (!response.ok) {
+                return response.text().then(text => {
+                    throw new Error(text)
+                })
+            }
+            document.getElementById("logout").remove();
+            cookiesLogout();
+            window.location.href='../';
+        })
 
 }
 
