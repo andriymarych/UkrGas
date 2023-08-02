@@ -2,20 +2,14 @@ package com.gas.app.entity.fuel;
 
 import com.gas.app.entity.currency.StandardCurrencyEnum;
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 import org.hibernate.annotations.Generated;
-import org.hibernate.annotations.GenerationTime;
 
-import java.sql.Date;
+import java.util.Date;
 
 @Entity
 @Table(name = "fuel_price")
-@Getter
-@Setter
-@ToString
+@Data
 @NoArgsConstructor
 public class FuelPrice {
 
@@ -39,7 +33,7 @@ public class FuelPrice {
     private String country;
 
     @Column(name = "date", insertable = false)
-    @Generated(GenerationTime.INSERT)
+    @Generated
     private Date date;
 
     public FuelPrice(StandardFuelTypeEnum type, Double price,String country) {

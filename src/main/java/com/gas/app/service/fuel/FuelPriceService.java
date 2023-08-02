@@ -11,11 +11,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.sql.Date;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -29,42 +29,49 @@ public class FuelPriceService {
     @Cacheable("fuelPrices")
     public List<FuelPriceChangeDto> getFuelPrices(StandardCurrencyEnum currency) {
 
-        List<FuelPrice> fuelPrices = List.copyOf(fuelPriceRepository.getFuelPriceForTheLastTwoDays());
+        List<FuelPrice> fuelPricesPreviousDay = fuelPriceRepository
+                .getFuelPriceByDate(Date.valueOf(LocalDate.now().minusDays(1)));
+        List<FuelPrice> fuelPricesCurrentDay = fuelPriceRepository
+                .getFuelPriceByDate(Date.valueOf(LocalDate.now()));
+
+        fuelPricesPreviousDay = convertCurrencyOfFuelPrices(fuelPricesPreviousDay, currency);
+        fuelPricesCurrentDay = convertCurrencyOfFuelPrices(fuelPricesCurrentDay, currency);
+
+        return getFuelPriceChangeDtoList(fuelPricesPreviousDay,fuelPricesCurrentDay);
+    }
+
+    public List<FuelPrice> convertCurrencyOfFuelPrices(List<FuelPrice> fuelPrices, StandardCurrencyEnum currency) {
+
         fuelPrices.forEach(
                 fuelPrice -> {
-                    fuelPrice.setPrice(conversionService.convertFromUSD(currency,fuelPrice.getPrice()));
+                    fuelPrice.setPrice(conversionService.convertFromUSD(currency, fuelPrice.getPrice()));
                     fuelPrice.setCurrency(currency);
                 }
         );
-        return getFuelPriceChangeDtoList(fuelPrices);
+
+        return fuelPrices;
     }
 
-    private List<FuelPriceChangeDto> getFuelPriceChangeDtoList(List<FuelPrice> fuelPrices) {
+    private List<FuelPriceChangeDto> getFuelPriceChangeDtoList(List<FuelPrice> fuelPricesPreviousDay, List<FuelPrice> fuelPricesCurrentDay) {
 
-        Map<String, List<FuelPrice>> groupedFuelPriceMap =
-                fuelPrices.stream().collect(Collectors.groupingBy(fuelPrice -> fuelPrice.getType().toString()));
+        fuelPricesPreviousDay.sort(Comparator.comparing(FuelPrice::getType));
+        fuelPricesCurrentDay.sort(Comparator.comparing(FuelPrice::getType));
+
         List<FuelPriceChangeDto> fuelPriceChangeDtoList = new ArrayList<>();
 
-        for (var entry : groupedFuelPriceMap.entrySet()) {
-
-            List<FuelPrice> fuelPriceForTheLastTwoDaysList = entry.getValue();
-            fuelPriceChangeDtoList.add(getFuelPriceChangeDto(fuelPriceForTheLastTwoDaysList));
-
+        for (int i = 0; i < fuelPricesCurrentDay.size(); i++) {
+            fuelPriceChangeDtoList.add(getFuelPriceChangeDto(fuelPricesPreviousDay.get(i), fuelPricesCurrentDay.get(i)));
         }
         return fuelPriceChangeDtoList;
-
     }
 
-    private FuelPriceChangeDto getFuelPriceChangeDto(List<FuelPrice> fuelPriceForTheLastTwoDaysList) {
-        fuelPriceForTheLastTwoDaysList.sort(Comparator.comparing(FuelPrice::getDate));
-        FuelPrice oldFuelPrice = fuelPriceForTheLastTwoDaysList.get(0);
-        FuelPrice newFuelPrice = fuelPriceForTheLastTwoDaysList.get(1);
-        Double newPriceValue = newFuelPrice.getPrice();
-        Double priceChange = newPriceValue- oldFuelPrice.getPrice() ;
-        Double priceChangePct = (newFuelPrice.getPrice() - oldFuelPrice.getPrice()) / oldFuelPrice.getPrice() * 100;
-        return new FuelPriceChangeDto(newFuelPrice.getType().toString(), newFuelPrice.getPrice(), priceChange, priceChangePct);
+    private FuelPriceChangeDto getFuelPriceChangeDto(FuelPrice fuelPricePreviousDay, FuelPrice fuelPriceCurrentDay) {
 
+        Double previousPriceValue = fuelPricePreviousDay.getPrice();
+        Double currentPriceValue = fuelPriceCurrentDay.getPrice();
+        Double priceChange = currentPriceValue - previousPriceValue;
+        Double priceChangePct = (currentPriceValue - previousPriceValue) / previousPriceValue * 100;
+        return new FuelPriceChangeDto(fuelPriceCurrentDay.getType().toString(), currentPriceValue, priceChange, priceChangePct);
     }
-
 
 }
