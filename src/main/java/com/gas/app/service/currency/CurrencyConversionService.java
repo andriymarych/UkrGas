@@ -14,13 +14,13 @@ public class CurrencyConversionService {
 
     public Double convertToUSD(StandardCurrencyEnum currency, Double sum){
 
-        Double exchangeRate = currencyRateRepository.getCurrentExchangeRate(currency.toString());
+        Double exchangeRate = currencyRateRepository.getCurrentExchangeRate(currency);
         return sum/exchangeRate;
 
     }
     public Double convertFromUSD(StandardCurrencyEnum currency, Double sum){
 
-        Double exchangeRate = currencyRateRepository.getCurrentExchangeRate(currency.toString());
+        Double exchangeRate = currencyRateRepository.getCurrentExchangeRate(currency);
         return sum * exchangeRate;
 
     }

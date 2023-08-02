@@ -2,6 +2,7 @@ package com.gas.app.service.currency;
 
 import com.gas.app.dto.currency.ExchangeRateDto;
 import com.gas.app.entity.currency.ExchangeRate;
+import com.gas.app.entity.currency.StandardCurrencyEnum;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -12,6 +13,6 @@ public class ExchangeRateDtoMapper implements Function<ExchangeRateDto, Exchange
 
     @Override
     public ExchangeRate apply(ExchangeRateDto exchangeRateDto) {
-        return new ExchangeRate(exchangeRateDto.code(), Double.valueOf(exchangeRateDto.value()));
+        return new ExchangeRate(StandardCurrencyEnum.valueOf(exchangeRateDto.code()), Double.valueOf(exchangeRateDto.value()));
     }
 }
