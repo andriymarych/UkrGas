@@ -10,7 +10,7 @@ import java.util.Optional;
 public interface TokenRepository extends JpaRepository<Token, Long> {
     @Query("select token " +
             "from Token token " +
-            "inner join User user " +
+            "join User user on user = token.user " +
             "where token.user.id  = :userId " +
             "and token.expired = false " +
             "or token.revoked = false")
