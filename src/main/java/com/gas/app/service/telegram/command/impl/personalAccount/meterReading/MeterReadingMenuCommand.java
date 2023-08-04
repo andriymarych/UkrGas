@@ -1,8 +1,7 @@
 package com.gas.app.service.telegram.command.impl.personalAccount.meterReading;
 
-import com.gas.app.dto.personalAccount.meterReading.MeterReadingDto;
-import com.gas.app.dto.personalAccount.meterReading.MeterReadingResponseDto;
 import com.gas.app.entity.personalAccount.Address;
+import com.gas.app.entity.personalAccount.MeterReading;
 import com.gas.app.entity.personalAccount.PersonalGasAccount;
 import com.gas.app.entity.telegram.BotState;
 import com.gas.app.entity.telegram.TelegramUser;
@@ -41,7 +40,7 @@ public class MeterReadingMenuCommand implements Command {
     }
 
     private String getMeterReadings(PersonalGasAccount personalGasAccount) {
-        MeterReadingResponseDto meterReadingsDto = meterReadingService
+        List<MeterReading> meterReadings = meterReadingService
                 .getMeterReadingsByPersonalAccountId(personalGasAccount.getId());
 
 
@@ -50,14 +49,14 @@ public class MeterReadingMenuCommand implements Command {
                 .append(personalGasAccount.getAccountNumber())
                 .append(getAddress(personalGasAccount.getAddress()));
         DecimalFormat decimalFormat = new DecimalFormat("0.00");
-        meterReadingsDto.meterReadings()
+        meterReadings
                 .stream()
                 .limit(5)
-                .sorted(Comparator.comparing(MeterReadingDto::id).reversed())
+                .sorted(Comparator.comparing(MeterReading::getId).reversed())
                 .forEach(meterReading ->
-                stringBuilder.append(getFormattedDate(meterReading.date()))
+                stringBuilder.append(getFormattedDate(meterReading.getDate()))
                         .append(" - ")
-                        .append(decimalFormat.format(meterReading.value()))
+                        .append(decimalFormat.format(meterReading.getMeterReading()))
                         .append("м³\n"));
         return stringBuilder.toString();
     }

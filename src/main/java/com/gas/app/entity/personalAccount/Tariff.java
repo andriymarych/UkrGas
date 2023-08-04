@@ -1,15 +1,12 @@
 package com.gas.app.entity.personalAccount;
 
 import jakarta.persistence.*;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
 
 @Entity
 @Table(name="tariff")
-@Getter @Setter
-@ToString
+@Data
 @NoArgsConstructor
 public class Tariff {
 

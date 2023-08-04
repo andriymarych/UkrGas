@@ -1,9 +1,7 @@
 package com.gas.app.service.personalAccount;
 
 
-import com.gas.app.dto.personalAccount.meterReading.MeterReadingDto;
 import com.gas.app.dto.personalAccount.meterReading.MeterReadingRequestDto;
-import com.gas.app.dto.personalAccount.meterReading.MeterReadingResponseDto;
 import com.gas.app.entity.personalAccount.MeterReading;
 import com.gas.app.entity.personalAccount.PersonalGasAccount;
 import com.gas.app.exception.ServiceException;
@@ -11,7 +9,6 @@ import com.gas.app.repository.personalAccount.MeterReadingRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CacheEvict;
-import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -31,18 +28,18 @@ public class MeterReadingService {
 
     @Transactional(readOnly = true)
     @Cacheable
-    public MeterReadingResponseDto getMeterReadingsByPersonalAccountId(Long personalAccountId) {
+    public List<MeterReading> getMeterReadingsByPersonalAccountId(Long personalAccountId) {
 
         PersonalGasAccount personalGasAccount = accountService.
                 getAccountByAccountId(personalAccountId);
 
-        List<MeterReadingDto> meterReadings = meterReadingRepository.
+        List<MeterReading> meterReadings = meterReadingRepository.
                 findMeterReadingsByPersonalAccountId(personalGasAccount.getId())
                 .orElseThrow(
                         () -> new ServiceException("Could not find meterReadings with personal gas account["
                                 + personalAccountId + "]", HttpStatus.NOT_FOUND));
 
-        return new MeterReadingResponseDto(personalGasAccount, meterReadings);
+        return meterReadings;
     }
 
     @Transactional(propagation = Propagation.REQUIRES_NEW)
@@ -68,7 +65,7 @@ public class MeterReadingService {
     @Transactional(readOnly = true)
     public boolean isMeterReadingValid(MeterReading meterReading) {
         Optional<MeterReading> lastMeterReading = meterReadingRepository
-                .getLastMeterReading(meterReading.getPersonalGasAccount().getId());
+                .findLastMeterReading(meterReading.getPersonalGasAccount().getId());
         return lastMeterReading.isEmpty() || lastMeterReading.get().getMeterReading() <= meterReading.getMeterReading();
 
     }

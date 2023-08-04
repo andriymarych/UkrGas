@@ -1,20 +1,15 @@
 package com.gas.app.entity.personalAccount;
 
 import jakarta.persistence.*;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
 import org.hibernate.annotations.Generated;
-import org.hibernate.annotations.GenerationTime;
 
-import java.sql.Date;
+import java.util.Date;
 
 @Entity
 @Table(name="meter_reading")
-@Getter
-@Setter
-@ToString
+@Data
 @NoArgsConstructor
 public class MeterReading {
 
@@ -27,10 +22,10 @@ public class MeterReading {
     private Double meterReading;
 
     @Column(name = "date", insertable = false)
-    @Generated(GenerationTime.INSERT)
+    @Generated
     private Date date;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     @JoinColumn(name = "personal_gas_account_id", referencedColumnName = "id")
     private PersonalGasAccount personalGasAccount;
 

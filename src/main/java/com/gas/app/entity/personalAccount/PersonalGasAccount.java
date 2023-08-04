@@ -3,17 +3,13 @@ package com.gas.app.entity.personalAccount;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.gas.app.entity.security.user.User;
 import jakarta.persistence.*;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
 
 
 @Entity
 @Table(name = "personal_gas_account")
-@Getter
-@Setter
-@ToString
+@Data
 @NoArgsConstructor
 public class PersonalGasAccount {
 

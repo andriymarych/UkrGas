@@ -1,6 +1,5 @@
 package com.gas.app.repository.personalAccount;
 
-import com.gas.app.dto.personalAccount.meterReading.MeterReadingDto;
 import com.gas.app.entity.personalAccount.MeterReading;
 import com.gas.app.entity.security.user.User;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -11,19 +10,18 @@ import java.util.Optional;
 
 public interface MeterReadingRepository extends JpaRepository<MeterReading, Long> {
 
-    @Query("select new com.gas.app.dto.personalAccount.meterReading.MeterReadingDto(meterReading.id," +
-            "meterReading.meterReading, meterReading.date, account.id) from MeterReading meterReading " +
-            "inner join meterReading.personalGasAccount account " +
+    @Query("select meterReading from MeterReading meterReading " +
+            "left join fetch meterReading.personalGasAccount account " +
             "where account.id = :personalAccountId " +
             "order by meterReading.id DESC ")
-    Optional<List<MeterReadingDto>> findMeterReadingsByPersonalAccountId(Long personalAccountId);
+    Optional<List<MeterReading>> findMeterReadingsByPersonalAccountId(Long personalAccountId);
 
 
     @Query("select meterReading from MeterReading meterReading " +
             "left join fetch meterReading.personalGasAccount account " +
             "where account.id = :personalAccountId " +
             "order by meterReading.id desc limit 1")
-    Optional<MeterReading> getLastMeterReading(Long personalAccountId);
+    Optional<MeterReading> findLastMeterReading(Long personalAccountId);
     @Query("select count(*) > 0 " +
             "from MeterReading  meterReading " +
             "where meterReading.personalGasAccount.id = :personalAccountId " +

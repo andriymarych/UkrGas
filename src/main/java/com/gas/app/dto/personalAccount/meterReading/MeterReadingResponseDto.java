@@ -1,8 +1,8 @@
 package com.gas.app.dto.personalAccount.meterReading;
 
-import com.gas.app.entity.personalAccount.PersonalGasAccount;
+import com.gas.app.entity.personalAccount.MeterReading;
 
 import java.util.List;
 
-public record MeterReadingResponseDto(PersonalGasAccount personalGasAccount, List<MeterReadingDto> meterReadings) {
+public record MeterReadingResponseDto(List<MeterReading> meterReadings) {
 }
