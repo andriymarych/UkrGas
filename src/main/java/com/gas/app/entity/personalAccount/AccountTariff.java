@@ -30,7 +30,7 @@ AccountTariff {
     @Column(name = "end_date")
     private Date endDate;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
     @JoinColumn(name = "tariff_id", referencedColumnName = "id")
     private Tariff tariff;
 

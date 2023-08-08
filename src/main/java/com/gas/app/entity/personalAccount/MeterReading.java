@@ -2,10 +2,11 @@ package com.gas.app.entity.personalAccount;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.Generated;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.Generated;
 
-import java.util.Date;
+import java.sql.Date;
+import java.time.LocalDate;
 
 @Entity
 @Table(name="meter_reading")
@@ -21,9 +22,8 @@ public class MeterReading {
     @Column(name = "meter_reading")
     private Double meterReading;
 
-    @Column(name = "date", insertable = false)
-    @Generated
-    private Date date;
+    @Column(name = "date")
+    private Date date = Date.valueOf(LocalDate.now());
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     @JoinColumn(name = "personal_gas_account_id", referencedColumnName = "id")

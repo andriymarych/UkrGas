@@ -43,7 +43,7 @@ public class User implements UserDetails{
     @Column(name = "password")
     private String password;
 
-    @Generated(GenerationTime.INSERT)
+    @Generated
     @Column(name = "creation_date")
     private Date creationDate;
 

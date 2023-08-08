@@ -2,20 +2,15 @@ package com.gas.app.entity.personalAccount;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
 import org.hibernate.annotations.Generated;
-import org.hibernate.annotations.GenerationTime;
 
 import java.sql.Date;
 
 @Entity
 @Table(name = "calculation")
-@Getter
-@Setter
-@ToString
+@Data
 @NoArgsConstructor
 public class Calculation {
 
@@ -37,15 +32,15 @@ public class Calculation {
     private Double balance;
 
     @Column(name = "date", insertable = false)
-    @Generated(GenerationTime.INSERT)
+    @Generated
     private Date date;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     @JoinColumn(name = "personal_gas_account_id", referencedColumnName = "id")
     @JsonBackReference
     private PersonalGasAccount personalGasAccount;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
     @JoinColumn(name = "tariff_id", referencedColumnName = "id")
     private Tariff tariff;
 
