@@ -10,7 +10,8 @@ import java.sql.Date;
 
 @Entity
 @Table(name = "account_tariff")
-@Getter @Setter
+@Getter
+@Setter
 @ToString
 @NoArgsConstructor
 public class

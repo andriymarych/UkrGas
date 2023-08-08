@@ -1,39 +1,31 @@
 package com.gas.app.entity.personalAccount;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
-import org.hibernate.annotations.Generated;
-import org.hibernate.annotations.GenerationTime;
 
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name="payment")
-@Getter
-@Setter
-@ToString
+@Data
 @NoArgsConstructor
 public class Payment {
+
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "id")
     private long id;
 
-
     @Column(name = "amount_paid")
     private Double amountPaid;
 
-    @Column(name = "date", insertable = false)
-    @Generated(GenerationTime.INSERT)
-    private Timestamp timestamp;
+    @Column(name = "date")
+    private Timestamp timestamp = Timestamp.valueOf(LocalDateTime.now());
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     @JoinColumn(name = "personal_gas_account_id", referencedColumnName = "id")
-    @JsonBackReference
     private PersonalGasAccount personalGasAccount;
 
     public Payment(Double amountPaid) {

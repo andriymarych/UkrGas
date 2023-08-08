@@ -6,7 +6,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 import org.hibernate.annotations.Generated;
-import org.hibernate.annotations.GenerationTime;
 
 import java.sql.Timestamp;
 
@@ -33,7 +32,7 @@ public class Feedback {
     private String content;
 
     @Column(name = "timestamp", insertable = false)
-    @Generated(GenerationTime.INSERT)
+    @Generated
     private Timestamp timestamp;
 
     @Column(name = "category_id")

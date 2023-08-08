@@ -1,6 +1,5 @@
 package com.gas.app.entity.personalAccount;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.gas.app.entity.security.user.User;
 import jakarta.persistence.*;
 import lombok.Data;
@@ -30,9 +29,8 @@ public class PersonalGasAccount {
     @Column(name = "account_number")
     private String accountNumber;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
     @JoinColumn(name = "user_id", referencedColumnName = "id")
-    @JsonBackReference
     private User user;
 
     @ManyToOne(cascade = CascadeType.ALL)

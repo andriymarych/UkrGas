@@ -4,18 +4,14 @@ import com.gas.app.entity.personalAccount.PersonalGasAccount;
 import jakarta.persistence.Embeddable;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
 
 import java.io.Serializable;
 
 
 @Embeddable
-@Getter
-@Setter
-@ToString
+@Data
 @NoArgsConstructor
 public class TelegramUserGasPersonalAccountKey implements Serializable {
 
@@ -26,4 +22,5 @@ public class TelegramUserGasPersonalAccountKey implements Serializable {
     @JoinColumn(name = "personal_gas_account_id")
     @ManyToOne
     private PersonalGasAccount personalGasAccount;
+
 }

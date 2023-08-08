@@ -1,14 +1,12 @@
 package com.gas.app.entity.security.user;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.gas.app.entity.security.token.Token;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.hibernate.annotations.Generated;
-import org.hibernate.annotations.GenerationTime;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -21,9 +19,15 @@ import java.util.List;
 @Entity
 @Table(name = "user")
 @Builder
-@Data
+@Getter
+@EqualsAndHashCode
+@ToString
 @AllArgsConstructor
 @NoArgsConstructor
+@JsonIgnoreProperties(
+        {"lastName","creationDate","role","password",
+        "tokens", "accountNonExpired", "accountNonLocked",
+        "authorities","credentialsNonExpired", "enabled", "username"})
 public class User implements UserDetails{
 
     @Id
@@ -52,6 +56,7 @@ public class User implements UserDetails{
     private Role role;
 
     @OneToMany(mappedBy = "user")
+    @JsonManagedReference
     private List<Token> tokens;
 
     @Override

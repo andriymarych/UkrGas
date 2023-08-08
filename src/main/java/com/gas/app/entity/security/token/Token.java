@@ -1,5 +1,6 @@
 package com.gas.app.entity.security.token;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.gas.app.entity.security.user.User;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -32,8 +33,9 @@ public class Token {
     @Column(name = "revoked")
     private Boolean revoked;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "user_id")
+    @JsonBackReference
     private User user;
 
 }

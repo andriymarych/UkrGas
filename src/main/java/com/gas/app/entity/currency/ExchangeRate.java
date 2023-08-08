@@ -1,9 +1,9 @@
 package com.gas.app.entity.currency;
 
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.Generated;
-import org.hibernate.annotations.GenerationTime;
 
 import java.sql.Date;
 
@@ -30,7 +30,7 @@ public class ExchangeRate {
     private Double exchangeRate;
 
     @Column(name = "date", insertable = false)
-    @Generated(GenerationTime.INSERT)
+    @Generated
     private Date date;
 
     public ExchangeRate(StandardCurrencyEnum currencyTo, Double exchangeRate) {

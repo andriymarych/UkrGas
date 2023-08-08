@@ -1,6 +1,5 @@
 package com.gas.app.entity.personalAccount;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -37,7 +36,6 @@ public class Calculation {
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     @JoinColumn(name = "personal_gas_account_id", referencedColumnName = "id")
-    @JsonBackReference
     private PersonalGasAccount personalGasAccount;
 
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)

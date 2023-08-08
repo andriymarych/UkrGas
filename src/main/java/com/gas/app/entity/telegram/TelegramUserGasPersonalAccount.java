@@ -4,7 +4,8 @@ import jakarta.persistence.Column;
 import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
-import lombok.*;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name = "telegram_user_personal_gas_account")
@@ -17,5 +18,9 @@ public class TelegramUserGasPersonalAccount {
 
     @Column(name = "verified")
     private Boolean verified = false;
+
+    public TelegramUserGasPersonalAccount(TelegramUserGasPersonalAccountKey key) {
+        this.key = key;
+    }
 
 }

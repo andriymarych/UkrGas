@@ -2,7 +2,6 @@ package com.gas.app.entity.personalAccount;
 
 import jakarta.persistence.*;
 import lombok.Data;
-import lombok.Generated;
 import lombok.NoArgsConstructor;
 
 import java.sql.Date;

@@ -3,16 +3,12 @@ package com.gas.app.entity.telegram;
 
 import com.gas.app.entity.personalAccount.PersonalGasAccount;
 import jakarta.persistence.*;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
 
 @Entity
 @Table(name = "telegram_user")
-@Getter
-@Setter
-@ToString
+@Data
 @NoArgsConstructor
 public class TelegramUser {
 
