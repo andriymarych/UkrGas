@@ -15,7 +15,9 @@ public class MeterReadingMenuSelectCommand implements Command {
 
     @Override
     public SendMessage execute(Update update) {
+
         List<String> menuItems = List.of("ПЕРЕДАТИ ПОКАЗАННЯ", "ГОЛОВНЕ МЕНЮ");
+
         return menuItemResolver.execute(update, menuItems);
     }
 }

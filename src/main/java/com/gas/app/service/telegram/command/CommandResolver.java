@@ -20,12 +20,14 @@ public class CommandResolver {
 
     @Transactional
     public SendMessage getMessageResponse(Update update) {
+
         String username = update.getMessage().getFrom().getUserName();
         Optional<TelegramUser> user = telegramUserRepository.findTelegramUserByUsername(username);
         if (user.isEmpty()) {
             return commandContainer.get("START").execute(update);
         }
         BotState state = user.get().getBotState();
+
         return commandContainer
                 .get(state.name())
                 .execute(update);

@@ -18,6 +18,7 @@ public class PersonalAccountMenuCommand implements Command {
 
     @Override
     public SendMessage execute(Update update) {
+
         String username = update.getMessage().getFrom().getUserName();
         TelegramUser user = telegramUserService.getTelegramUserByUsername(username);
         user.setBotState(BotState.PERSONAL_GAS_ACCOUNT_MENU_SELECT);
@@ -27,6 +28,7 @@ public class PersonalAccountMenuCommand implements Command {
 
     }
     public SendMessage buildSendMessageWithKeyboardMarkup(Update update, String message) {
+
         SendMessage sendMessage = SendMessage.builder()
                 .chatId(update.getMessage().getChatId())
                 .text(message)
@@ -36,6 +38,7 @@ public class PersonalAccountMenuCommand implements Command {
         return sendMessage;
     }
     public List<String> getMenuItems(){
+
         return List.of(
                 "ЗМІНИТИ ПОТОЧНИЙ ОСОБОВИЙ РАХУНОК",
                 "ГОЛОВНЕ МЕНЮ"

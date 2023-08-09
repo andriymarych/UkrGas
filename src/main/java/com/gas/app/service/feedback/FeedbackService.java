@@ -1,4 +1,4 @@
-package com.gas.app.service.general;
+package com.gas.app.service.feedback;
 
 import com.gas.app.dto.feedback.FeedbackDto;
 import com.gas.app.entity.general.Feedback;

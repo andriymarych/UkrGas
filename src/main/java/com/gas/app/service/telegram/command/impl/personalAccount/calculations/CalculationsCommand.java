@@ -1,6 +1,5 @@
 package com.gas.app.service.telegram.command.impl.personalAccount.calculations;
 
-import com.gas.app.dto.personalAccount.calculation.CalculationResponseDto;
 import com.gas.app.entity.personalAccount.Address;
 import com.gas.app.entity.personalAccount.Calculation;
 import com.gas.app.entity.personalAccount.PersonalGasAccount;
@@ -28,6 +27,7 @@ public class CalculationsCommand implements Command {
 
     @Override
     public SendMessage execute(Update update) {
+
         String username = update.getMessage().getFrom().getUserName();
         TelegramUser user = telegramUserService.getTelegramUserByUsername(username);
         PersonalGasAccount currentPersonalGasAccount = user.getCurrentPersonalGasAccount();
@@ -37,16 +37,16 @@ public class CalculationsCommand implements Command {
     }
 
     private String getCalculations(PersonalGasAccount personalGasAccount) {
-        CalculationResponseDto calculationResponseDto = calculationService
-                .getCalculationsByPersonalAccountId(personalGasAccount.getId());
 
+        List<Calculation> calculations = calculationService
+                .getCalculationsByPersonalAccountId(personalGasAccount.getId());
 
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("Історія розрахунків за особовим рахунком ")
                 .append(personalGasAccount.getAccountNumber())
                 .append(getAddress(personalGasAccount.getAddress()));
         DecimalFormat decimalFormat = new DecimalFormat("0.00");
-        calculationResponseDto.calculations()
+        calculations
                 .stream()
                 .limit(10)
                 .sorted(Comparator.comparing(Calculation::getId))
@@ -54,7 +54,10 @@ public class CalculationsCommand implements Command {
                         stringBuilder.append(getFormattedDate(payment.getDate().toLocalDate()))
                                 .append(" - ")
                                 .append(decimalFormat.format(payment.getAmountConsumed()))
-                                .append("м³ - ").append(decimalFormat.format(payment.getAccruedPayment())).append("грн\n"));
+                                .append("м³ - ")
+                                .append(decimalFormat.format(payment.getAccruedPayment()))
+                                .append("грн\n"));
+
         return stringBuilder.toString();
     }
 

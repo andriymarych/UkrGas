@@ -17,6 +17,7 @@ public class MainMenuSelectCommand implements Command {
 
     @Override
     public SendMessage execute(Update update) {
+
         List<String> menuItems =List.of(
                 "ПОКАЗНИКИ",
                 "ПЛАТЕЖІ",

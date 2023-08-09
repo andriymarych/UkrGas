@@ -30,6 +30,7 @@ public class MeterReadingSaveMenuSelectCommand implements Command {
 
     @Override
     public SendMessage execute(Update update) {
+
         String username = update.getMessage().getFrom().getUserName();
         TelegramUser telegramUser = telegramUserService.getTelegramUserByUsername(username);
         PersonalGasAccount personalGasAccount = personalGasAccountService
@@ -57,12 +58,14 @@ public class MeterReadingSaveMenuSelectCommand implements Command {
             return buildSendMessageWithKeyboardMarkup(update,
                     "Показники лічильника №" + personalGasAccount.getGasMeterNumber() + " успішно передано");
         }catch(ServiceException e){
+
             return buildSendMessageWithKeyboardMarkup(update,
                     "Введіть коректне значення лічильника");
         }
     }
 
     public SendMessage buildSendMessageWithKeyboardMarkup(Update update, String message) {
+
         SendMessage sendMessage = SendMessage.builder()
                 .chatId(update.getMessage().getChatId())
                 .text(message)
@@ -72,10 +75,12 @@ public class MeterReadingSaveMenuSelectCommand implements Command {
             menuItems = getMainMenuItems();
             sendMessage.setReplyMarkup(ReplyKeyboardMarkupBuilder.build(menuItems));
         }
+
         return sendMessage;
     }
 
     public List<String> getMainMenuItems(){
+
         return  List.of(
                 "ПОКАЗНИКИ",
                 "ПЛАТЕЖІ",

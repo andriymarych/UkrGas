@@ -25,27 +25,32 @@ public class PersonalAccountChangeMenuCommand implements Command {
         TelegramUser user = telegramUserService.getTelegramUserByUsername(username);
         user.setBotState(BotState.PERSONAL_GAS_ACCOUNT_CHANGE_MENU_SELECT);
 
-
         return buildSendMessageWithKeyboardMarkup(update,
                 "Оберіть поточний особовий рахунок");
     }
     public SendMessage buildSendMessageWithKeyboardMarkup(Update update, String message) {
+
         SendMessage sendMessage = SendMessage.builder()
                 .chatId(update.getMessage().getChatId())
                 .text(message)
                 .build();
         sendMessage.setReplyMarkup(initializeReplyKeyboardMarkup(update));
+
         return sendMessage;
     }
     public ReplyKeyboardMarkup initializeReplyKeyboardMarkup(Update update){
+
         String username = update.getMessage().getFrom().getUserName();
         List<String> menuItems  = getPersonalGasAccountsStr(username);
+
         return ReplyKeyboardMarkupBuilder.build(menuItems);
     }
 
     private List<String> getPersonalGasAccountsStr(String username) {
+
         List<PersonalGasAccount> personalAccounts = telegramUserService
                 .getPersonalAccountListByUsername(username);
+
         return personalAccounts.stream().map(PersonalGasAccount::getAccountNumber).toList();
     }
 

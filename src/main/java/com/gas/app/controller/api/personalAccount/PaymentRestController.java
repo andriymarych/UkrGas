@@ -2,7 +2,6 @@ package com.gas.app.controller.api.personalAccount;
 
 
 import com.gas.app.dto.personalAccount.payment.PaymentRequestDto;
-import com.gas.app.dto.personalAccount.payment.PaymentResponseDto;
 import com.gas.app.entity.personalAccount.Payment;
 import com.gas.app.service.personalAccount.PaymentService;
 import com.gas.app.util.ResponseHandler;
@@ -10,6 +9,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -20,11 +21,11 @@ public class PaymentRestController {
     @GetMapping("/payments")
     public ResponseEntity<Object> getPayments(@PathVariable Long personalAccountId) {
 
-        PaymentResponseDto paymentResponseDto = paymentService
+        List<Payment> payments = paymentService
                 .getPaymentsByPersonalAccountId(personalAccountId);
 
         return ResponseHandler.generateResponse("OK",
-                HttpStatus.OK, paymentResponseDto);
+                HttpStatus.OK, payments);
     }
     @PostMapping("/payments")
     public ResponseEntity<Object> savePayment(@PathVariable Long personalAccountId,

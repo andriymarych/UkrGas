@@ -40,14 +40,16 @@ public class PersonalGasAccountAddingCommand implements Command {
                     "Особового рахунку №" + accountNumber + " не існує\n" +
                             "Повторіть спробу");
         }
+
         return buildSendMessage(update,
                 "Для підтвердження власності особового рахунку " + accountNumber + " введіть номер лічильника:");
     }
 
     @Transactional
     public void setPersonalGasAccount(Update update) {
+
         String username = update.getMessage().getFrom().getUserName();
-        TelegramUser user = authenticationService.getUserByUsername(username);
+        TelegramUser user = authenticationService.getTelegramUserByUsername(username);
         String accountNumber = update.getMessage().getText();
         PersonalGasAccount personalGasAccount = personalGasAccountService.getAccountByAccountNumber(accountNumber);
         authenticationService.addPersonalGasAccount(user, personalGasAccount);
@@ -57,6 +59,7 @@ public class PersonalGasAccountAddingCommand implements Command {
 
 
     public SendMessage buildSendMessage(Update update, String message) {
+
         return SendMessage.builder()
                 .chatId(update.getMessage().getChatId())
                 .text(message)

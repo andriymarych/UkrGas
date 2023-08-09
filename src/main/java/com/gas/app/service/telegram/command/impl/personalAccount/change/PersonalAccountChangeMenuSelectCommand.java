@@ -20,12 +20,14 @@ public class PersonalAccountChangeMenuSelectCommand implements Command {
     private  boolean isPersonAccountChanged;
     @Override
     public SendMessage execute(Update update) {
+
         changePersonalAccount(update);
         return buildSendMessageWithKeyboardMarkup(update,
                 changePersonalAccount(update));
     }
 
     public String changePersonalAccount(Update update){
+
         String username = update.getMessage().getFrom().getUserName();
         TelegramUser user = telegramUserService.getTelegramUserByUsername(username);
         String selectedPersonalAccount = update.getMessage().getText();
@@ -38,9 +40,11 @@ public class PersonalAccountChangeMenuSelectCommand implements Command {
                 return "Поточний особовий рахунок №" + personalAccount.getAccountNumber() + " успішно змінено";
             }
         }
+
         return "Введіть коректний номер особового рахунку";
     }
     public SendMessage buildSendMessageWithKeyboardMarkup(Update update, String message) {
+
         SendMessage sendMessage = SendMessage.builder()
                 .chatId(update.getMessage().getChatId())
                 .text(message)
@@ -48,13 +52,17 @@ public class PersonalAccountChangeMenuSelectCommand implements Command {
         if(isPersonAccountChanged) {
             sendMessage.setReplyMarkup(initializeReplyKeyboardMarkup(update));
         }
+
         return sendMessage;
     }
     public ReplyKeyboardMarkup initializeReplyKeyboardMarkup(Update update){
+
         List<String> menuItems = getMenuItems();
+
         return ReplyKeyboardMarkupBuilder.build(menuItems);
     }
     public List<String> getMenuItems(){
+
         return  List.of(
                 "ПОКАЗНИКИ",
                 "ПЛАТЕЖІ",

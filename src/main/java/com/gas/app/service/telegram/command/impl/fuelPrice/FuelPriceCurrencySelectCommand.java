@@ -18,6 +18,7 @@ public class FuelPriceCurrencySelectCommand implements Command {
     private final TelegramUserService telegramUserService;
     @Override
     public SendMessage execute(Update update) {
+
         String username = update.getMessage().getFrom().getUserName();
         TelegramUser user = telegramUserService.getTelegramUserByUsername(username);
         user.setBotState(BotState.FUEL_PRICE);
@@ -27,15 +28,18 @@ public class FuelPriceCurrencySelectCommand implements Command {
 
     }
     public SendMessage buildSendMessageWithKeyboardMarkup(Update update, String message) {
+
         SendMessage sendMessage = SendMessage.builder()
                 .chatId(update.getMessage().getChatId())
                 .text(message)
                 .build();
         List<String> menuItems = getMenuItems();
         sendMessage.setReplyMarkup(ReplyKeyboardMarkupBuilder.build(menuItems));
+
         return sendMessage;
     }
     public List<String> getMenuItems(){
+
         return List.of(
                 "UAH",
                 "USD",

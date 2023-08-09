@@ -17,7 +17,7 @@ public class MeterReadingEmailService {
     @Scheduled(cron = "0 0 12 1 * ?")
     public void sendMonthlyReminderByEmail() {
 
-        meterReadingRepository.findUserWithUntransmittedMeterReading()
+        meterReadingRepository.findUsersWithUntransmittedMeterReadingForTheCurrentMonth()
                 .forEach(
                         (user) -> mailService.sendEmail(user.getEmail(),
                                 "Показання",

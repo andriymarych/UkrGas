@@ -15,11 +15,13 @@ public class PersonalAccountMenuSelectCommand implements Command {
 
     @Override
     public SendMessage execute(Update update) {
+
         List<String> menuItems = List.of(
                 "ЗМІНИТИ ПОТОЧНИЙ ОСОБОВИЙ РАХУНОК",
                 "ГОЛОВНЕ МЕНЮ"
         );
         menuItemResolver.execute(update,menuItems);
+
         return menuItemResolver.execute(update, menuItems);
     }
 }

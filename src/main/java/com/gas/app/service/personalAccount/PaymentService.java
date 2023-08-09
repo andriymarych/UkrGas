@@ -2,7 +2,6 @@ package com.gas.app.service.personalAccount;
 
 
 import com.gas.app.dto.personalAccount.payment.PaymentRequestDto;
-import com.gas.app.dto.personalAccount.payment.PaymentResponseDto;
 import com.gas.app.entity.personalAccount.Payment;
 import com.gas.app.entity.personalAccount.PersonalGasAccount;
 import com.gas.app.exception.ServiceException;
@@ -23,18 +22,14 @@ public class PaymentService {
     private final PersonalGasAccountService accountService;
     @Transactional(readOnly = true)
     @Cacheable("payments")
-    public PaymentResponseDto getPaymentsByPersonalAccountId(Long personalAccountId) {
+    
+    public List<Payment> getPaymentsByPersonalAccountId(Long personalAccountId) {
 
         PersonalGasAccount personalGasAccount = accountService.
                 getAccountByAccountId(personalAccountId);
 
-        List<Payment> payments = paymentRepository.
-                findPaymentsByPersonalAccountId(personalGasAccount.getId())
-                .orElseThrow(
-                        () -> new ServiceException("Could not find payments with personal gas account["
-                                + personalAccountId + "]", HttpStatus.NOT_FOUND));
-
-        return new PaymentResponseDto(personalGasAccount, payments);
+        return paymentRepository.
+                findAllByPersonalAccountId(personalGasAccount.getId());
     }
 
     @Transactional

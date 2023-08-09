@@ -26,18 +26,21 @@ public class AuthRestController {
     private final AuthenticationService authenticationService;
     @PostMapping("/login")
     public ResponseEntity<Object> login(@RequestBody AuthenticationRequest request) {
+
         AuthenticationResponse response = authenticationService.authenticate(request);
         return ResponseHandler.generateResponse("Login is successful", HttpStatus.OK, response);
     }
     @PostMapping("/register")
     public ResponseEntity<Object> registration(@RequestBody RegisterRequest request) {
+
         AuthenticationResponse response = authenticationService.register(request);
         return ResponseHandler.generateResponse("Account has been created", HttpStatus.CREATED, response);
     }
     @PostMapping("/refresh-token")
     public void refreshToken(HttpServletRequest request,
                              HttpServletResponse response) throws IOException {
-        authenticationService.refreshToken(request, response);
+
+        authenticationService.refreshToken(request);
     }
 
 }

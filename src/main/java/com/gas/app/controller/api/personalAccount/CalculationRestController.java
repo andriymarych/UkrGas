@@ -1,6 +1,6 @@
 package com.gas.app.controller.api.personalAccount;
 
-import com.gas.app.dto.personalAccount.calculation.CalculationResponseDto;
+import com.gas.app.entity.personalAccount.Calculation;
 import com.gas.app.service.personalAccount.CalculationService;
 import com.gas.app.util.ResponseHandler;
 import lombok.RequiredArgsConstructor;
@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -21,7 +23,7 @@ public class CalculationRestController {
     @GetMapping("/calculations")
     public ResponseEntity<Object> getCalculations(@PathVariable Long personalAccountId) {
 
-        CalculationResponseDto calculationResponseDto = calculationService
+        List<Calculation> calculationResponseDto = calculationService
                 .getCalculationsByPersonalAccountId(personalAccountId);
 
         return ResponseHandler.generateResponse("OK",

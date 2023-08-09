@@ -20,22 +20,27 @@ public class StartCommand implements Command {
     private final TelegramUserRepository telegramUserRepository;
     @Override
     public SendMessage execute(Update update) {
+
         registerTelegramUser(update);
+
         return buildSendMessage(update,
                 "Вітаємо, " + update.getMessage().getFrom().getFirstName() + "\n" +
                         "Для початку роботи із нашим ботом скористайтеся контекстним меню");
     }
 
-    public void registerTelegramUser(Update update) {
+    public TelegramUser registerTelegramUser(Update update) {
+
         TelegramUser user = new TelegramUser();
         user.setUsername(update.getMessage().getFrom().getUserName());
         user.setChatId(update.getMessage().getChatId());
         user.setBotState(BotState.UNAUTHORIZED_MENU_SELECT);
-        telegramUserRepository.save(user);
+
+        return telegramUserRepository.save(user);
     }
 
 
     public SendMessage buildSendMessage(Update update, String message) {
+
         SendMessage sendMessage = SendMessage.builder()
                 .chatId(update.getMessage().getChatId())
                 .text(message)
@@ -44,7 +49,9 @@ public class StartCommand implements Command {
         keyboardMarkup.setResizeKeyboard(true);
 
         List<KeyboardRow> keyboardRows = new ArrayList<>();
-        List<String> menuItems = List.of("ДОБАВИТИ ОСОБОВИЙ РАХУНОК", "АКТУАЛЬНІ ЦІНИ НА ПАЛИВО");
+        List<String> menuItems = List.of(
+                "ДОБАВИТИ ОСОБОВИЙ РАХУНОК",
+                "АКТУАЛЬНІ ЦІНИ НА ПАЛИВО");
         menuItems.forEach(menuItem -> {
             KeyboardRow keyboardRow = new KeyboardRow();
             keyboardRow.add(menuItem);

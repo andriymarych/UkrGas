@@ -23,6 +23,7 @@ public class PersonalGasAccountVerifyingCommand implements Command {
 
     @Override
     public SendMessage execute(Update update) {
+
         String accountNumber;
         String gasMeterNumber = update.getMessage().getText();
 
@@ -37,6 +38,7 @@ public class PersonalGasAccountVerifyingCommand implements Command {
                     "Ви ввели невірний номер лічильника\n" +
                             "Повторіть спробу");
         }
+
         return
 
                 buildSendMessageWithKeyboardMarkup(update,
@@ -45,19 +47,22 @@ public class PersonalGasAccountVerifyingCommand implements Command {
     }
 
     public String verifyGasMeterNumber(Update update) {
+
         String username = update.getMessage().getFrom().getUserName();
-        TelegramUser user = authenticationService.getUserByUsername(username);
+        TelegramUser user = authenticationService.getTelegramUserByUsername(username);
         String gasMeterNumber = update.getMessage().getText();
-        PersonalGasAccount personalGasAccount = authenticationService.authenticateGasAccount(user, Long.valueOf(gasMeterNumber));
+        PersonalGasAccount personalGasAccount = authenticationService.authenticatePersonalGasAccount(user, Long.valueOf(gasMeterNumber));
         if (personalGasAccount != null) {
             user.setBotState(BotState.MAIN_MENU_SELECT);
             user.setCurrentPersonalGasAccount(personalGasAccount);
             return personalGasAccount.getAccountNumber();
         }
+
         return null;
     }
 
     public SendMessage buildSendMessage(Update update, String message) {
+
         return SendMessage.builder()
                 .chatId(update.getMessage().getChatId())
                 .text(message)
@@ -66,6 +71,7 @@ public class PersonalGasAccountVerifyingCommand implements Command {
 
 
     public SendMessage buildSendMessageWithKeyboardMarkup(Update update, String message) {
+
         SendMessage sendMessage = SendMessage.builder()
                 .chatId(update.getMessage().getChatId())
                 .text(message)
