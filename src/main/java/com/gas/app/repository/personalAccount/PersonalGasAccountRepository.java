@@ -16,7 +16,7 @@ public interface PersonalGasAccountRepository extends JpaRepository<PersonalGasA
             "left join fetch account.accountTariff accountTariff " +
             "left join fetch accountTariff.tariff " +
             "where account.accountNumber = :accountNumber")
-    Optional<PersonalGasAccount> findAccountByAccountNumber(String accountNumber);
+    Optional<PersonalGasAccount> findByAccountNumber(String accountNumber);
 
     @Query("select distinct account from PersonalGasAccount account " +
             "left join fetch account.accountTariff account_tariff " +
@@ -32,8 +32,8 @@ public interface PersonalGasAccountRepository extends JpaRepository<PersonalGasA
             "left join fetch account_tariff.tariff " +
             "left join fetch account.person " +
             "left join fetch account.address " +
-            "left join fetch account.person  where account.id = :accountId")
-    Optional<PersonalGasAccount> findAccountByAccountId(Long accountId);
+            "left join fetch account.person  where account.id = :personalGasAccountId")
+    Optional<PersonalGasAccount> findByAccountId(Long personalGasAccountId);
 
     @Query("select distinct account " +
             "from PersonalGasAccount account " +
@@ -42,6 +42,6 @@ public interface PersonalGasAccountRepository extends JpaRepository<PersonalGasA
             "left join fetch account.person " +
             "left join fetch account.address " +
             "where account.user = :user")
-    Optional<List<PersonalGasAccount>> findAccountsByUser(User user);
+    List<PersonalGasAccount> findAllByUser(User user);
 
 }

@@ -10,5 +10,5 @@ public interface ExchangeRateRepository extends JpaRepository<ExchangeRate, Long
             "from ExchangeRate exchangeRate " +
             "where exchangeRate.date = current_date " +
             "and exchangeRate.currencyTo = :currency")
-    Double getCurrentExchangeRate(StandardCurrencyEnum currency);
+    Double findForTheCurrentDayByCurrency(StandardCurrencyEnum currency);
 }

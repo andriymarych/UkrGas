@@ -11,6 +11,6 @@ public interface FuelPriceRepository extends JpaRepository<FuelPrice, Long> {
 
     @Query("select fuelPrice from FuelPrice fuelPrice " +
             "where fuelPrice.date = :date")
-    List<FuelPrice> getFuelPriceByDate(Date date);
+    List<FuelPrice> findByDate(Date date);
 
 }
