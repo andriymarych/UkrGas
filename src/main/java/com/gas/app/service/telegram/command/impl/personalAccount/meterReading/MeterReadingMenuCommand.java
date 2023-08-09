@@ -30,6 +30,7 @@ public class MeterReadingMenuCommand implements Command {
 
     @Override
     public SendMessage execute(Update update) {
+
         String username = update.getMessage().getFrom().getUserName();
         TelegramUser user = telegramUserService.getTelegramUserByUsername(username);
         user.setBotState(BotState.METER_READING_MENU_SELECT);
@@ -40,9 +41,9 @@ public class MeterReadingMenuCommand implements Command {
     }
 
     private String getMeterReadings(PersonalGasAccount personalGasAccount) {
+
         List<MeterReading> meterReadings = meterReadingService
                 .getMeterReadingsByPersonalAccountId(personalGasAccount.getId());
-
 
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("Показання лічильника за особовим рахунком ")
@@ -58,29 +59,37 @@ public class MeterReadingMenuCommand implements Command {
                         .append(" - ")
                         .append(decimalFormat.format(meterReading.getMeterReading()))
                         .append("м³\n"));
+
         return stringBuilder.toString();
     }
     public String getFormattedDate(Date date){
+
         SimpleDateFormat dateFormatter = new SimpleDateFormat("dd.MM.yyyy");
+
         return dateFormatter.format(date);
     }
     public String getAddress(Address address){
+
         return "\n(вул. " + address.getStreet() + ", буд. " + address.getHouseNumber() + "):\n\n";
     }
     public SendMessage buildSendMessageWithKeyboardMarkup(Update update, String message) {
+
         SendMessage sendMessage = SendMessage.builder()
                 .chatId(update.getMessage().getChatId())
                 .text(message)
                 .build();
         sendMessage.setReplyMarkup(initializeReplyKeyboardMarkup(update));
+
         return sendMessage;
     }
     public ReplyKeyboardMarkup initializeReplyKeyboardMarkup(Update update){
 
         List<String> menuItems  = getMenuItems();
+
         return ReplyKeyboardMarkupBuilder.build(menuItems);
     }
     public List<String> getMenuItems(){
+
         return List.of("ПЕРЕДАТИ ПОКАЗАННЯ",
                 "ГОЛОВНЕ МЕНЮ");
     }

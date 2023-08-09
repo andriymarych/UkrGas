@@ -29,6 +29,7 @@ public class FuelPriceCommand implements Command {
 
     @Override
     public SendMessage execute(Update update) {
+
         String username = update.getMessage().getFrom().getUserName();
         TelegramUser user = telegramUserService.getTelegramUserByUsername(username);
         String currencyStr = update.getMessage().getText();
@@ -43,6 +44,7 @@ public class FuelPriceCommand implements Command {
     }
 
     private String getFuelPrices(StandardCurrencyEnum currency) {
+
         List<FuelPriceChangeDto> fuelPrices = fuelPriceService.getFuelPrices(currency);
         StringBuilder stringBuilder = new StringBuilder();
         DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd.MM.yyyy", Locale.US);
@@ -56,6 +58,7 @@ public class FuelPriceCommand implements Command {
                         .append(getSign(fuelPrice.priceChangePct()))
                         .append(decimalFormat.format(fuelPrice.priceChangePct()))
                         .append("%)\n"));
+
         return stringBuilder.toString();
     }
     public String getSign(Double number){
@@ -63,11 +66,13 @@ public class FuelPriceCommand implements Command {
     }
 
     public SendMessage buildSendMessageWithKeyboardMarkup(Update update, String message) {
+
         SendMessage sendMessage = SendMessage.builder()
                 .chatId(update.getMessage().getChatId())
                 .text(message)
                 .build();
         sendMessage.setReplyMarkup(initializeReplyKeyboardMarkup(update));
+
         return sendMessage;
     }
     public ReplyKeyboardMarkup initializeReplyKeyboardMarkup(Update update){
@@ -83,10 +88,12 @@ public class FuelPriceCommand implements Command {
         return ReplyKeyboardMarkupBuilder.build(menuItems);
     }
     public List<String> getUnauthorizedMenuItems(){
+
         return List.of("ДОБАВИТИ ОСОБОВИЙ РАХУНОК",
                 "АКТУАЛЬНІ ЦІНИ НА ПАЛИВО");
     }
     public List<String> getAuthorizedMenuItems(){
+
         return  List.of(
                 "ПОКАЗНИКИ",
                 "ПЛАТЕЖІ",

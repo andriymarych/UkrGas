@@ -27,11 +27,13 @@ public class MainMenuCommand implements Command {
 
     }
     public SendMessage buildSendMessageWithKeyboardMarkup(Update update) {
+
         SendMessage sendMessage = SendMessage.builder()
                 .chatId(update.getMessage().getChatId())
                 .text("Для взаємодії скористаєтеся контекстним меню")
                 .build();
         sendMessage.setReplyMarkup(initializeReplyKeyboardMarkup(update));
+
         return sendMessage;
     }
     public ReplyKeyboardMarkup initializeReplyKeyboardMarkup(Update update){
@@ -40,6 +42,7 @@ public class MainMenuCommand implements Command {
         return ReplyKeyboardMarkupBuilder.build(menuItems);
     }
     public List<String> getMenuItems(){
+
         return List.of(
                 "ПОКАЗНИКИ",
                 "ПЛАТЕЖІ",

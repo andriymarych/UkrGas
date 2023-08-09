@@ -11,7 +11,6 @@ import com.gas.app.exception.ServiceException;
 import com.gas.app.repository.security.user.UserRepository;
 import com.gas.app.service.personalAccount.PersonalGasAccountService;
 import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -39,7 +38,7 @@ public class AuthenticationService {
     @Transactional
     public AuthenticationResponse register(RegisterRequest request) {
 
-        if (userRepository.findUserByEmail(request.email()).isPresent()) {
+        if (userRepository.findByEmail(request.email()).isPresent()) {
             throw new ServiceException("Email [" + request.email() + "] is already in use",
                     HttpStatus.CONFLICT);
         }
@@ -65,27 +64,32 @@ public class AuthenticationService {
 
     @Transactional
     public AuthenticationResponse authenticate(AuthenticationRequest request) {
+
         try{authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
                         request.email(),
                         request.password())
         );
         }catch (BadCredentialsException e){
-            throw new ServiceException("User entered incorrect credentials",HttpStatus.UNAUTHORIZED);
+            throw new ServiceException("User entered incorrect credentials", HttpStatus.UNAUTHORIZED);
         }
-        User user = userRepository.findUserByEmail(request.email())
+
+        User user = userRepository.findByEmail(request.email())
                 .orElseThrow(
                         () -> new ServiceException("User with email [" +
                                 request.email() + "] is not found ",
                                 HttpStatus.UNAUTHORIZED));
+
         String jwtToken = jwtService.generateToken(user);
         String refreshToken = jwtService.generateRefreshToken(user);
         jwtService.revokeAllUserTokens(user);
         jwtService.saveUserToken(user, jwtToken);
+
         return new AuthenticationResponse(jwtToken, refreshToken);
     }
 
     public User getCurrentUser(){
+
         User currentUser = (User)  SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         if(currentUser != null){
             return currentUser;
@@ -93,12 +97,11 @@ public class AuthenticationService {
             throw new ServiceException("User is not authorized ",
                     HttpStatus.UNAUTHORIZED);
         }
+
     }
     @Transactional
-    public void refreshToken(
-            HttpServletRequest request,
-            HttpServletResponse response
-    ) {
-        jwtService.refreshToken(request);
+    public String refreshToken(HttpServletRequest request) {
+
+        return jwtService.refreshToken(request);
     }
 }

@@ -18,7 +18,9 @@ public class TelegramUserRegistrationCommand implements Command {
 
     @Override
     public SendMessage execute(Update update) {
+
         registerTelegramUser(update);
+
         return buildSendMessage(update,
                 "Вітаємо\n" +
                         "На жаль, ми не змогли виявити вашого особового рахунку\n" +
@@ -26,15 +28,17 @@ public class TelegramUserRegistrationCommand implements Command {
                         "Наприклад: XXXXXXXXXX (тільки цифри)");
     }
 
-    public void registerTelegramUser(Update update) {
+    public TelegramUser registerTelegramUser(Update update) {
         TelegramUser user = new TelegramUser();
         user.setUsername(update.getMessage().getFrom().getUserName());
         user.setChatId(update.getMessage().getChatId());
         user.setBotState(BotState.UNAUTHORIZED_MENU);
-        telegramUserRepository.save(user);
+
+        return telegramUserRepository.save(user);
     }
 
     public SendMessage buildSendMessage(Update update, String message) {
+
         SendMessage sendMessage = SendMessage.builder()
                 .chatId(update.getMessage().getChatId())
                 .text(message)

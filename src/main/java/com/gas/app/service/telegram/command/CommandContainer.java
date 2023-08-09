@@ -16,7 +16,6 @@ public class CommandContainer {
         this.commandMap = commandMap;
     }
 
-
     public Command get(String command) {
         return commandMap.getOrDefault(command, new ExceptionCommand());
     }

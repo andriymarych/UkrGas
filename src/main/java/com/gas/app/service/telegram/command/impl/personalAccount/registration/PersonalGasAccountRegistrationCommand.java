@@ -18,21 +18,24 @@ public class PersonalGasAccountRegistrationCommand implements Command {
 
     @Override
     public SendMessage execute(Update update) {
+
         String username = update.getMessage().getFrom().getUserName();
         TelegramUser user = telegramUserService.getTelegramUserByUsername(username);
         user.setBotState(BotState.PERSONAL_GAS_ACCOUNT_INPUT);
+
         return buildSendMessage(update,
                         "Щоб добавити особовий рахунок, введіть його номер\n" +
                         "Наприклад: XXXXXXXXXX (тільки цифри)");
     }
 
-
     public SendMessage buildSendMessage(Update update, String message) {
+
         SendMessage sendMessage = SendMessage.builder()
                 .chatId(update.getMessage().getChatId())
                 .text(message)
                 .build();
         sendMessage.setReplyMarkup(new ReplyKeyboardRemove(true));
+
         return sendMessage;
     }
 }

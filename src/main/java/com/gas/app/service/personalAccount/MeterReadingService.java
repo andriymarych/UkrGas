@@ -33,13 +33,9 @@ public class MeterReadingService {
         PersonalGasAccount personalGasAccount = accountService.
                 getAccountByAccountId(personalAccountId);
 
-        List<MeterReading> meterReadings = meterReadingRepository.
-                findMeterReadingsByPersonalAccountId(personalGasAccount.getId())
-                .orElseThrow(
-                        () -> new ServiceException("Could not find meterReadings with personal gas account["
-                                + personalAccountId + "]", HttpStatus.NOT_FOUND));
+        return meterReadingRepository.
+                findAllByPersonalGasAccountId(personalGasAccount.getId());
 
-        return meterReadings;
     }
 
     @Transactional(propagation = Propagation.REQUIRES_NEW)
@@ -51,21 +47,29 @@ public class MeterReadingService {
 
         MeterReading meterReading = new MeterReading(requestDto.meterReading());
         meterReading.setPersonalGasAccount(personalGasAccount);
+
         if(isMeterReadingValid(meterReading)){
             return meterReadingRepository.save(meterReading);
         }else {
             throw new ServiceException("The entered value of the meter reading is less than the previous one",
                     HttpStatus.CONFLICT);
         }
+
     }
     @Transactional(readOnly = true)
     public boolean isBillingPeriodClosed(Long personalAccountId){
-        return meterReadingRepository.isBillingPeriodClosed(personalAccountId);
+
+        PersonalGasAccount personalGasAccount = accountService.
+                getAccountByAccountId(personalAccountId);
+
+        return meterReadingRepository.isBillingPeriodClosed(personalGasAccount.getId());
+
     }
     @Transactional(readOnly = true)
     public boolean isMeterReadingValid(MeterReading meterReading) {
+
         Optional<MeterReading> lastMeterReading = meterReadingRepository
-                .findLastMeterReading(meterReading.getPersonalGasAccount().getId());
+                .findLastByPersonalGasAccountId(meterReading.getPersonalGasAccount().getId());
         return lastMeterReading.isEmpty() || lastMeterReading.get().getMeterReading() <= meterReading.getMeterReading();
 
     }

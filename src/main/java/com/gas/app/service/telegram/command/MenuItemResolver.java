@@ -16,6 +16,7 @@ public class MenuItemResolver {
         this.commandContainer = commandContainer;
     }
     public SendMessage execute(Update update, List<String> menuItems){
+
         String selectedMenuItem = update.getMessage().getText();
         if (menuItems.contains(selectedMenuItem)) {
             return commandContainer.get(BotState.getStateEnumStr(selectedMenuItem)).execute(update);

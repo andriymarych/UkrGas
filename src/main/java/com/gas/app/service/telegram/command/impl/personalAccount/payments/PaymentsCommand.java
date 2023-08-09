@@ -1,6 +1,5 @@
 package com.gas.app.service.telegram.command.impl.personalAccount.payments;
 
-import com.gas.app.dto.personalAccount.payment.PaymentResponseDto;
 import com.gas.app.entity.personalAccount.Address;
 import com.gas.app.entity.personalAccount.Payment;
 import com.gas.app.entity.personalAccount.PersonalGasAccount;
@@ -17,6 +16,7 @@ import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Comparator;
 import java.util.Date;
+import java.util.List;
 
 @Service("PAYMENTS")
 @RequiredArgsConstructor
@@ -28,6 +28,7 @@ public class PaymentsCommand implements Command {
 
     @Override
     public SendMessage execute(Update update) {
+
         String username = update.getMessage().getFrom().getUserName();
         TelegramUser user = telegramUserService.getTelegramUserByUsername(username);
         PersonalGasAccount currentPersonalGasAccount = user.getCurrentPersonalGasAccount();
@@ -37,7 +38,8 @@ public class PaymentsCommand implements Command {
     }
 
     private String getPayments(PersonalGasAccount personalGasAccount) {
-        PaymentResponseDto paymentResponseDto = paymentService
+
+        List<Payment> payments = paymentService
                 .getPaymentsByPersonalAccountId(personalGasAccount.getId());
 
 
@@ -46,7 +48,7 @@ public class PaymentsCommand implements Command {
                 .append(personalGasAccount.getAccountNumber())
                 .append(getAddress(personalGasAccount.getAddress()));
         DecimalFormat decimalFormat = new DecimalFormat("0.00");
-        paymentResponseDto.payments()
+        payments
                 .stream()
                 .limit(10)
                 .sorted(Comparator.comparing(Payment::getId).reversed())
@@ -55,16 +57,20 @@ public class PaymentsCommand implements Command {
                                 .append(" - ")
                                 .append(decimalFormat.format(payment.getAmountPaid()))
                                 .append("грн\n"));
+
         return stringBuilder.toString();
     }
     public String getFormattedDate(Date date){
+
         SimpleDateFormat dateFormatter = new SimpleDateFormat("dd.MM.yyyy");
         return dateFormatter.format(date);
     }
     public String getAddress(Address address){
+
         return "\n(вул. " + address.getStreet() + ", буд. " + address.getHouseNumber() + "):\n\n";
     }
     public SendMessage buildSendMessageWithKeyboardMarkup(Update update, String message) {
+
         return SendMessage.builder()
                 .chatId(update.getMessage().getChatId())
                 .text(message)

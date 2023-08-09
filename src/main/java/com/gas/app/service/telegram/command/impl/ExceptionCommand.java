@@ -9,12 +9,13 @@ import org.telegram.telegrambots.meta.api.objects.Update;
 public class ExceptionCommand implements Command {
     @Override
     public SendMessage execute(Update update) {
+
         return buildSendMessage(update,
                 "Ми не можемо обробити ваш запит, введіть коректну команду");
     }
 
-
     public SendMessage buildSendMessage(Update update, String message) {
+
         return SendMessage.builder()
                 .chatId(update.getMessage().getChatId())
                 .text(message)

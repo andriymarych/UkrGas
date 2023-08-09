@@ -40,15 +40,8 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             filterChain.doFilter(request, response);
             return;
         }
-        if (jwtService.isAccessTokenExpired(jwt, request.getCookies()) &&
-                !jwtService.isRefreshTokenExpired(request.getCookies())) {
-
-            jwt = jwtService.refreshToken(request);
-            cookieService.addCookie(response, "access_token", jwt);
-        }
-
-        if (jwtService.isRefreshTokenExpired(request.getCookies())) {
-            logout(response);
+        jwt = verifyAccessAndRefreshTokens(jwt, request,response);
+        if(jwt == null){
             return;
         }
         userEmail = jwtService.extractUsername(jwt);
@@ -74,7 +67,25 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         filterChain.doFilter(request, response);
     }
 
-    public void logout(HttpServletResponse response) throws IOException {
+    private String verifyAccessAndRefreshTokens(String jwt,
+                                                 HttpServletRequest request,
+                                                 HttpServletResponse response) throws IOException {
+
+        if (jwtService.isRefreshTokenExpired(request.getCookies())) {
+            logout(response);
+            return null;
+        }
+
+        if (jwtService.isAccessTokenExpired(jwt, request.getCookies()) &&
+                !jwtService.isRefreshTokenExpired(request.getCookies())) {
+
+            jwt = jwtService.refreshToken(request);
+            cookieService.addCookie(response, "access_token", jwt);
+        }
+        return jwt;
+    }
+
+    private void logout(HttpServletResponse response) throws IOException {
         WebClient.create("https://localhost/api/v2/auth/logout")
                 .get()
                 .retrieve();

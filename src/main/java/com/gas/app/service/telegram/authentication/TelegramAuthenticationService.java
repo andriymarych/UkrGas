@@ -6,7 +6,7 @@ import com.gas.app.entity.telegram.TelegramUser;
 import com.gas.app.entity.telegram.TelegramUserGasPersonalAccount;
 import com.gas.app.entity.telegram.TelegramUserGasPersonalAccountKey;
 import com.gas.app.exception.ServiceException;
-import com.gas.app.repository.telegram.TelegramUserGasPersonalAccountRepository;
+import com.gas.app.repository.telegram.TelegramUserPersonalGasAccountRepository;
 import com.gas.app.service.telegram.service.TelegramUserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -18,13 +18,13 @@ import org.springframework.transaction.annotation.Transactional;
 public class TelegramAuthenticationService {
 
     private final TelegramUserService telegramUserService;
-    private final TelegramUserGasPersonalAccountRepository telegramUserGasPersonalAccountRepository;
+    private final TelegramUserPersonalGasAccountRepository telegramUserPersonalGasAccountRepository;
 
     @Transactional(noRollbackFor = ServiceException.class)
-    public PersonalGasAccount authenticateGasAccount(TelegramUser user, Long gasMeterNumber) {
+    public PersonalGasAccount authenticatePersonalGasAccount(TelegramUser user, Long gasMeterNumber) {
 
-        TelegramUserGasPersonalAccount  telegramUserGasPersonalAccount= telegramUserGasPersonalAccountRepository
-                .findTelegramUserGasPersonalAccountByUser(user)
+        TelegramUserGasPersonalAccount  telegramUserGasPersonalAccount= telegramUserPersonalGasAccountRepository
+                .findUnverifiedTelegramUserGasPersonalAccountByTelegramUser(user)
                 .orElseThrow(()-> new ServiceException("Unverified personal gas account of Telegram user "
                         + user.getUsername() +
                         " is not found",
@@ -34,23 +34,25 @@ public class TelegramAuthenticationService {
 
         if (personalGasAccount.getGasMeterNumber().equals(gasMeterNumber)) {
             telegramUserGasPersonalAccount.setVerified(true);
-            telegramUserGasPersonalAccountRepository.save(telegramUserGasPersonalAccount);
+            telegramUserPersonalGasAccountRepository.save(telegramUserGasPersonalAccount);
             return personalGasAccount;
         }
         return null;
     }
 
-    public TelegramUser getUserByUsername(String username){
+    public TelegramUser getTelegramUserByUsername(String username){
+
         return  telegramUserService
                 .getTelegramUserByUsername(username);
     }
     public void addPersonalGasAccount(TelegramUser user, PersonalGasAccount personalGasAccount){
+
         TelegramUserGasPersonalAccount telegramUserGasPersonalAccount = new TelegramUserGasPersonalAccount();
         TelegramUserGasPersonalAccountKey key = new TelegramUserGasPersonalAccountKey();
         key.setTelegramUser(user);
         key.setPersonalGasAccount(personalGasAccount);
         telegramUserGasPersonalAccount.setKey(key);
-        telegramUserGasPersonalAccountRepository.save(telegramUserGasPersonalAccount);
+        telegramUserPersonalGasAccountRepository.save(telegramUserGasPersonalAccount);
 
     }
 }

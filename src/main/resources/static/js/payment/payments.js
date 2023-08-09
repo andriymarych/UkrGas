@@ -65,7 +65,7 @@ const setBalance = (data) => {
 }
 const setPayments = (data) => {
 
-    const payments = data.payments;
+    const payments = data.payments
 
     payments.sort((a,b) => b.id - a.id);
 

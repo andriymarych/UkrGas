@@ -27,10 +27,12 @@ public class MeterReadingSaveMenuCommand implements Command {
 
     @Override
     public SendMessage execute(Update update) {
+
         String username = update.getMessage().getFrom().getUserName();
         TelegramUser user = telegramUserService.getTelegramUserByUsername(username);
         PersonalGasAccount personalGasAccount = user.getCurrentPersonalGasAccount();
         isBillingPeriodClosed = isBillingPeriodClosed(personalGasAccount.getId());
+
         if (isBillingPeriodClosed) {
             user.setBotState(BotState.MAIN_MENU_SELECT);
             return buildSendMessageWithKeyboardMarkup(update,
@@ -40,18 +42,23 @@ public class MeterReadingSaveMenuCommand implements Command {
 
         user.setBotState(BotState.METER_READING_SAVE_MENU_INPUT);
         Long gasMeterNumber = personalGasAccount.getGasMeterNumber();
+
         return buildSendMessageWithKeyboardMarkup(update,
                 "Введіть показання лічильника №" + gasMeterNumber + " станом на " + getFormattedDate(LocalDate.now()) + "\n");
     }
 
     public boolean isBillingPeriodClosed(Long personalAccountId) {
+
         return meterReadingService.isBillingPeriodClosed(personalAccountId);
     }
     public String getFormattedDate(LocalDate date) {
+
         DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd.MM.yyyy", Locale.US);
+
         return dateFormatter.format(date);
     }
     public SendMessage buildSendMessageWithKeyboardMarkup(Update update, String message) {
+
         SendMessage sendMessage = SendMessage.builder()
                 .chatId(update.getMessage().getChatId())
                 .text(message)
@@ -63,10 +70,12 @@ public class MeterReadingSaveMenuCommand implements Command {
             menuItems = getMeterReadingSaveMenuItems();
         }
         sendMessage.setReplyMarkup(ReplyKeyboardMarkupBuilder.build(menuItems));
+
         return sendMessage;
     }
 
     public List<String> getMainMenuItems(){
+
             return  List.of(
                     "ПОКАЗНИКИ",
                     "ПЛАТЕЖІ",
@@ -75,6 +84,7 @@ public class MeterReadingSaveMenuCommand implements Command {
                     "ОСОБОВІ РАХУНКИ");
     }
     public List<String> getMeterReadingSaveMenuItems(){
+
         return  List.of(
                 "ГОЛОВНЕ МЕНЮ");
     }

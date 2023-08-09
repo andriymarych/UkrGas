@@ -30,9 +30,9 @@ public class FuelPriceService {
     public List<FuelPriceChangeDto> getFuelPrices(StandardCurrencyEnum currency) {
 
         List<FuelPrice> fuelPricesPreviousDay = fuelPriceRepository
-                .getFuelPriceByDate(Date.valueOf(LocalDate.now().minusDays(1)));
+                .findByDate(Date.valueOf(LocalDate.now().minusDays(1)));
         List<FuelPrice> fuelPricesCurrentDay = fuelPriceRepository
-                .getFuelPriceByDate(Date.valueOf(LocalDate.now()));
+                .findByDate(Date.valueOf(LocalDate.now()));
 
         fuelPricesPreviousDay = convertCurrencyOfFuelPrices(fuelPricesPreviousDay, currency);
         fuelPricesCurrentDay = convertCurrencyOfFuelPrices(fuelPricesCurrentDay, currency);

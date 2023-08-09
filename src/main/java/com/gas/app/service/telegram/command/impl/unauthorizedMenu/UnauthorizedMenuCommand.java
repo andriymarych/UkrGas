@@ -17,7 +17,11 @@ public class UnauthorizedMenuCommand implements Command {
 
     @Override
     public SendMessage execute(Update update) {
-        List<String> menuItems = List.of("ДОБАВИТИ ОСОБОВИЙ РАХУНОК", "АКТУАЛЬНІ ЦІНИ НА ПАЛИВО");
+
+        List<String> menuItems = List.of(
+                "ДОБАВИТИ ОСОБОВИЙ РАХУНОК",
+                "АКТУАЛЬНІ ЦІНИ НА ПАЛИВО");
+
         return menuItemResolver.execute(update, menuItems);
     }
 

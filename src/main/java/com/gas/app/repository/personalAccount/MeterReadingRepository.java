@@ -45,6 +45,6 @@ public interface MeterReadingRepository extends JpaRepository<MeterReading, Long
             "left join fetch meterReading.personalGasAccount account " +
             "where account.id = :personalGasAccountId and " +
             "month(meterReading.date) = month(CAST(:date AS timestamp))")
-    Optional<MeterReading> findByPersonalGasAccountIdAndMonth(Long personalGasAccountId, Date date);
+    Optional<MeterReading> findByPersonalGasAccountByIdAndMonth(Long personalGasAccountId, Date date);
 
 }

@@ -79,9 +79,10 @@ public class JwtService {
         final String userEmail;
         refreshToken = cookieService.extractCookie(request.getCookies(), "refresh_token");
         userEmail = extractUsername(refreshToken);
+
         if(userEmail != null ){
 
-            User user = this.userRepository.findUserByEmail(userEmail)
+            User user = this.userRepository.findByEmail(userEmail)
                     .orElseThrow();
 
             if(isTokenValid(refreshToken, user)){
