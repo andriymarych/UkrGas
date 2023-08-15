@@ -29,7 +29,3 @@ ALTER SEQUENCE ukr_gas.tariff_id_seq OWNED BY ukr_gas.tariff.id;
 ALTER TABLE ONLY ukr_gas.tariff
     ALTER COLUMN id SET DEFAULT nextval('ukr_gas.tariff_id_seq'::regclass);
 
-COPY ukr_gas.tariff (id, plan, price) FROM stdin;
-1	Річний	7.95689
-2	Домашній	8.04655
-\.
