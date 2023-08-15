@@ -1,4 +1,4 @@
-package com.gas.app.repository.general;
+package com.gas.app.repository.feedback;
 
 import com.gas.app.entity.general.Feedback;
 import org.springframework.data.jpa.repository.JpaRepository;

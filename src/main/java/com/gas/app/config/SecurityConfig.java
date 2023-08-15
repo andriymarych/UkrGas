@@ -1,5 +1,6 @@
 package com.gas.app.config;
 
+import com.gas.app.filter.JwtAuthenticationFilter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -23,6 +24,20 @@ public class SecurityConfig {
     private final AuthenticationProvider authenticationProvider;
     private final LogoutHandler logoutHandler;
 
+    private static final String[] PUBLIC_PATHS = {
+            "/",
+            "/contacts",
+            "/feedback",
+            "/registration",
+            "/api/v2/fuel-prices",
+            "/api/v2/feedback",
+            "/api/v2/auth/**"
+    };
+    private static final String[] STATIC_RESOURCE_PATHS = {
+            "/css/**",
+            "/js/**",
+            "/images/**"
+    };
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
@@ -30,14 +45,8 @@ public class SecurityConfig {
         http
                 .authorizeHttpRequests(authorize ->
                         authorize
-                                .requestMatchers("/").permitAll()
-                                .requestMatchers("/contacts").permitAll()
-                                .requestMatchers("/feedback").permitAll()
-                                .requestMatchers("/css/**", "/js/**", "/images/**").permitAll()
-                                .requestMatchers("/registration").permitAll()
-                                .requestMatchers("/api/v2/fuel-prices").permitAll()
-                                .requestMatchers("/api/v2/feedback").permitAll()
-                                .requestMatchers("/api/v2/auth/**").permitAll()
+                                .requestMatchers(PUBLIC_PATHS).permitAll()
+                                .requestMatchers(STATIC_RESOURCE_PATHS).permitAll()
                                 .anyRequest().authenticated()
 
                 )
@@ -46,15 +55,15 @@ public class SecurityConfig {
                 )
                 .authenticationProvider(authenticationProvider)
                 .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)
-                .logout()
-                .logoutUrl("/api/v2/auth/logout")
-                .addLogoutHandler(logoutHandler)
-                .logoutSuccessHandler(((request, response, authentication) ->
-                        SecurityContextHolder.clearContext()));
-
-
+                .logout(logout ->
+                        logout
+                                .logoutUrl("/api/v2/auth/logout")
+                                .addLogoutHandler(logoutHandler)
+                                .logoutSuccessHandler(
+                                        ((request, response, authentication) ->
+                                        SecurityContextHolder.clearContext()))
+                );
         return http.build();
     }
-
 
 }

@@ -2,7 +2,7 @@ package com.gas.app.service.feedback;
 
 import com.gas.app.dto.feedback.FeedbackDto;
 import com.gas.app.entity.general.Feedback;
-import com.gas.app.repository.general.FeedbackRepository;
+import com.gas.app.repository.feedback.FeedbackRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
