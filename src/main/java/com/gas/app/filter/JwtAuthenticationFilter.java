@@ -1,4 +1,4 @@
-package com.gas.app.config;
+package com.gas.app.filter;
 
 import com.gas.app.repository.security.token.TokenRepository;
 import com.gas.app.service.security.JwtService;
@@ -68,9 +68,8 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     }
 
     private String verifyAccessAndRefreshTokens(String jwt,
-                                                 HttpServletRequest request,
-                                                 HttpServletResponse response) throws IOException {
-
+                                                HttpServletRequest request,
+                                                HttpServletResponse response) throws IOException {
         if (jwtService.isRefreshTokenExpired(request.getCookies())) {
             logout(response);
             return null;
