@@ -1,0 +1,73 @@
+server:
+
+  ssl:
+    keyAlias: appsecurity
+    keyStorePassword: password
+    keyStoreType: PKCS12
+    keyStore: src/main/resources/ukrGasSSL.p12
+    enabled: 'true'
+  port: '8443'
+
+spring:
+
+  config:
+    import: env.properties
+
+  flyway:
+    baseline-on-migrate: 'true'
+    flyway:
+      schemas: ukrGas
+    password: ${FLYWAY_PASSWORD}
+    user: ${FLYWAY_USER}
+
+  mail:
+    username: ${MAIL_USERNAME}
+    starttls:
+      enable: true
+    host: ${MAIL_HOST}
+    post: ${MAIL_POST}
+    smtp:
+      auth: true
+    password: ${MAIL_PASSWORD}
+
+  cache:
+    type: redis
+
+  redis:
+    host: localhost
+    password: ${REDIS_PASSWORD}
+    port: '6379'
+
+  datasource:
+    password: ${DB_PASSWORD}
+    username: ${DB_USERNAME}
+    url: ${DB_URL}
+
+  jpa:
+    show-sql: 'true'
+    properties:
+      hibernate:
+        default_schema: ukr_gas
+
+application:
+
+  security:
+    jwt:
+      refresh-token:
+        expiration: ${JWT_REFRESH_TOKEN_EXPIRATION}
+      access-token:
+        expiration: ${JWT_ACCESS_TOKEN_EXPIRATION}
+      secret-key: ${JWT_SECRET_KEY}
+
+telegram:
+  bot:
+    name: ${TELEGRAM_BOT_NAME}
+    token: ${TELEGRAM_BOT_TOKEN}
+
+gasPrice:
+  api:
+    key: ${GAS_PRICE_API_KEY}
+
+currencyRate:
+  api:
+    key: ${CURRENCY_RATE_API_KEY}
