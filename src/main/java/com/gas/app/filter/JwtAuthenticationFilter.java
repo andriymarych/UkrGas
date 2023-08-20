@@ -79,7 +79,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                 !jwtService.isRefreshTokenExpired(request.getCookies())) {
 
             jwt = jwtService.refreshToken(request);
-            cookieService.addCookie(response, "access_token", jwt);
+            cookieService.addAccessToken(response, "access_token", jwt);
         }
         return jwt;
     }
