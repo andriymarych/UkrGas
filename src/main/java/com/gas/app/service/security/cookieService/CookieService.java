@@ -13,7 +13,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class CookieService {
 
-    @Value("${application.security.jwt.expiration}")
+    @Value("${application.security.jwt.access-token.expiration}")
     private Long jwtExpiration;
 
 
@@ -38,8 +38,8 @@ public class CookieService {
         );
     }
 
-    public void addCookie(@NonNull HttpServletResponse response,
-                          String name, String value) {
+    public void addAccessToken(@NonNull HttpServletResponse response,
+                               String name, String value) {
         Cookie accessTokenCookie = new Cookie(name, value);
         accessTokenCookie.setAttribute("SameSite","Lax");
         accessTokenCookie.setHttpOnly(true);

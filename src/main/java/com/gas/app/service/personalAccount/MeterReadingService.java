@@ -35,6 +35,7 @@ public class MeterReadingService {
 
         return meterReadingRepository.
                 findAllByPersonalGasAccountId(personalGasAccount.getId());
+
     }
 
     @Transactional(propagation = Propagation.REQUIRES_NEW)

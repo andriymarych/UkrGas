@@ -68,8 +68,8 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     }
 
     private String verifyAccessAndRefreshTokens(String jwt,
-                                                 HttpServletRequest request,
-                                                 HttpServletResponse response) throws IOException {
+                                                HttpServletRequest request,
+                                                HttpServletResponse response) throws IOException {
         if (jwtService.isRefreshTokenExpired(request.getCookies())) {
             logout(response);
             return null;
@@ -79,7 +79,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                 !jwtService.isRefreshTokenExpired(request.getCookies())) {
 
             jwt = jwtService.refreshToken(request);
-            cookieService.addCookie(response, "access_token", jwt);
+            cookieService.addAccessToken(response, "access_token", jwt);
         }
         return jwt;
     }
@@ -92,4 +92,3 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         response.sendRedirect("https://localhost:8443/");
     }
 }
-

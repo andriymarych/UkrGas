@@ -61,7 +61,7 @@ public class SettlementService {
     public Double calculateAmountConsumed(PersonalGasAccount account) {
 
         MeterReading meterReadingPreviousMonth = meterReadingRepository.
-                findByPersonalGasAccountIdAndMonth(
+                findByPersonalGasAccountByIdAndMonth(
                         account.getId(),
                         Date.valueOf(LocalDate.now().minusMonths(1)))
                 .orElseThrow(
@@ -69,7 +69,7 @@ public class SettlementService {
                                 "with personal gas account id [" + account.getId() + "]", HttpStatus.NOT_FOUND));
 
         Optional<MeterReading> meterReadingCurrentMonth = meterReadingRepository.
-                findByPersonalGasAccountIdAndMonth(
+                findByPersonalGasAccountByIdAndMonth(
                         account.getId(),
                         Date.valueOf(LocalDate.now()));
 
