@@ -39,11 +39,3 @@ ALTER SEQUENCE ukr_gas.personal_gas_account_id_seq OWNED BY ukr_gas.personal_gas
 
 ALTER TABLE ONLY ukr_gas.personal_gas_account
     ALTER COLUMN id SET DEFAULT nextval('ukr_gas.personal_gas_account_id_seq'::regclass);
-
-
-COPY ukr_gas.personal_gas_account (id, person_id, user_id, balance, iec_number, gas_meter_number, address_id,
-                                   account_number, tariff_id) FROM stdin;
-2	1002	\N	24.00	23IA16A509084853	975032	6	07753146	2
-1	1001	\N	100.65	56XM16A507384234	342014	5	03234124	1
-3	1002	14	1010.12	98XC1609684888A3	869321	6	04682124	2
-\.

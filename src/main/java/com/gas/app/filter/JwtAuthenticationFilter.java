@@ -92,4 +92,3 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         response.sendRedirect("https://localhost:8443/");
     }
 }
-
